@@ -409,9 +409,35 @@ class MasterIpIntelligenceService implements IpIntelligenceProvider {
   name = 'mailtrace-authoritative-intelligence';
   private cache = new Map<string, IpIntelligenceResult>();
 
-  async lookup(rawIp: string): Promise<IpIntelligenceResult> {
+  lookupSync(rawIp: string): IpIntelligenceResult {
     const classification = classifyIp(rawIp);
-    const ipKey = classification.normalizedIp || rawIp.trim();
+    const ipKey = classification.normalizedIp || (rawIp ? rawIp.trim() : '');
+
+    if (!ipKey || !classification.isValid || classification.classification === 'INVALID') {
+      return {
+        ip: rawIp || 'Unknown IP',
+        normalizedIp: '',
+        country: 'Unverified Location',
+        countryCode: 'XX',
+        region: 'Unverified Region',
+        city: 'Unverified Location',
+        latitude: null,
+        longitude: null,
+        isp: 'Unresolved Internet Provider',
+        organization: 'Unresolved Network',
+        asn: 'AS-UNKNOWN',
+        hostname: rawIp || 'Unknown Host',
+        reverseDns: 'Unknown PTR',
+        source: 'unresolved-header',
+        confidence: 10,
+        evidenceType: 'unresolved',
+        isPublic: false,
+        isMappable: false,
+        classification: 'INVALID',
+        threatSeverity: 'LOW',
+        retrievedAt: new Date().toISOString()
+      };
+    }
 
     if (this.cache.has(ipKey)) {
       return this.cache.get(ipKey)!;
@@ -621,6 +647,10 @@ class MasterIpIntelligenceService implements IpIntelligenceProvider {
 
     this.cache.set(ipKey, unmappedResult);
     return unmappedResult;
+  }
+
+  async lookup(rawIp: string): Promise<IpIntelligenceResult> {
+    return Promise.resolve(this.lookupSync(rawIp));
   }
 
   clearCache(): void {

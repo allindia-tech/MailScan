@@ -5,6 +5,7 @@
 
 import { AttachmentAnalysis, ThreatSeverity } from '../../src/types/forensics.js';
 import { ParsedMimePart } from './emailParser.js';
+import { staticAttachmentAnalyzer } from '../services/staticAttachmentAnalyzer.js';
 
 interface MagicByteSignature {
   pattern: RegExp | ((rawBuf: Buffer | null, dataStr: string, ext: string) => boolean);
@@ -215,8 +216,29 @@ export function analyzeAttachments(parts: ParsedMimePart[]): AttachmentAnalysis[
     const filename = part.filename || 'unnamed_payload.bin';
     const lowerName = filename.toLowerCase();
     const declaredMime = (part.contentType || 'application/octet-stream').toLowerCase().split(';')[0].trim();
+    const attId = `att-${idCounter++}`;
 
-    // Decode sample buffer if base64 data exists
+    // Decode full binary buffer if base64 data exists in MIME part
+    if (part.data && typeof part.data === 'string' && part.data.trim().length > 0) {
+      try {
+        const cleanData = part.data.replace(/[\r\n\s]/g, '');
+        const fullBuf = Buffer.from(cleanData, 'base64');
+        if (fullBuf && fullBuf.length > 0) {
+          const staticRes = staticAttachmentAnalyzer.analyze({
+            buffer: fullBuf,
+            filename,
+            declaredMime,
+            attachmentId: attId
+          });
+          results.push(staticRes);
+          continue;
+        }
+      } catch (e) {
+        console.warn(`[AttachmentAnalyzer] Failed to decode base64 for ${filename}:`, e);
+      }
+    }
+
+    // Decode sample buffer if partial base64 data exists
     let rawBuf: Buffer | null = null;
     if (part.data) {
       try {
@@ -395,8 +417,11 @@ export function analyzeAttachments(parts: ParsedMimePart[]): AttachmentAnalysis[
       forensicAnalysisNote = 'Header metadata mismatch between email transport declaration and payload stream.';
     }
 
+    const attachmentRisk = risk === 'CRITICAL' ? 85 : risk === 'HIGH' ? 65 : risk === 'MEDIUM' ? 35 : 5;
+
     results.push({
-      id: `att-${idCounter++}`,
+      id: attId,
+      attachmentId: attId,
       filename,
       mimeType: declaredMime,
       declaredMimeType: declaredMime,
@@ -415,7 +440,10 @@ export function analyzeAttachments(parts: ParsedMimePart[]): AttachmentAnalysis[
       md5,
       fileType: isExecutable ? 'Win32/PE Executable' : (isMacroEnabled ? 'Macro-Enabled Document' : magicByteFormatName),
       risk,
+      attachmentRisk,
       detectionResult,
+      lifecycleStatus: 'NOT_ANALYZED',
+      statusMessage: 'Attachment metadata detected. Click "Analyze Attachment" for sandboxed inline analysis.',
       flags: {
         isExecutable,
         isMacroEnabled,

@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "tsx server.ts",
     "model:setup": "python3 scripts/model_setup.py",
+    "build:extension": "node scripts/generate-icons.js && node scripts/build-extension.js && node scripts/package-extension.js && tsx scripts/validate-extension.js",
+    "validate:extension": "tsx scripts/validate-extension.js",
     "package:extension": "node scripts/generate-icons.js && node scripts/package-extension.js",
-    "build": "node scripts/generate-icons.js && node scripts/package-extension.js && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build": "node scripts/generate-icons.js && node scripts/build-extension.js && node scripts/package-extension.js && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",

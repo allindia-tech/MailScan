@@ -10,6 +10,8 @@ import { socStore } from './store.js';
 import { EmailAnalysisResult } from '../src/types/forensics.js';
 
 export interface ExtensionEmailPayload {
+  rawMime?: string;
+  rawHeaders?: string;
   provider?: 'gmail' | 'outlook' | 'webmail' | 'generic';
   sender?: string;
   senderName?: string;
@@ -30,7 +32,7 @@ export interface ExtensionEmailPayload {
   }>;
   threadMessageCount?: number;
   hasFullHeaders?: boolean;
-  rawHeaders?: string;
+  metadata?: Record<string, any>;
 }
 
 /**
@@ -38,6 +40,14 @@ export interface ExtensionEmailPayload {
  * Preserves sender identity, recipients, headers, links, and attachment descriptors.
  */
 export function buildSyntheticRfc5322FromExtension(data: ExtensionEmailPayload): string {
+  if (data.rawMime && data.rawMime.trim()) {
+    return data.rawMime.trim();
+  }
+
+  if (data.rawHeaders && data.rawHeaders.trim()) {
+    return `${data.rawHeaders.trim()}\n\n${data.body || ''}`;
+  }
+
   const dateStr = data.timestamp || new Date().toUTCString();
   const providerTag = data.provider || 'webmail';
   const cleanRandom = crypto.randomBytes(4).toString('hex');
@@ -102,16 +112,23 @@ export function buildSyntheticRfc5322FromExtension(data: ExtensionEmailPayload):
 export async function analyzeExtensionEmail(payload: {
   emailData?: ExtensionEmailPayload;
   rawEmail?: string;
+  rawMime?: string;
   sourceContext?: string;
 }): Promise<{
   analysis: EmailAnalysisResult;
   analysisId: string;
   deepLinkPath: string;
 }> {
-  let rawEml = payload.rawEmail;
+  let rawEml = payload.rawMime || payload.rawEmail;
 
   if (!rawEml && payload.emailData) {
-    rawEml = buildSyntheticRfc5322FromExtension(payload.emailData);
+    if (payload.emailData.rawMime && payload.emailData.rawMime.trim()) {
+      rawEml = payload.emailData.rawMime.trim();
+    } else if (payload.emailData.rawHeaders && payload.emailData.rawHeaders.trim()) {
+      rawEml = `${payload.emailData.rawHeaders.trim()}\n\n${payload.emailData.body || ''}`;
+    } else {
+      rawEml = buildSyntheticRfc5322FromExtension(payload.emailData);
+    }
   }
 
   if (!rawEml || typeof rawEml !== 'string' || !rawEml.trim()) {

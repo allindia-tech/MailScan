@@ -114,6 +114,7 @@ export interface RelayNode {
   isMappable?: boolean;
   classification?: string;
   evidenceSource?: string;
+  receivedHeaderIndex?: number;
   rawHeader: string;
 }
 
@@ -191,8 +192,32 @@ export interface URLAnalysis {
   isTrackingPixel?: boolean;
 }
 
+export type AttachmentLifecycleStatus =
+  | 'NOT_ANALYZED'
+  | 'QUEUED'
+  | 'RETRIEVING'
+  | 'ANALYZING'
+  | 'COMPLETED'
+  | 'FAILED'
+  | 'SIZE_LIMIT_EXCEEDED'
+  | 'UNSUPPORTED_TYPE'
+  | 'PROVIDER_UNAVAILABLE'
+  | 'PERMISSION_DENIED';
+
+export interface AttachmentFinding {
+  id: string;
+  type: string;
+  severity: ThreatSeverity;
+  confidence: number;
+  evidence: string;
+  source: string;
+  attachmentId: string;
+  sha256: string;
+}
+
 export interface AttachmentAnalysis {
   id: string;
+  attachmentId?: string;
   filename: string;
   mimeType: string;
   sizeBytes: number;
@@ -201,7 +226,10 @@ export interface AttachmentAnalysis {
   md5: string;
   fileType: string;
   risk: ThreatSeverity;
+  attachmentRisk?: number;
   detectionResult: string;
+  lifecycleStatus?: AttachmentLifecycleStatus;
+  statusMessage?: string;
   declaredMimeType?: string;
   detectedMagicBytes?: string;
   detectedMagicBytesAscii?: string;
@@ -212,6 +240,37 @@ export interface AttachmentAnalysis {
   mismatchReason?: string;
   entropy?: number;
   forensicAnalysisNote?: string;
+  extractedUrls?: string[];
+  qrDestinations?: string[];
+  findings?: AttachmentFinding[];
+  macroDetails?: {
+    hasVbaMacro: boolean;
+    macroNames?: string[];
+    hasAutoExec?: boolean;
+    hasSuspiciousApi?: boolean;
+  };
+  pdfDetails?: {
+    pageCount?: number;
+    hasJavaScript?: boolean;
+    hasLaunchActions?: boolean;
+    hasEmbeddedFiles?: boolean;
+    hasAcroForm?: boolean;
+    embeddedFiles?: string[];
+  };
+  archiveDetails?: {
+    isArchiveBombRisk?: boolean;
+    compressionRatio?: number;
+    extractedFileCount?: number;
+    files?: string[];
+    nestedDepth?: number;
+  };
+  htmlDetails?: {
+    hasPhishingForm?: boolean;
+    formActionUrl?: string;
+    hasPasswordInput?: boolean;
+    obfuscatedScriptCount?: number;
+    hasHiddenIframe?: boolean;
+  };
   flags: {
     isExecutable: boolean;
     isMacroEnabled: boolean;

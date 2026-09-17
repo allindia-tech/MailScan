@@ -23,6 +23,7 @@ import { deviceSyncService } from './server/deviceSyncService.js';
 import { feedbackService } from './server/feedbackService.js';
 import { mlTransformer100M } from './server/engines/mlTransformer100M.js';
 import { loadOrGenerateDatasetReport, generateTrainingReport } from './server/datasetReportService.js';
+import { attachmentRetrievalService } from './server/services/attachmentRetrievalService.js';
 
 import { spawn, ChildProcess } from 'child_process';
 
@@ -239,13 +240,16 @@ async function startServer() {
   // 4. Analyze Email (Master Pipeline)
   app.post('/api/analyze', async (req, res) => {
     try {
-      let { rawEmail, scenarioId } = req.body;
-      if (!rawEmail && scenarioId) {
+      let { rawEmail, rawMime, scenarioId, headers, body, attachments, metadata } = req.body;
+      const content = rawMime || rawEmail;
+      if (!content && scenarioId) {
         const found = SAMPLE_SCENARIOS.find(s => s.id === scenarioId);
         if (found) rawEmail = found.rawEml;
+      } else if (content) {
+        rawEmail = content;
       }
       if (!rawEmail || typeof rawEmail !== 'string') {
-        return res.status(400).json({ error: 'rawEmail text content is required' });
+        return res.status(400).json({ error: 'rawEmail or rawMime text content is required' });
       }
 
       const result = await runEmailAnalysisPipeline(rawEmail, scenarioId);
@@ -344,6 +348,70 @@ async function startServer() {
 
   app.get('/downloads/mailtrace-ai-extension.zip', serveExtensionZip);
   app.get('/api/extension/download', serveExtensionZip);
+
+  // 4.45. Secure Inline Sandboxed Attachment Analysis (Zero User Downloads)
+  app.post('/api/attachments/analyze', async (req, res) => {
+    try {
+      const { analysisId, provider, messageId, attachmentId, filename, declaredMimeType, sizeBytes, rawBase64, expectedSha256 } = req.body;
+
+      if (!attachmentId && !filename) {
+        return res.status(400).json({ error: 'attachmentId or filename is required for attachment analysis.' });
+      }
+
+      const result = await attachmentRetrievalService.analyzeAttachmentInline({
+        analysisId: analysisId || `adhoc-${Date.now()}`,
+        provider: provider || 'eml_mime',
+        messageId,
+        attachmentId: attachmentId || `att-${Date.now()}`,
+        filename: filename || 'attachment.bin',
+        declaredMimeType,
+        sizeBytes,
+        rawBase64,
+        expectedSha256
+      });
+
+      // If tied to an active email investigation in socStore, update the email's attachment record and findings
+      if (analysisId && socStore.analyzedEmails.has(analysisId)) {
+        const email = socStore.analyzedEmails.get(analysisId)!;
+        const existingIdx = email.attachments.findIndex(a => a.id === result.id || a.attachmentId === result.attachmentId || a.filename === result.filename);
+        if (existingIdx >= 0) {
+          email.attachments[existingIdx] = result;
+        } else {
+          email.attachments.push(result);
+        }
+
+        // Add attachment SHA-256 to IOCs if valid
+        if (result.sha256 && result.sha256.length === 64) {
+          const iocExists = email.iocs.some(i => i.indicator === result.sha256);
+          if (!iocExists) {
+            email.iocs.push({
+              id: `ioc-hash-${Date.now()}`,
+              type: 'hash',
+              indicator: result.sha256,
+              risk: result.risk,
+              source: 'attachment-static-analyzer',
+              confidence: 99,
+              context: `SHA-256 for attachment "${result.filename}" (${result.fileType})`
+            });
+          }
+        }
+
+        socStore.logAudit(
+          'ANALYST',
+          'SOC_ANALYST',
+          'INLINE_ATTACHMENT_ANALYSIS',
+          `Completed static sandbox analysis on "${result.filename}" (Risk: ${result.attachmentRisk || 0}/100, SHA-256: ${result.sha256?.slice(0, 16)}...)`,
+          req.ip || '127.0.0.1',
+          result.lifecycleStatus === 'FAILED' ? 'FAILURE' : 'SUCCESS'
+        );
+      }
+
+      res.json(result);
+    } catch (error: any) {
+      console.error('[MailTrace Attachment API] Inline analysis error:', error);
+      res.status(500).json({ error: error.message || 'Attachment analysis failed.' });
+    }
+  });
 
   // ==========================================
   // 4.5. DEVICE IDENTITY & REAL-TIME SYNC (PART A)

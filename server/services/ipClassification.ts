@@ -374,9 +374,6 @@ export function extractReceivedHeaderDetails(rawHeader: string): {
 } {
   const clean = rawHeader.replace(/\r\n/g, ' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
 
-  // Extract from hostname / IP
-  // e.g., "from mail.domain.com (mail.domain.com [203.0.113.10])"
-  // e.g., "from [192.168.1.1] (unknown [185.220.101.42])"
   let fromHost = '';
   let fromIp = '';
   let byHost = '';
@@ -385,60 +382,90 @@ export function extractReceivedHeaderDetails(rawHeader: string): {
   let tls: string | undefined = undefined;
   let timestamp = '';
 
-  // Extract from host
-  const fromHostMatch = clean.match(/\bfrom\s+([^\s;()\[\]]+)/i);
-  if (fromHostMatch) {
-    fromHost = fromHostMatch[1];
-  }
+  // 1. Check if header starts with 'by ' (local MTA submission without remote from)
+  const isDirectByHeader = /^by\s+/i.test(clean);
 
-  // Extract TCP peer IP (inside parenthesis/brackets associated with from)
-  // Look for: (rdns [IP]) or ([IP]) or (IP)
-  const peerIpMatch = clean.match(/\((?:[^()\[\]]*\s+)?\[?((?:[0-9]{1,3}\.){3}[0-9]{1,3}|(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{1,4}|IPv6:[0-9a-fA-F:]+)\]?\)/i);
-  if (peerIpMatch) {
-    fromIp = peerIpMatch[1].replace(/^IPv6:/i, '').trim();
-  } else {
-    // Fallback to bracketed IP after from
-    const bracketMatch = clean.match(/\bfrom\s+[^\s;]*\s*\[((?:[0-9]{1,3}\.){3}[0-9]{1,3}|(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{1,4}|IPv6:[0-9a-fA-F:]+)\]/i);
-    if (bracketMatch) {
-      fromIp = bracketMatch[1].replace(/^IPv6:/i, '').trim();
+  // Extract from host only from top-level 'from' clause
+  if (!isDirectByHeader) {
+    const fromHostMatch = clean.match(/(?:^|\s)from\s+\[?([^\s;()\[\]]+)\]?/i);
+    if (fromHostMatch && !['userid', 'uid', 'local'].includes(fromHostMatch[1].toLowerCase())) {
+      fromHost = fromHostMatch[1];
     }
   }
 
-  // If still no fromIp, extract first bracketed valid IP in the header
-  if (!fromIp) {
-    const anyBracketMatch = clean.match(/\[((?:[0-9]{1,3}\.){3}[0-9]{1,3}|(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{1,4}|IPv6:[0-9a-fA-F:]+)\]/i);
-    if (anyBracketMatch) {
-      fromIp = anyBracketMatch[1].replace(/^IPv6:/i, '').trim();
+  // Helper to extract clean valid IP
+  const findValidIp = (candidates: (string | undefined)[]): string => {
+    for (const c of candidates) {
+      if (!c) continue;
+      const cleanCandidate = c.replace(/^IPv6:\s*/i, '').replace(/[\[\]]/g, '').trim();
+      const classified = classifyIp(cleanCandidate);
+      if (classified.isValid && classified.classification !== 'INVALID') {
+        return classified.normalizedIp || cleanCandidate;
+      }
     }
-  }
+    return '';
+  };
 
-  // Extract by host
-  const byHostMatch = clean.match(/\bby\s+([^\s;()\[\]]+)/i);
+  // 2. Extract TCP peer IP (inside parenthesis/brackets associated with from)
+  // Extract all bracketed tokens in header as initial candidates
+  const allBracketMatches = Array.from(clean.matchAll(/\[([^\[\]]+)\]/g)).map(m => m[1]);
+
+  const peerBracketMatch = clean.match(/\bfrom\s+[^;]*?\((?:[^()\[\]]*\s+)?\[?([^\s()\[\];]+)\]?\)/i);
+  const directBracketMatch = clean.match(/\bfrom\s+[^;]*?\[([^\s\[\];]+)\]/i);
+  const parenBareIpMatch = clean.match(/\bfrom\s+[^;]*?\(\s*(?:HELO\s+[^\s)]+\s+)?(?:\[?([^\s()\[\];]+)\]?)\s*\)/i);
+
+  fromIp = findValidIp([
+    peerBracketMatch?.[1],
+    directBracketMatch?.[1],
+    parenBareIpMatch?.[1],
+    fromHost && classifyIp(fromHost).isValid ? fromHost : undefined,
+    ...allBracketMatches
+  ]);
+
+  // 3. Extract by host
+  const byHostMatch = clean.match(/\bby\s+\[?([^\s;()\[\]]+)\]?/i);
   if (byHostMatch) {
     byHost = byHostMatch[1];
   }
 
-  // Extract by IP if explicitly recorded
-  const byIpMatch = clean.match(/\bby\s+[^\s;()\[\]]+\s*(?:\([^)]*\)\s*)?\[((?:[0-9]{1,3}\.){3}[0-9]{1,3}|(?:[0-9a-fA-F]{1,4}:){2,7}[0-9a-fA-F]{1,4})\]/i);
-  if (byIpMatch) {
-    byIp = byIpMatch[1].trim();
+  // If fromHost is empty but byHost exists (e.g., local Postfix hop), use byHost
+  if (!fromHost && byHost) {
+    fromHost = byHost;
   }
 
-  // Protocol extraction
+  // 4. Extract by IP if explicitly recorded
+  const byBracketMatch = clean.match(/\bby\s+[^;]*?\[([^\s\[\];]+)\]/i);
+  const byParenMatch = clean.match(/\bby\s+[^;]*?\(\s*(?:\[?([^\s()\[\];]+)\]?)\s*\)/i);
+  byIp = findValidIp([
+    byBracketMatch?.[1],
+    byParenMatch?.[1],
+    byHost && classifyIp(byHost).isValid ? byHost : undefined
+  ]);
+
+  // 5. Protocol extraction
   if (/\bwith\s+ESMTPSA\b/i.test(clean)) protocol = 'ESMTPSA';
   else if (/\bwith\s+ESMTPS\b/i.test(clean)) protocol = 'ESMTPS';
   else if (/\bwith\s+ESMTPA\b/i.test(clean)) protocol = 'ESMTPA';
   else if (/\bwith\s+ESMTP\b/i.test(clean)) protocol = 'ESMTP';
+  else if (/\bwith\s+LMTPS\b/i.test(clean)) protocol = 'LMTPS';
+  else if (/\bwith\s+LMTP\b/i.test(clean)) protocol = 'LMTP';
   else if (/\bwith\s+SMTP\b/i.test(clean)) protocol = 'SMTP';
   else if (/\bwith\s+HTTPS?\b/i.test(clean)) protocol = 'HTTP';
+  else {
+    const protoMatch = clean.match(/\bwith\s+([A-Za-z0-9_-]+)/i);
+    if (protoMatch && !['id', 'for', 'by', 'from', 'using', 'cipher'].includes(protoMatch[1].toLowerCase())) {
+      protocol = protoMatch[1].toUpperCase();
+    }
+  }
 
-  // TLS cipher extraction
-  const tlsMatch = clean.match(/\b(?:using|with)?\s*(TLS[v\d._\s]+|version=TLS[^\s;]+)\b/i);
+  // 6. TLS cipher extraction
+  const tlsMatch = clean.match(/\b(?:using|with)?\s*(TLS[v\d._\s]+|version=TLS[^\s;]+|cipher=[^\s;]+)\b/i) ||
+                   clean.match(/\b(TLS_[A-Za-z0-9_]+)\b/i);
   if (tlsMatch) {
     tls = tlsMatch[0].trim();
   }
 
-  // Timestamp extraction (everything after final semicolon)
+  // 7. Timestamp extraction (everything after final semicolon)
   const semiIdx = clean.lastIndexOf(';');
   if (semiIdx !== -1) {
     const rawDate = clean.substring(semiIdx + 1).trim();

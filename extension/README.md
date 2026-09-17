@@ -42,17 +42,21 @@ The MailTrace AI Chrome Extension extends the **MailTrace AI Forensics & SOC Pla
 
 ## Installation Guide (Developer Mode)
 
-1. Download or locate the `mailtrace-ai-extension.zip` package (available directly from the web platform).
-2. Unpack the ZIP archive to a folder on your computer (e.g., `~/Downloads/mailtrace-ai-extension`).
-3. Open Google Chrome and navigate to:
+1. Build or download the extension:
+   ```bash
+   npm run build:extension
+   ```
+   This generates the verified unpacked extension in `dist/extension/` and creates the `mailtrace-ai-extension.zip` archive.
+2. Open Google Chrome and navigate to:
    ```text
    chrome://extensions
    ```
-4. In the top right corner, enable the **Developer mode** toggle.
-5. In the top left toolbar, click the **"Load unpacked"** button.
-6. Select the extracted `extension` directory.
-7. Pin **MailTrace AI** to your Chrome toolbar.
-8. Navigate to [Gmail](https://mail.google.com) or [Outlook](https://outlook.live.com), open any email, and click the MailTrace AI icon!
+3. In the top right corner, enable the **Developer mode** toggle.
+4. In the top left toolbar, click the **"Load unpacked"** button.
+5. In the file picker, select the **`dist/extension`** directory (or the unpacked `mailtrace-ai-extension` root folder containing `manifest.json`).
+   > **Note:** Select the extension root directory itself (e.g., `dist/extension` or `extension`). **Do NOT select subdirectories** such as `background/`, `content/`, or `popup/`.
+6. Pin **MailTrace AI** to your Chrome toolbar.
+7. Navigate to [Gmail](https://mail.google.com) or [Outlook](https://outlook.live.com), open any email, and click the MailTrace AI icon!
 
 ---
 

@@ -5,9 +5,19 @@
 import fs from 'fs';
 import path from 'path';
 import { ZipArchive } from 'archiver';
+import { buildExtension } from './build-extension.js';
+import { validateExtensionDirectory } from './validate-extension.js';
 
 async function zipExtension() {
-  const extensionDir = path.resolve('./extension');
+  // 1. Build dist/extension directory
+  const distExtensionDir = await buildExtension();
+
+  // 2. Validate built extension
+  const valResult = validateExtensionDirectory(distExtensionDir);
+  if (!valResult.passed) {
+    throw new Error('Extension validation failed. Aborting packaging.');
+  }
+
   const outDirs = [
     path.resolve('./public/downloads'),
     path.resolve('./dist/downloads')
@@ -46,8 +56,8 @@ async function zipExtension() {
 
     archive.pipe(output);
 
-    // Append files from extension directory
-    archive.directory(extensionDir, false);
+    // Append files from built extension directory
+    archive.directory(distExtensionDir, false);
 
     archive.finalize();
   });

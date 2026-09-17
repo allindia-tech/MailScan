@@ -2068,5 +2068,72 @@
         "sender": "security@micros0ft-support-portal.com"
       }
     }
+  },
+  {
+    "id": "AUDIT-585368AE",
+    "timestamp": "2026-09-17T09:36:05.337Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.soc@mailtrace.workstation",
+    "actorRole": "SOC L3 Lead",
+    "feedbackId": "FB-810E77E92A08",
+    "analysisId": "analysis-1789637704416-3788c8b6",
+    "modelVersion": "mailtrace-100m-v2",
+    "details": "Analyst verified ️ Jules found improvements for your repos: Pred=\"Legitimate\" -> GT=\"Legitimate\" (Verdict: Legitimate, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-810E77E92A08",
+      "feedbackId": "FB-810E77E92A08",
+      "analysisId": "analysis-1789637704416-3788c8b6",
+      "emailFingerprint": "7abaace481c22fb71bed7a643a5828ca11529086ed0c8975a795140e66b2e695",
+      "contentHash": "19d90da6a7d027ca93939076a35222e7aa20a9b7c63bf44f349f596a9fdded8c",
+      "urlFingerprint": "4cfea7d1c1f10b30",
+      "emailSubject": "️ Jules found improvements for your repos",
+      "sender": "Jules <jules-noreply@google.com>",
+      "originalPrediction": {
+        "primaryCategory": "Legitimate",
+        "secondaryCategories": [],
+        "threatRisk": 5,
+        "spamBulkScore": 5,
+        "confidence": 93,
+        "probabilities": {
+          "Legitimate": 0.85
+        },
+        "detectedTechniques": [],
+        "evidence": []
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "Legitimate",
+        "secondaryCategories": [],
+        "verdict": "Legitimate",
+        "isMalicious": false,
+        "isSpam": false,
+        "correctedEvidence": []
+      },
+      "classificationType": "CONFIRMED_BENIGN",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.soc@mailtrace.workstation",
+        "name": "SOC Verification Analyst",
+        "role": "SOC L3 Lead",
+        "confidence": 0.95
+      },
+      "reason": "Analyst verified model verdict.",
+      "notes": "",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-17T09:36:05.337Z",
+      "verifiedAt": "2026-09-17T09:36:05.337Z",
+      "modelVersion": "mailtrace-100m-v2",
+      "rawEmailSample": {
+        "subject": "️ Jules found improvements for your repos",
+        "bodyText": "️ Jules found improvements for your repos",
+        "urls": [
+          "https://c.gle/ACT4xYykdvHU_ubrekX9xGb-A949AO4Ij8LSU0vdKF2wfwSOM_Q5C5EgCmqktA06ucD0nbXBBNgTAdEf9Tzp99c4Q-4X3Al9Y8sVaAlgBWO_cfGHrQ1Se_cuUlN2ZborQYFU8Eqq799JYlRT_4xPsFLMlQ6mr8FwfyRaiOPXyQYfnOvn-X7vbpaM0RKL4rzdw4mIYQ",
+          "https://www.google.com/maps/search/1600+Amphitheatre+Parkway,+Mountain+View,+CA+94043?entry=gmail&source=g"
+        ],
+        "sender": "Jules <jules-noreply@google.com>"
+      }
+    }
   }
 ]

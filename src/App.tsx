@@ -134,7 +134,9 @@ export default function App() {
           try {
             const deepAnalysis = await fetchAnalysis(deepInvestigationId);
             setAnalysis(deepAnalysis);
-            if (deepAnalysis.rawHeaders) {
+            if (deepAnalysis.rawMime) {
+              setRawInput(deepAnalysis.rawMime);
+            } else if (deepAnalysis.rawHeaders) {
               setRawInput(`${deepAnalysis.rawHeaders}\n\n${deepAnalysis.bodyText || ''}`);
             }
             setActiveTab('analyzer');
@@ -148,7 +150,9 @@ export default function App() {
           const latestId = historyList[0].id;
           const loadedAnalysis = await fetchAnalysis(latestId);
           setAnalysis(loadedAnalysis);
-          if (loadedAnalysis.rawHeaders) {
+          if (loadedAnalysis.rawMime) {
+            setRawInput(loadedAnalysis.rawMime);
+          } else if (loadedAnalysis.rawHeaders) {
             setRawInput(`${loadedAnalysis.rawHeaders}\n\n${loadedAnalysis.bodyText || ''}`);
           }
         }
@@ -173,7 +177,9 @@ export default function App() {
     const unsubscribe = deviceIdentityManager.subscribe((syncState) => {
       if (syncState.analysisResult) {
         setAnalysis(syncState.analysisResult);
-        if (syncState.analysisResult.rawHeaders) {
+        if (syncState.analysisResult.rawMime) {
+          setRawInput(syncState.analysisResult.rawMime);
+        } else if (syncState.analysisResult.rawHeaders) {
           setRawInput(`${syncState.analysisResult.rawHeaders}\n\n${syncState.analysisResult.bodyText || ''}`);
         }
         setActiveTab('analyzer');
@@ -181,7 +187,9 @@ export default function App() {
         fetchAnalysis(syncState.activeEmailId)
           .then((res) => {
             setAnalysis(res);
-            if (res.rawHeaders) {
+            if (res.rawMime) {
+              setRawInput(res.rawMime);
+            } else if (res.rawHeaders) {
               setRawInput(`${res.rawHeaders}\n\n${res.bodyText || ''}`);
             }
             setActiveTab('analyzer');
@@ -215,7 +223,9 @@ export default function App() {
       setAnalyzing(true);
       const res = await fetchAnalysis(id);
       setAnalysis(res);
-      if (res.rawHeaders) {
+      if (res.rawMime) {
+        setRawInput(res.rawMime);
+      } else if (res.rawHeaders) {
         setRawInput(`${res.rawHeaders}\n\n${res.bodyText || ''}`);
       }
       setActiveTab('analyzer');

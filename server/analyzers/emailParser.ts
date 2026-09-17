@@ -13,7 +13,14 @@ export interface ParsedMimePart {
 
 export interface ParsedEmailRaw {
   headers: Record<string, string>;
+  allHeaders: Record<string, string[]>;
   receivedHeaders: string[];
+  authResultsHeaders: string[];
+  receivedSpfHeaders: string[];
+  dkimSignatures: string[];
+  arcSeals: string[];
+  arcAuthResults: string[];
+  xOriginatingIp?: string;
   subject: string;
   from: string;
   fromName: string;
@@ -27,7 +34,6 @@ export interface ParsedEmailRaw {
   userAgent?: string;
   xMailer?: string;
   authResultsHeader?: string;
-  dkimSignatures: string[];
   bodyText: string;
   bodyHtml: string;
   attachments: ParsedMimePart[];
@@ -35,10 +41,38 @@ export interface ParsedEmailRaw {
 }
 
 export function parseRawEmail(raw: string): ParsedEmailRaw {
+  if (!raw || typeof raw !== 'string') {
+    return {
+      headers: {},
+      allHeaders: {},
+      receivedHeaders: [],
+      authResultsHeaders: [],
+      receivedSpfHeaders: [],
+      dkimSignatures: [],
+      arcSeals: [],
+      arcAuthResults: [],
+      subject: '(No Subject)',
+      from: '',
+      fromName: '',
+      fromDomain: '',
+      to: [],
+      cc: [],
+      replyTo: '',
+      returnPath: '',
+      messageId: '',
+      date: new Date().toUTCString(),
+      authResultsHeader: '',
+      bodyText: '',
+      bodyHtml: '',
+      attachments: [],
+      rawHeaders: ''
+    };
+  }
+
   // Normalize line endings
   const normalized = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   
-  // Separate headers and body
+  // Separate headers and body by standard double newline
   const headerBodySplit = normalized.indexOf('\n\n');
   let headerBlock = '';
   let bodyBlock = '';
@@ -47,24 +81,47 @@ export function parseRawEmail(raw: string): ParsedEmailRaw {
     headerBlock = normalized.substring(0, headerBodySplit);
     bodyBlock = normalized.substring(headerBodySplit + 2);
   } else {
-    headerBlock = normalized;
-    bodyBlock = '';
+    // If no empty line found, check if first lines are headers
+    const lines = normalized.split('\n');
+    let lastHeaderIdx = -1;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^[A-Za-z0-9_-]+:/.test(line) || ((line.startsWith(' ') || line.startsWith('\t')) && lastHeaderIdx === i - 1)) {
+        lastHeaderIdx = i;
+      } else if (lastHeaderIdx !== -1) {
+        break;
+      }
+    }
+
+    if (lastHeaderIdx !== -1) {
+      headerBlock = lines.slice(0, lastHeaderIdx + 1).join('\n');
+      bodyBlock = lines.slice(lastHeaderIdx + 1).join('\n');
+    } else {
+      headerBlock = '';
+      bodyBlock = normalized;
+    }
   }
 
-  // Unfold headers (RFC 5322 line continuation: lines starting with space or tab)
+  // Unfold headers (RFC 5322 line continuation: lines starting with space or tab belong to the previous header)
   const unfoldedLines: string[] = [];
   const rawLines = headerBlock.split('\n');
   for (const line of rawLines) {
     if ((line.startsWith(' ') || line.startsWith('\t')) && unfoldedLines.length > 0) {
       unfoldedLines[unfoldedLines.length - 1] += ' ' + line.trim();
-    } else {
+    } else if (line.trim().length > 0) {
       unfoldedLines.push(line);
     }
   }
 
   const headers: Record<string, string> = {};
+  const allHeaders: Record<string, string[]> = {};
   const receivedHeaders: string[] = [];
+  const authResultsHeaders: string[] = [];
+  const receivedSpfHeaders: string[] = [];
   const dkimSignatures: string[] = [];
+  const arcSeals: string[] = [];
+  const arcAuthResults: string[] = [];
+  let xOriginatingIp: string | undefined = undefined;
 
   for (const line of unfoldedLines) {
     const colonIdx = line.indexOf(':');
@@ -72,10 +129,32 @@ export function parseRawEmail(raw: string): ParsedEmailRaw {
       const key = line.substring(0, colonIdx).trim().toLowerCase();
       const value = line.substring(colonIdx + 1).trim();
       
+      // Defend against prototype pollution attacks
+      if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+        continue;
+      }
+
+      if (!allHeaders[key]) {
+        allHeaders[key] = [];
+      }
+      allHeaders[key].push(value);
+
       if (key === 'received') {
         receivedHeaders.push(value);
+      } else if (key === 'authentication-results') {
+        authResultsHeaders.push(value);
+      } else if (key === 'received-spf') {
+        receivedSpfHeaders.push(value);
       } else if (key === 'dkim-signature') {
         dkimSignatures.push(value);
+      } else if (key === 'arc-seal') {
+        arcSeals.push(value);
+      } else if (key === 'arc-authentication-results') {
+        arcAuthResults.push(value);
+      } else if (key === 'x-originating-ip' || key === 'x-sender-ip' || key === 'x-client-ip') {
+        if (!xOriginatingIp) {
+          xOriginatingIp = value.replace(/[\[\]]/g, '').trim();
+        }
       }
       
       if (!headers[key]) {
@@ -118,10 +197,12 @@ export function parseRawEmail(raw: string): ParsedEmailRaw {
   const date = headers['date'] || new Date().toUTCString();
   const userAgent = headers['user-agent'] || '';
   const xMailer = headers['x-mailer'] || '';
+  
+  // Combine all authentication headers into composite authentication results string
   const authResultsHeader = [
-    headers['authentication-results'],
-    headers['arc-authentication-results'],
-    headers['received-spf'] ? `spf=${headers['received-spf']}` : '',
+    ...authResultsHeaders,
+    ...arcAuthResults,
+    ...receivedSpfHeaders.map(s => (s.toLowerCase().startsWith('spf=') ? s : `spf=${s}`)),
     headers['dkim-status'] ? `dkim=${headers['dkim-status']}` : ''
   ].filter(Boolean).join('; ');
 
@@ -180,7 +261,14 @@ export function parseRawEmail(raw: string): ParsedEmailRaw {
 
   return {
     headers,
+    allHeaders,
     receivedHeaders,
+    authResultsHeaders,
+    receivedSpfHeaders,
+    dkimSignatures,
+    arcSeals,
+    arcAuthResults,
+    xOriginatingIp,
     subject: headers['subject'] || '(No Subject)',
     from: rawFrom,
     fromName: fromName || fromEmail,
@@ -194,7 +282,6 @@ export function parseRawEmail(raw: string): ParsedEmailRaw {
     userAgent,
     xMailer,
     authResultsHeader,
-    dkimSignatures,
     bodyText: bodyText.trim(),
     bodyHtml: bodyHtml.trim(),
     attachments,

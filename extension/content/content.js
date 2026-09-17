@@ -548,11 +548,40 @@
 
         const sizeElem = att.querySelector('.aZi, .aZb, span.size');
         const sizeText = sizeElem ? sanitizeText(sizeElem.textContent) : undefined;
+        let sizeBytes = undefined;
+        if (sizeText) {
+          const matchKb = sizeText.match(/([\d.]+)\s*kb/i);
+          const matchMb = sizeText.match(/([\d.]+)\s*mb/i);
+          const matchB = sizeText.match(/(\d+)\s*b/i);
+          if (matchMb) sizeBytes = Math.round(parseFloat(matchMb[1]) * 1024 * 1024);
+          else if (matchKb) sizeBytes = Math.round(parseFloat(matchKb[1]) * 1024);
+          else if (matchB) sizeBytes = parseInt(matchB[1], 10);
+        }
+
+        const rawAttId = att.getAttribute('data-attachment-id') ||
+          att.getAttribute('data-id') ||
+          att.getAttribute('id') ||
+          att.querySelector('[data-attachment-id]')?.getAttribute('data-attachment-id');
+        const attachmentId = rawAttId || `dom-att-${attachments.length + 1}`;
+
+        let mimeType = 'application/octet-stream';
+        if (lower.endsWith('.pdf')) mimeType = 'application/pdf';
+        else if (lower.endsWith('.exe')) mimeType = 'application/x-msdownload';
+        else if (lower.endsWith('.zip')) mimeType = 'application/zip';
+        else if (lower.endsWith('.docx')) mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        else if (lower.endsWith('.xlsx')) mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        else if (lower.endsWith('.png')) mimeType = 'image/png';
+        else if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) mimeType = 'image/jpeg';
+        else if (lower.endsWith('.html') || lower.endsWith('.htm')) mimeType = 'text/html';
 
         attachments.push({
+          attachmentId,
           name,
+          filename: name,
           type,
-          sizeText
+          mimeType,
+          sizeText,
+          sizeBytes
         });
       });
 
