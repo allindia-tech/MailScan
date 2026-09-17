@@ -74,11 +74,17 @@ flowchart TD
 - **Static URL Analysis**: Evaluates suspicious top-level domains (TLDs), high-risk URL paths (`/login`, `/wp-admin`, `/verification`), IP-based hosts, and credential harvesting patterns.
 - **IOC Extraction**: Automatically extracts SHA-256 hashes, URLs, domain names, IPv4/IPv6 addresses, and email routing indicators.
 
-### Attachment Analysis
-- **Static Risk Profiling**: Evaluates file extensions, MIME type mismatches, double extensions (`.pdf.exe`), and suspicious document structures.
-- **Archive & Macro Detection**: Detects nested archive payloads (`.zip`, `.iso`, `.img`, `.7z`) and Office macro indicators (`.docm`, `.xlsm`).
-- **Cryptographic Hashing**: Computes SHA-256 hashes for all MIME attachments for threat correlation.
-- **Safety Policy**: **Attachments are never dynamically executed by MailTrace AI.** Analysis is strictly static and forensic.
+### Secure Inline Sandboxed Attachment Analysis
+- **Zero Client-Side Downloads**: Attachments are analyzed entirely in-memory and through ephemeral backend sandboxing without triggering browser downloads or exposing raw binary bytes to the client.
+- **Magic Byte Signature Verification**: Compares declared MIME types against authentic magic byte headers (PE32/MZ, ELF, Mach-O, PDF, OLE2, ZIP, RAR, 7Z, JPEG, PNG), instantly catching camouflaged executables (e.g. `.pdf.exe` or `.docx` carrying PE32 binaries).
+- **Deep PDF Inspection**: Statically extracts and audits `/JavaScript`, `/JS`, `/Launch` process directives, `/EmbeddedFiles`, `/AcroForm`, page counts, and embedded hyperlink targets.
+- **Office Document & Macro Forensics**: Inspects OLE2 and OpenXML containers for VBA code streams, automatic execution hooks (`AutoOpen`, `Workbook_Open`), dangerous API calls (`WScript.Shell`, `powershell`), and external template injection (`TargetMode="External"`).
+- **Archive Inspection & ZIP Bomb Protection**: Parses ZIP/TAR/GZ/7Z headers, enforces recursion depth limits, inventories inner files, and protects against decompression bombs by flagging disproportionate compression ratios (> 100:1).
+- **HTML Phishing Form Detection**: Statically identifies standalone credential harvesting forms, password inputs, hidden iframes, and obfuscated script payloads (`eval`, `String.fromCharCode`).
+- **Shannon Entropy Profiling**: Computes binary entropy (0.00 to 8.00) to detect packed, encrypted, or obfuscated payloads.
+- **QR Code Static Analysis**: Decodes QR destinations from documents and routes targets into threat intelligence pipelines without automated navigation.
+- **Ephemeral Sandbox Storage**: Temporary processing occurs in `/tmp/mailtrace-attachments/<analysis-id>/` with restricted permissions (`0o700`) and guaranteed cleanup on success or error.
+- **Safety Policy**: **Strictly static and non-executing.** MailTrace AI never launches binaries, executes macros, runs scripts, or renders active HTML.
 
 ---
 
@@ -383,12 +389,41 @@ Executes forward-pass inference on normalized email features.
 | `POST` | `/api/feedback/verify` | Submits analyst ground-truth feedback. |
 | `GET` | `/api/threat-intel/feed`| Retrieves active threat intelligence indicators. |
 | `POST` | `/api/extension/analyze`| Analyzes email payload received from Chrome extension. |
+| `POST` | `/api/attachments/analyze` | Executes sandboxed static forensic analysis on attachment without client download. |
 | `GET` | `/api/reports/markdown/:id` | Generates a Markdown forensic investigation report. |
 | `GET` | `/api/reports/stix/:id` | Generates a STIX 2.1 JSON incident bundle. |
 
 ---
 
-## 11. Environment Variables
+## 11. Chrome Companion Extension (Manifest V3)
+
+MailTrace AI includes a companion Chrome Manifest V3 extension for direct in-box triage across Gmail (`mail.google.com`) and Outlook Web (`outlook.live.com`, `outlook.office.com`).
+
+### Features
+- **In-Page Triage Button**: Injects native action toolbar triggers directly within webmail message views.
+- **Dual Form Factor**: Supports both the 420px Quick Action Popup and the persistent Chrome Side Panel (`sidePanel` API).
+- **Zero-Download Security**: Metadata is captured in-box; deep static forensics and attachment analysis run on the backend without downloading files to the user's computer.
+- **Strict Origin Scoping**: Restricts host permissions exclusively to Gmail, Outlook, and the authorized MailTrace application origin (no `<all_urls>` wildcards).
+
+### Building & Loading in Chrome
+```bash
+# 1. Build and validate extension into dist/extension/
+npm run build:extension
+
+# 2. Programmatically validate Manifest V3 structure
+npm run validate:extension
+```
+
+To load unpacked into Google Chrome:
+1. Open Chrome and navigate to `chrome://extensions`.
+2. Enable **Developer mode** toggle in the top right.
+3. Click **"Load unpacked"** in the top left.
+4. Select the **`dist/extension`** directory (or the repository root `extension` folder).
+   > **Note:** Select the folder containing `manifest.json`. **Do NOT select the `background/` subfolder.**
+
+---
+
+## 12. Environment Variables
 
 | Variable | Required | Subsystem | Description | Example Value |
 | :--- | :--- | :--- | :--- | :--- |
@@ -439,7 +474,7 @@ The SOC Workstation will be live at `http://localhost:3000`.
 
 ---
 
-## 13. Build & Test Verification
+## 14. Build & Test Verification
 
 ```bash
 # Verify TypeScript Type Safety
@@ -448,19 +483,25 @@ npx tsc --noEmit
 # Run Master Test Suite (Regression, Determinism, Security Isolation)
 npm test
 
-# Run GCS Model Lifecycle & Concurrency Tests
-npm run test:gcs
+# Run Secure Inline Attachment Forensics Suite (24/24 Test Cases)
+npx tsx server/testing/attachmentSecurityTest.ts
 
-# Run Analyst Feedback & Promotion Pipeline Tests
-npm run test:feedback
+# Run Email Transport Relay Forensics Suite (22/22 Test Cases)
+npx tsx server/testing/relayForensicsTest.ts
 
-# Build Production Bundles (Frontend, Extension ZIP, Backend CJS)
+# Validate Chrome Extension Manifest V3 Package
+npm run validate:extension
+
+# Build Complete Extension Distribution
+npm run build:extension
+
+# Build Full Production Bundles (Frontend, Extension ZIP, Backend CJS)
 npm run build
 ```
 
 ---
 
-## 14. Project Directory Structure
+## 15. Project Directory Structure
 
 ```
 MailScan/
@@ -499,7 +540,7 @@ MailScan/
 
 ---
 
-## 15. Production Deployment Checklist
+## 16. Production Deployment Checklist
 
 - [ ] Private GCS bucket created (`gs://<PROJECT_ID>-mailtrace-models`).
 - [ ] Production checkpoint uploaded: `mailtrace-100m-v2.pt` (SHA-256 `22b238cd0d011128347cb019d233f3001f84d1dc95e2655a015e8315c97900c9`).
@@ -514,7 +555,7 @@ MailScan/
 
 ---
 
-## 16. Troubleshooting
+## 17. Troubleshooting
 
 ### 1. `GET /ready` returns HTTP 503
 - **Cause**: The PyTorch model is still streaming from GCS or initializing into memory.
@@ -530,7 +571,7 @@ MailScan/
 
 ---
 
-## 17. License & Project Ownership
+## 18. License & Project Ownership
 
 - **Repository**: [https://github.com/grownowdigital/MailScan](https://github.com/grownowdigital/MailScan)
 - **License**: License information is not currently specified in this repository.
