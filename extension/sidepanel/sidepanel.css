@@ -1,0 +1,18 @@
+/**
+ * MailTrace AI - Sidepanel Specific Styling
+ */
+
+.sidepanel-body {
+  width: 100% !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  overflow-y: auto;
+}
+
+.sidepanel-container {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  gap: 12px;
+  min-height: 100%;
+}

@@ -1,0 +1,20 @@
+{
+  "modelId": "MailTrace-100M-Security-v1",
+  "modelVersion": "1.0.0",
+  "architecture": "MultimodalSecurityTransformer",
+  "actualTrainableParameters": 128894258,
+  "totalParameters": 128894258,
+  "trainablePercentage": 100.0,
+  "layers": 10,
+  "hiddenSize": 768,
+  "attentionHeads": 12,
+  "ffnIntermediateSize": 3072,
+  "vocabularySize": 50265,
+  "maxSequenceLength": 1024,
+  "structuredFeatureDim": 128,
+  "fusionHiddenDim": 768,
+  "fusionLayers": 2,
+  "primaryCategoryHeads": 30,
+  "binaryDetectionHeads": 13,
+  "verifiedAt": "2026-09-15T10:53:51.980022+00:00"
+}

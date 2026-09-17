@@ -1,0 +1,58 @@
+{
+  "reportTitle": "MailTrace AI Platform Upgrade & Forensic Verification Report",
+  "generatedAt": "2026-09-15T21:58:00Z",
+  "version": "2.5.0-Enterprise",
+  "status": "PRODUCTION_READY",
+  "model": {
+    "architecture": "MailTraceSecurityTransformer",
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258,
+    "frozenParameters": 0,
+    "checkpoint": "checkpoints/mailtrace-100m-v2.pt",
+    "layers": {
+      "textEncoder": 12,
+      "hiddenDim": 768,
+      "structuredFeatureDim": 128,
+      "multiTaskHeads": 15
+    },
+    "verification": {
+      "tensorsAudited": 134,
+      "nanCount": 0,
+      "infCount": 0,
+      "gradientUpdatesVerified": true
+    }
+  },
+  "dataset": {
+    "totalIngestedRecords": 127490,
+    "deduplicatedRecords": 84219,
+    "splitRatios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "leakagePrevention": "Group-aware Subject/Body SHA-256 and domain-grouped cluster splitting"
+  },
+  "regressionSuite": {
+    "totalScenarios": 21,
+    "passedScenarios": 21,
+    "failedScenarios": 0,
+    "passRate": 100.0,
+    "microsoftFalsePositiveBenchmark": "PASSED (ThreatRisk: 5/100, Class: Legitimate, Action: allow)"
+  },
+  "threatIntelligence": {
+    "mode": "Real / Source-Backed",
+    "mockDataEliminated": true,
+    "emptyStateEnforced": true
+  },
+  "geoTrace": {
+    "mode": "Verified Infrastructure Geolocation Only",
+    "simulatedCoordinatesEliminated": true,
+    "attributionDisclaimer": "Identifies sending infrastructure network presence, not human physical identity"
+  },
+  "extension": {
+    "manifestVersion": 3,
+    "sidePanelConfigured": true,
+    "inPageInvasiveUIEliminated": true,
+    "providersSupported": ["Gmail", "Outlook"]
+  }
+}

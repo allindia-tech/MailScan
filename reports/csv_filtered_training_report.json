@@ -1,0 +1,46 @@
+{
+  "report": "MailTrace AI \u2014 csv_filtered.json Training Report",
+  "generated_at": "2026-09-17T02:11:15.606077+00:00",
+  "model_version": "mailtrace-100m-v3-csv-filtered",
+  "checkpoint_file": "mailtrace-100m-v3-csv-filtered.pt",
+  "checkpoint_sha256": "bca9054a216623c414d8665d08aeca1177d307a757fa0fad4527d0985251ad9a",
+  "dataset_source": "dataset/new/csv_filtered.json",
+  "dataset_sha256": "7bd46db052b8d1825a913862306dd6bf3d23e65c96bc1d55a067c55d5cb4e903",
+  "split": "csv-filtered-seed-42",
+  "seed": 42,
+  "parameter_counts": {
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258,
+    "frozenParameters": 0
+  },
+  "training_configuration": {
+    "mode": "FULL",
+    "epochs": 1,
+    "batch_size": 64,
+    "learning_rate": 5e-05,
+    "optimizer": "AdamW",
+    "device": "CPU",
+    "total_steps": 3233,
+    "duration_seconds": 30800.0,
+    "final_loss": 0.441,
+    "final_avg_loss": 0.6964
+  },
+  "dataset_counts": {
+    "train_count": 206912,
+    "test_count": 51728,
+    "actual_processed": 206912,
+    "labeled_records": 206912,
+    "unlabeled_records": 0
+  },
+  "unlabeled_loss_masking": {
+    "unlabeled_supervised_loss_contribution": 0.0,
+    "verified": true
+  },
+  "sensitivity_test": {
+    "legitimate_threat_prob": 0.0009,
+    "malicious_threat_prob": 0.0018,
+    "logit_delta_norm": 10.0796,
+    "fused_embedding_delta_norm": 37.7116,
+    "status": "PASS"
+  }
+}

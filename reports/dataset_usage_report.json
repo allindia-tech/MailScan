@@ -1,0 +1,27 @@
+{
+  "reportTitle": "MailTrace AI Dataset Usage & Inventory Report",
+  "generatedAt": "2026-09-15T21:58:00Z",
+  "datasetDirectory": "dataset/",
+  "discoveredFiles": [
+    { "filename": "CEAS-08.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "CEAS_08.csv", "type": "duplicate_alias", "status": "deduplicated" },
+    { "filename": "Enron.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "TREC-05.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "TREC-06.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "TREC-07.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "Assassin.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "Ling.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "fraud_email_.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "emails.csv", "type": "original_corpus", "status": "active" },
+    { "filename": "phishing_legit_dataset_KD_10000.csv", "type": "original_corpus", "status": "active" }
+  ],
+  "totalRecordsIngested": 127490,
+  "uniqueRecordsDeduplicated": 84219,
+  "trainingPartition": 58953,
+  "validationPartition": 12633,
+  "testPartition": 12633,
+  "feedbackIntegration": {
+    "verifiedGroundTruthStore": "reports/analyst_feedback_store.json",
+    "samplesInTrainingEligibility": 6
+  }
+}

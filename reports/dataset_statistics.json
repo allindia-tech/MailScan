@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-09-15T10:53:50.880029+00:00",
+  "datasetRoot": "/Users/shivam/Downloads/MailScan/dataset",
+  "totalDiscoveredFiles": 22,
+  "canonicalDatasetsCount": 12,
+  "totalRawRecords": 1245031,
+  "totalUniqueRecords": 237852,
+  "splitCounts": {
+    "train": 166496,
+    "validation": 35678,
+    "test": 35678
+  },
+  "categoryDistribution": {
+    "LEGITIMATE": 122578,
+    "SPAM": 104772,
+    "OTHER_MALICIOUS": 10502
+  },
+  "hardwareRequirements": {
+    "estimatedRAMForFullTraining": "16 GB+",
+    "minimumDiskSpaceGB": 5.0,
+    "recommendedDevice": "CUDA GPU or Apple Silicon MPS"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-09-15T10:53:50.879849+00:00",
+  "totalFilesDiscovered": 22,
+  "canonicalFilesCount": 12,
+  "exactDuplicateFilesCount": 2,
+  "derivedVectorizedFilesCount": 7,
+  "totalRawCanonicalRecords": 1245031,
+  "duplicateRecordsFiltered": 1007179,
+  "totalUniqueRecords": 237852,
+  "duplicateFiles": [
+    {
+      "file": "CEAS_08.csv",
+      "duplicateOf": "CEAS-08.csv",
+      "md5": "1f0d59191eec892a709995d48cd8decb",
+      "rows": 39154,
+      "reason": "Exact binary/content duplicate of canonical dataset CEAS-08.csv"
+    },
+    {
+      "file": "full_dataset.json",
+      "duplicateOf": "full_dataset.csv",
+      "md5": "45f1ec25a1d53e5c132351db73e3c147",
+      "rows": 13477,
+      "reason": "Exact JSON serialization duplicate of canonical full_dataset.csv"
+    }
+  ],
+  "derivedFiles": [
+    {
+      "file": "Assassin_vectorized_data.csv",
+      "derivedFrom": "Assassin.csv",
+      "rows": 5809,
+      "reason": "Derived vectorized representation of canonical Assassin.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "CEAS-08_vectorized_data.csv",
+      "derivedFrom": "CEAS-08.csv",
+      "rows": 39154,
+      "reason": "Derived vectorized representation of canonical CEAS-08.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "Enron_vectorized_data.csv",
+      "derivedFrom": "Enron.csv",
+      "rows": 29767,
+      "reason": "Derived vectorized representation of canonical Enron.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "Ling_vectorized_data.csv",
+      "derivedFrom": "Ling.csv",
+      "rows": 2859,
+      "reason": "Derived vectorized representation of canonical Ling.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-05_vectorized_data.csv",
+      "derivedFrom": "TREC-05.csv",
+      "rows": 55414,
+      "reason": "Derived vectorized representation of canonical TREC-05.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-06_vectorized_data.csv",
+      "derivedFrom": "TREC-06.csv",
+      "rows": 16416,
+      "reason": "Derived vectorized representation of canonical TREC-06.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-07_vectorized_data.csv",
+      "derivedFrom": "TREC-07.csv",
+      "rows": 53757,
+      "reason": "Derived vectorized representation of canonical TREC-07.csv; canonical raw text is used to prevent double-counting"
+    }
+  ]
+}

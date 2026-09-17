@@ -1,0 +1,58 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: mailtrace-ai
+  labels:
+    cloud.google.com/location: us-central1
+  annotations:
+    run.googleapis.com/ingress: all
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '1'
+        autoscaling.knative.dev/maxScale: '10'
+        run.googleapis.com/cpu-throttling: 'false'
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      containers:
+        - image: us-central1-docker.pkg.dev/${PROJECT_ID}/mailtrace-registry/mailtrace-ai:latest
+          resources:
+            limits:
+              cpu: '2'
+              memory: 4Gi
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: 'production'
+            - name: PORT
+              value: '3000'
+            - name: ML_PORT
+              value: '5001'
+            - name: MAILTRACE_MODEL_BUCKET
+              value: '${PROJECT_ID}-mailtrace-models'
+            - name: MAILTRACE_MODEL_OBJECT
+              value: 'models/mailtrace-100m-v2/mailtrace-100m-v2.pt'
+            - name: MAILTRACE_MODEL_VERSION
+              value: '100m-v2'
+            - name: MAILTRACE_MODEL_DIR
+              value: '/tmp/mailtrace-model'
+          startupProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3

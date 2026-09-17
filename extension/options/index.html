@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MailTrace AI - Extension Options & Preferences</title>
+  <link rel="stylesheet" href="../popup/popup.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="options-body">
+  <div class="options-wrapper">
+    <header class="options-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base font-bold text-white tracking-wide font-mono">MAILTRACE<span class="text-cyan-400">.AI</span> EXTENSION CONFIGURATION</h1>
+          <p class="text-xs text-slate-400">Direct Email Threat Detection, Geolocation & Forensic Intelligence</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="options-content">
+      <!-- Backend Settings -->
+      <section class="card">
+        <div class="card-header">
+          <span class="card-label">SOC BACKEND CONNECTION</span>
+        </div>
+        <p class="text-xs text-slate-400 mb-3">
+          Specify the active MailTrace AI backend server instance that receives telemetry and runs the deep analysis pipeline.
+        </p>
+
+        <div class="setting-item">
+          <label class="setting-label" for="input-backend-url">Backend Server Origin URL</label>
+          <div class="input-with-action">
+            <input type="text" id="input-backend-url" class="text-input font-mono" placeholder="http://localhost:3000">
+            <button id="btn-test" class="btn btn-secondary btn-sm">Test Connection</button>
+          </div>
+          <span id="test-feedback" class="text-xs mt-1 block"></span>
+        </div>
+      </section>
+
+      <!-- Threat Detection Settings -->
+      <section class="card">
+        <div class="card-header">
+          <span class="card-label">DETECTION PREFERENCES</span>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Immediate Auto-Analysis</div>
+            <div class="toggle-desc">Automatically analyze open emails as soon as the popup or side panel is triggered</div>
+          </div>
+          <input type="checkbox" id="opt-auto-analyze" class="toggle">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Local Scan History Retention</div>
+            <div class="toggle-desc">Keep a history of recently analyzed email subjects and risk scores in browser storage</div>
+          </div>
+          <input type="checkbox" id="opt-save-history" class="toggle" checked>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">High-Severity OS Notifications</div>
+            <div class="toggle-desc">Display desktop notification when an email exceeds 85/100 risk score</div>
+          </div>
+          <input type="checkbox" id="opt-notifications" class="toggle" checked>
+        </div>
+      </section>
+
+      <!-- Privacy & Data Handling -->
+      <section class="card">
+        <div class="card-header">
+          <span class="card-label">PRIVACY & FORENSIC TRANSPARENCY</span>
+        </div>
+        <div class="text-xs text-slate-300 space-y-2">
+          <p>
+            <strong>Zero-Trace Policy:</strong> The extension extracts visible email metadata (sender, subject, plain text body, hyperlinks, and attachment descriptors) strictly on-demand.
+          </p>
+          <p>
+            <strong>Credential Security:</strong> No inbox passwords, OAuth master tokens, or unrelated browser cookies are stored or accessed by the extension.
+          </p>
+          <p>
+            <strong>Header Transport Note:</strong> Standard webmail interfaces (Gmail/Outlook DOM) do not expose raw SMTP Received headers. The extension marks extractions accordingly and reconstructs clean RFC 5322 metadata.
+          </p>
+        </div>
+      </section>
+
+      <div class="flex justify-end gap-3 mt-3">
+        <button id="btn-save-options" class="btn btn-primary px-5 py-2">
+          Save Settings
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

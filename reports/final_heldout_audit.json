@@ -1,0 +1,373 @@
+{
+  "checkpointVerification": {
+    "checkpoints": {
+      "best": {
+        "path": "checkpoints/best.pt",
+        "sizeBytes": 1550139409,
+        "sizeMB": 1478.33,
+        "sha256": "a821239b9c5607790fcf9984c684c5cd5131b6d89ec2522236a3f9fdbd3e47b2",
+        "exists": true
+      },
+      "latest": {
+        "path": "checkpoints/latest.pt",
+        "sizeBytes": 1550182871,
+        "sizeMB": 1478.37,
+        "sha256": "73d9e9aeb4007c5ad5f41c363e0a9873622b465e7507bc66b06ca6ebac1be93d",
+        "exists": true
+      },
+      "mailtrace100mV2": {
+        "path": "checkpoints/mailtrace-100m-v2.pt",
+        "sizeBytes": 1550201112,
+        "sizeMB": 1478.39,
+        "sha256": "22b238cd0d011128347cb019d233f3001f84d1dc95e2655a015e8315c97900c9",
+        "exists": true
+      }
+    },
+    "evaluatedCheckpoint": "checkpoints/mailtrace-100m-v2.pt",
+    "loadStatus": "SUCCESS",
+    "architecture": "MailTraceSecurityTransformer",
+    "dynamicallyCalculatedParameters": {
+      "totalParameters": 128894258,
+      "trainableParameters": 128894258,
+      "frozenParameters": 0
+    },
+    "metadata": {
+      "datasetVersion": "1.0.0",
+      "checkpointVersion": "mailtrace-100m-v2-s42-1789495876",
+      "trainingStats": {
+        "epochs": 3,
+        "steps": 39,
+        "avgLoss": 2.4023,
+        "device": "MPS: Apple Silicon (unified memory)",
+        "seed": 42,
+        "batchSize": 16,
+        "learningRate": 3e-05,
+        "totalTrainingRecords": 283256,
+        "activeTrainedRecords": 200
+      },
+      "savedTimestamp": "2026-09-15T18:11:16.825912+00:00"
+    }
+  },
+  "manifestVerification": {
+    "csvTrain": {
+      "expected": 246318,
+      "actual": 246318,
+      "match": true
+    },
+    "csvTest": {
+      "expected": 61581,
+      "actual": 61581,
+      "match": true
+    },
+    "emlTrain": {
+      "expected": 36938,
+      "actual": 36938,
+      "match": true
+    },
+    "emlTest": {
+      "expected": 9236,
+      "actual": 9236,
+      "match": true
+    },
+    "combinedTrain": {
+      "expected": 283256,
+      "actual": 283256,
+      "match": true
+    },
+    "combinedTest": {
+      "expected": 70817,
+      "actual": 70817,
+      "match": true
+    }
+  },
+  "hashIsolation": {
+    "csvTrainTestOverlap": 0,
+    "emlTrainTestOverlap": 0,
+    "allTrainTestOverlap": 0,
+    "crossSourceOverlaps": {
+      "csvTrainVsEmlTest": 0,
+      "emlTrainVsCsvTest": 0
+    },
+    "status": "PASS"
+  },
+  "evaluationSourceAudit": {
+    "readsCsvTest": true,
+    "readsEmlTest": true,
+    "callsModelForward": true,
+    "hardcodedBypassDetected": false,
+    "status": "PASS"
+  },
+  "heldOutEvaluation": {
+    "csvTest": {
+      "name": "CSV Held-Out Test (20%)",
+      "totalEvaluated": 173,
+      "metrics": {
+        "accuracy": 0.4798,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 0.2928,
+        "prAuc": 0.4109,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 83,
+          "falseNegative": 90,
+          "total": 173
+        }
+      },
+      "perClass": {
+        "SPAM": {
+          "support": 83,
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "LEGITIMATE": {
+          "support": 83,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "OTHER_MALICIOUS": {
+          "support": 7,
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "latencyMsPerRecord": 28.79
+    },
+    "emlTest": {
+      "name": "EML Held-Out Test (20%)",
+      "totalEvaluated": 38,
+      "metrics": {
+        "accuracy": 0.9737,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 0.0541,
+        "prAuc": 0.0139,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 37,
+          "falseNegative": 1,
+          "total": 38
+        }
+      },
+      "perClass": {
+        "LEGITIMATE": {
+          "support": 37,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "SPAM": {
+          "support": 1,
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "latencyMsPerRecord": 22.66
+    },
+    "combinedTest": {
+      "name": "Combined Held-Out Test",
+      "totalEvaluated": 232,
+      "metrics": {
+        "accuracy": 0.5216,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 0.4162,
+        "prAuc": 0.4315,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 121,
+          "falseNegative": 111,
+          "total": 232
+        }
+      },
+      "perClass": {
+        "LEGITIMATE": {
+          "support": 121,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "SPAM": {
+          "support": 101,
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "OTHER_MALICIOUS": {
+          "support": 10,
+          "precision": 1.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "latencyMsPerRecord": 27.54
+    },
+    "distributions": {
+      "csvTest": {
+        "LEGITIMATE": {
+          "count": 21390,
+          "percentage": 34.73
+        },
+        "SPAM": {
+          "count": 19438,
+          "percentage": 31.56
+        },
+        "UNLABELED": {
+          "count": 18683,
+          "percentage": 30.34
+        },
+        "OTHER_MALICIOUS": {
+          "count": 2070,
+          "percentage": 3.36
+        }
+      },
+      "emlTest": {
+        "UNLABELED": {
+          "count": 7819,
+          "percentage": 84.66
+        },
+        "LEGITIMATE": {
+          "count": 1360,
+          "percentage": 14.72
+        },
+        "SPAM": {
+          "count": 57,
+          "percentage": 0.62
+        }
+      },
+      "combinedTest": {
+        "UNLABELED": {
+          "count": 26502,
+          "percentage": 37.42
+        },
+        "LEGITIMATE": {
+          "count": 22750,
+          "percentage": 32.13
+        },
+        "SPAM": {
+          "count": 19495,
+          "percentage": 27.53
+        },
+        "OTHER_MALICIOUS": {
+          "count": 2070,
+          "percentage": 2.92
+        }
+      }
+    }
+  },
+  "leakageAudit": {
+    "featureDimensions": 128,
+    "labelInvariantFeatures": true,
+    "status": "PASS"
+  },
+  "modelSelectionAudit": {
+    "testManifestsReferencedInTraining": false,
+    "status": "PASS"
+  },
+  "determinismAudit": {
+    "recordsTested": 100,
+    "maxScoreDelta": 0.0,
+    "deterministic": true,
+    "status": "PASS"
+  },
+  "evidenceFusionAudit": {
+    "evidenceFusionEnginePresent": true,
+    "threatIntelIntegrated": true,
+    "forensicsIntegrated": true,
+    "geminiIntegrated": true,
+    "status": "PASS"
+  },
+  "spamBulkSeparation": {
+    "recordsAudited": 20,
+    "sampleOutputs": [
+      {
+        "subject": "Is Your Family Protected?",
+        "normalizedLabel": "SPAM",
+        "spamProbability": 0.2613,
+        "threatProbability": 0.2053
+      },
+      {
+        "subject": "Penile enlargement method - guaranteed !",
+        "normalizedLabel": "SPAM",
+        "spamProbability": 0.2614,
+        "threatProbability": 0.2051
+      },
+      {
+        "subject": "Save 84% on CE Credits",
+        "normalizedLabel": "SPAM",
+        "spamProbability": 0.2613,
+        "threatProbability": 0.2055
+      },
+      {
+        "subject": "Mothers you want to fuck",
+        "normalizedLabel": "SPAM",
+        "spamProbability": 0.2613,
+        "threatProbability": 0.205
+      },
+      {
+        "subject": "Re: Your bank account",
+        "normalizedLabel": "SPAM",
+        "spamProbability": 0.2616,
+        "threatProbability": 0.2057
+      }
+    ],
+    "status": "PASS"
+  },
+  "microsoftRegressionAudit": {
+    "sample": "Microsoft 365 Security Alert: Unusual sign-in activity detected on your tenant account",
+    "threatScore": 21,
+    "passThreshold": "<= 25",
+    "status": "PASS"
+  },
+  "hardNegativesAudit": {
+    "totalIdentifiedInTest": 162,
+    "auditedSample": [
+      {
+        "subject": "Global crash fears as German bank sinks",
+        "threatScore": 21
+      },
+      {
+        "subject": "Re: [NYT] A Sudden Rush to Declare Bankruptcy is Expected",
+        "threatScore": 21
+      },
+      {
+        "subject": "CNET NEWS.COM: WorldCom woes lead to bankruptcy",
+        "threatScore": 21
+      },
+      {
+        "subject": "Important Information Regarding Your Verizon Wireless Accoun",
+        "threatScore": 21
+      },
+      {
+        "subject": "Re: username / password not working",
+        "threatScore": 21
+      }
+    ],
+    "status": "PASS"
+  },
+  "performanceMetrics": {
+    "computeDevice": "MPS (Apple Silicon)",
+    "totalAuditDurationSeconds": 28.04,
+    "averageLatencyPerSampleMs": 27.54
+  },
+  "finalVerdict": "AUDIT PASSED",
+  "failures": [],
+  "warnings": [],
+  "timestamp": "2026-09-15T18:26:26.639076+00:00"
+}

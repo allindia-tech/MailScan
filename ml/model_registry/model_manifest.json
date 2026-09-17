@@ -1,0 +1,29 @@
+{
+  "modelId": "mailtrace-security-transformer",
+  "version": "100m-v2",
+  "architecture": "MailTraceSecurityTransformer",
+  "parameterCount": 128894258,
+  "artifact": {
+    "provider": "gcs",
+    "bucketEnv": "MAILTRACE_MODEL_BUCKET",
+    "objectEnv": "MAILTRACE_MODEL_OBJECT",
+    "defaultObject": "models/mailtrace-100m-v2/mailtrace-100m-v2.pt",
+    "sha256": "22b238cd0d011128347cb019d233f3001f84d1dc95e2655a015e8315c97900c9",
+    "sizeBytes": 1550201112
+  },
+  "config": {
+    "vocabSize": 50265,
+    "maxSeqLen": 1024,
+    "dModel": 768,
+    "numTextLayers": 10,
+    "numHeads": 12,
+    "dFfn": 3072,
+    "structuredInputDim": 128,
+    "numFusionLayers": 2,
+    "primaryNumClasses": 30,
+    "languageNumClasses": 7,
+    "numBinaryHeads": 13
+  },
+  "production": true,
+  "createdAt": "2026-09-15T18:11:16.825912Z"
+}

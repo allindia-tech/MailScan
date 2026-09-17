@@ -1,0 +1,286 @@
+[
+  {
+    "version": "training-dataset-v1-e2e-test",
+    "sampleCount": 5,
+    "verifiedFeedbackCount": 5,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 0,
+    "createdAt": "2026-09-15T11:18:27.782Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v1-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v2-e2e-test",
+    "sampleCount": 5,
+    "verifiedFeedbackCount": 5,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 0,
+    "createdAt": "2026-09-15T11:20:14.308Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v2-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v3-e2e-test",
+    "sampleCount": 5,
+    "verifiedFeedbackCount": 5,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 0,
+    "createdAt": "2026-09-15T11:34:57.686Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v3-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v4-e2e-test",
+    "sampleCount": 5,
+    "verifiedFeedbackCount": 5,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 0,
+    "createdAt": "2026-09-15T11:35:28.743Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v4-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v5-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T15:34:27.893Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v5-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v6-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T15:37:25.313Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v6-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v7-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T15:43:49.489Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v7-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v8-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T15:56:35.331Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v8-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v9-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T16:18:48.505Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v9-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v10-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T16:27:01.430Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v10-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v11-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-15T16:27:28.265Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan/reports/dataset_training-dataset-v11-e2e-test_manifest.json"
+  },
+  {
+    "version": "training-dataset-v12-e2e-test",
+    "sampleCount": 6,
+    "verifiedFeedbackCount": 6,
+    "hardNegativeCount": 0,
+    "hardPositiveCount": 0,
+    "duplicateCount": 0,
+    "classDistribution": {
+      "NEWSLETTER": 1,
+      "BUSINESS_EMAIL_COMPROMISE": 1,
+      "LEGITIMATE": 1,
+      "CREDENTIAL_THEFT": 2,
+      "Newsletter": 1
+    },
+    "trainCount": 4,
+    "valCount": 1,
+    "testCount": 1,
+    "createdAt": "2026-09-17T05:39:04.455Z",
+    "sourceDatasetVersions": [
+      "canonical-csv-v1",
+      "verified-ground-truth-pool"
+    ],
+    "manifestPath": "/Users/shivam/Downloads/MailScan 2/MailScan/reports/dataset_training-dataset-v12-e2e-test_manifest.json"
+  }
+]

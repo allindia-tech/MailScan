@@ -1,0 +1,2072 @@
+[
+  {
+    "id": "AUDIT-C4D2720D",
+    "timestamp": "2026-09-15T11:18:27.321Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-C8595347FB40",
+    "analysisId": "sample-case-ms-newsletter",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Untitled Email: Pred=\"SPAM\" -> GT=\"NEWSLETTER\" (Verdict: Newsletter, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-C8595347FB40",
+      "feedbackId": "FB-C8595347FB40",
+      "analysisId": "sample-case-ms-newsletter",
+      "emailFingerprint": "afc84d1a5b85453928d7825833f25c679ae9a9538b4055d36f7a7a9e0cedb529",
+      "contentHash": "f6befda88a48fc069298337d4cca63b41445cde977b8cb366e3f6448f1f58edc",
+      "urlFingerprint": "226c75dddf157551",
+      "emailSubject": "Untitled Email",
+      "sender": "updates@substack.com",
+      "originalPrediction": {
+        "primaryCategory": "SPAM",
+        "secondaryCategories": [
+          "BULK"
+        ],
+        "threatRisk": 22,
+        "spamBulkScore": 85,
+        "confidence": 0.91,
+        "probabilities": {
+          "SPAM": 0.85,
+          "NEWSLETTER": 0.08,
+          "LEGITIMATE": 0.05
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "List-Unsubscribe header present",
+          "Marketing tracking pixels"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "NEWSLETTER",
+        "secondaryCategories": [
+          "PROMOTIONAL"
+        ],
+        "verdict": "Newsletter",
+        "isMalicious": false,
+        "isSpam": true,
+        "correctedEvidence": [
+          "Valid DKIM for substack.com",
+          "Clean reputational domain"
+        ]
+      },
+      "classificationType": "CONFIRMED_BENIGN",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Legitimate engineering newsletter; not spam or threat. Verified DKIM/SPF alignment.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.313Z",
+      "verifiedAt": "2026-09-15T11:18:27.321Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Here is your weekly summary of the latest open-source tools and platform features. Click here to read. Unsubscribe at https://substack.com/unsubscribe",
+        "urls": [
+          "https://substack.com/read/weekly-5-updates",
+          "https://substack.com/unsubscribe"
+        ],
+        "sender": "updates@substack.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-49EA33D7",
+    "timestamp": "2026-09-15T11:18:27.322Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "admin.taylor@defense.corp",
+    "actorRole": "Chief Security Officer",
+    "feedbackId": "FB-3A3EDB518C5E",
+    "analysisId": "sample-case-bec-wire",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Untitled Email: Pred=\"PHISHING\" -> GT=\"BUSINESS_EMAIL_COMPROMISE\" (Verdict: Business Email Compromise, Status: VERIFIED, Weight: 1.50)",
+    "newState": {
+      "id": "FB-3A3EDB518C5E",
+      "feedbackId": "FB-3A3EDB518C5E",
+      "analysisId": "sample-case-bec-wire",
+      "emailFingerprint": "cf93c54355b7856f05cd456a1e9d26266eb21c5db2486efee2c634c178dd2f45",
+      "contentHash": "f6a6b586efe2d6d47c7c687b0b307dffbcf645703c351ff030340ee608abe3ac",
+      "urlFingerprint": "e3b0c44298fc1c14",
+      "emailSubject": "Untitled Email",
+      "sender": "ceo-office@company-partner-corp.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 88,
+        "spamBulkScore": 10,
+        "confidence": 0.89,
+        "probabilities": {
+          "PHISHING": 0.8,
+          "BEC": 0.15
+        },
+        "detectedTechniques": [
+          "T1566",
+          "T1598"
+        ],
+        "evidence": [
+          "Urgent payment diversion language",
+          "Lookalike sender domain"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "BUSINESS_EMAIL_COMPROMISE",
+        "secondaryCategories": [
+          "FINANCIAL_FRAUD",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Business Email Compromise",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "CFO impersonation",
+          "Supplier wire diversion pattern"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 1.5,
+      "analyst": {
+        "id": "admin.taylor@defense.corp",
+        "name": "Taylor Lead",
+        "role": "Chief Security Officer",
+        "confidence": 0.99
+      },
+      "reason": "Confirmed BEC wire redirection attack targeting corporate treasury.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.322Z",
+      "verifiedAt": "2026-09-15T11:18:27.322Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Please urgently change the routing details on invoice INV-88921 to our new reserve account before 3 PM cutoff.",
+        "urls": [],
+        "sender": "ceo-office@company-partner-corp.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-3D356932",
+    "timestamp": "2026-09-15T11:18:27.322Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-E818AC0379F1",
+    "analysisId": "sample-case-internal-memo",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Untitled Email: Pred=\"LEGITIMATE\" -> GT=\"LEGITIMATE\" (Verdict: Legitimate, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-E818AC0379F1",
+      "feedbackId": "FB-E818AC0379F1",
+      "analysisId": "sample-case-internal-memo",
+      "emailFingerprint": "058bb2bd6dca32a973b1daec31d925b014e34be72dfa4275ae5cdcfe3d69153c",
+      "contentHash": "7aa6b740f908a42a26783479c0fb41f0c42f0be48a5b23fbc23311a87bc483ed",
+      "urlFingerprint": "05a78b5f9590142e",
+      "emailSubject": "Untitled Email",
+      "sender": "sarah.connor@defense.corp",
+      "originalPrediction": {
+        "primaryCategory": "LEGITIMATE",
+        "secondaryCategories": [],
+        "threatRisk": 5,
+        "spamBulkScore": 2,
+        "confidence": 0.97,
+        "probabilities": {
+          "LEGITIMATE": 0.97
+        },
+        "detectedTechniques": [],
+        "evidence": [
+          "Internal RFC1918 hop",
+          "Mutual TLS authenticated"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "LEGITIMATE",
+        "secondaryCategories": [],
+        "verdict": "Legitimate",
+        "isMalicious": false,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Internal enterprise collaboration"
+        ]
+      },
+      "classificationType": "CONFIRMED_BENIGN",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 1
+      },
+      "reason": "Confirmed benign internal correspondence.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.322Z",
+      "verifiedAt": "2026-09-15T11:18:27.322Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Hi Chen, thanks for attending the sync. Architecture diagrams are on internal Confluence.",
+        "urls": [
+          "https://confluence.defense.corp/pages/viewpage.action?pageId=9821"
+        ],
+        "sender": "sarah.connor@defense.corp"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-15CB7AF5",
+    "timestamp": "2026-09-15T11:18:27.323Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-D664FD7D3889",
+    "analysisId": "sample-case-m365-phish",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Untitled Email: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-D664FD7D3889",
+      "feedbackId": "FB-D664FD7D3889",
+      "analysisId": "sample-case-m365-phish",
+      "emailFingerprint": "82e5803b6c747c88aedeb75366f17807fcdeb57afa73e2dadbc56b7631ce3daa",
+      "contentHash": "dfda7ccac17d86b5803a2db77af441bf4cf63bff48e4b33e8d871fb86b384190",
+      "urlFingerprint": "7985106d562a1428",
+      "emailSubject": "Untitled Email",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 95,
+        "spamBulkScore": 5,
+        "confidence": 0.96,
+        "probabilities": {
+          "PHISHING": 0.92,
+          "CREDENTIAL_THEFT": 0.06
+        },
+        "detectedTechniques": [
+          "T1566.002",
+          "T1056"
+        ],
+        "evidence": [
+          "Lookalike Microsoft domain",
+          "Credential harvesting URL"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Active credential harvesting landing page verified"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.99
+      },
+      "reason": "Confirmed credential harvesting campaign targeting employee M365 credentials.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.323Z",
+      "verifiedAt": "2026-09-15T11:18:27.323Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Your Microsoft 365 session has expired. Click here to retain your access: https://login.micros0ft-portal-auth.com/login",
+        "urls": [
+          "https://login.micros0ft-portal-auth.com/login"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-21D2FF38",
+    "timestamp": "2026-09-15T11:18:27.781Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:18:27.781Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-4B9EBA96",
+    "timestamp": "2026-09-15T11:20:14.307Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:18:27.781Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v1-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:20:14.307Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-EA2DF21A",
+    "timestamp": "2026-09-15T11:34:57.685Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:20:14.307Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v2-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:34:57.685Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-97ADA6DA",
+    "timestamp": "2026-09-15T11:35:28.742Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:34:57.685Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v3-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:35:28.742Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-26EADF62",
+    "timestamp": "2026-09-15T15:28:04.640Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-24AC64211C91",
+    "analysisId": "analysis-1789486028728-n5uws",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified 5 new updates: Pred=\"Newsletter\" -> GT=\"Newsletter\" (Verdict: Newsletter, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-24AC64211C91",
+      "feedbackId": "FB-24AC64211C91",
+      "analysisId": "analysis-1789486028728-n5uws",
+      "emailFingerprint": "acfb8d015c03969d1141d7bca47135dc0ef47a04a055f63b6553e37c78181023",
+      "contentHash": "e0ac6fce5e0daf7912d9cae497a2abff3b769715f038ae5809852e82c81a04d9",
+      "urlFingerprint": "6a3eb584c8bb2a03",
+      "emailSubject": "5 new updates",
+      "sender": "discountwalas briefing <newsletter@em.discountwalas.com>",
+      "originalPrediction": {
+        "primaryCategory": "Newsletter",
+        "secondaryCategories": [
+          "Social Engineering / Scam",
+          "Newsletter"
+        ],
+        "threatRisk": 1,
+        "spamBulkScore": 63,
+        "confidence": 97,
+        "probabilities": {
+          "Phishing": 0.05,
+          "BEC": 0.04,
+          "Fraud": 0.03,
+          "Malware": 0.02,
+          "CredentialTheft": 0.05,
+          "Impersonation": 0.06,
+          "SocialEngineering": 0.86,
+          "Obfuscation": 0.04
+        },
+        "detectedTechniques": [
+          "IDENTITY_DECEPTION - Sender / Reply-To Routing Discrepancy"
+        ],
+        "evidence": [
+          "Authentication SPF: PASS",
+          "Domain Reputation: TRUSTED",
+          "Threat Risk Score: 1/100"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "Newsletter",
+        "secondaryCategories": [],
+        "verdict": "Newsletter",
+        "isMalicious": false,
+        "isSpam": true,
+        "correctedEvidence": []
+      },
+      "classificationType": "CONFIRMED_BENIGN",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "SOC Verification Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.95
+      },
+      "reason": "Analyst confirmed model assessment.",
+      "notes": "",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T15:28:04.640Z",
+      "verifiedAt": "2026-09-15T15:28:04.640Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "structuredFeatures": {
+        "threatRisk": 1,
+        "spamBulkScore": 63,
+        "authenticityScore": 98
+      },
+      "rawEmailSample": {
+        "subject": "5 new updates",
+        "bodyText": "5 new updates",
+        "urls": [
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629d=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campai=",
+          "https://m.mc.lavishmonk.com/e=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1=",
+          "https://m.mc.lavishmonk.com/=",
+          "https://m.mc.lavishmonk.com/emaindia/inde=",
+          "https://m.mc.lavishmonk.com/emaindia/index.ph=",
+          "https://m.mc.lavishmonk.com/emaindia/i=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1yc78d/=",
+          "https://m.mc.lavishmonk.com/emain=",
+          "https://m.m=",
+          "https://m.mc.lavishmonk.com/emaindia/ind=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1yc=",
+          "https://m.mc.lavishmonk.com/emai="
+        ],
+        "sender": "discountwalas briefing <newsletter@em.discountwalas.com>"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-1B378EF9",
+    "timestamp": "2026-09-15T15:34:27.892Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T11:35:28.742Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v4-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:34:27.892Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-0E21ACB4",
+    "timestamp": "2026-09-15T15:37:25.311Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:34:27.892Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v5-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:37:25.311Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-3A4A0A95",
+    "timestamp": "2026-09-15T15:43:49.488Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:37:25.311Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v6-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:43:49.488Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-74A373BE",
+    "timestamp": "2026-09-15T15:56:35.330Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:43:49.488Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v7-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:56:35.330Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-60535570",
+    "timestamp": "2026-09-15T16:18:48.504Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T15:56:35.330Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v8-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:18:48.504Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-EDB275FF",
+    "timestamp": "2026-09-15T16:27:01.427Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:18:48.504Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v9-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:27:01.427Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-E6347156",
+    "timestamp": "2026-09-15T16:27:28.264Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:27:01.427Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v10-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:27:28.264Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  },
+  {
+    "id": "AUDIT-0CBB1BD6",
+    "timestamp": "2026-09-17T05:39:04.450Z",
+    "action": "ANALYST_VERIFICATION_UPDATED",
+    "actor": "analyst.chen@defense.corp",
+    "actorRole": "Senior SOC Analyst",
+    "feedbackId": "FB-5ED3F736140E",
+    "analysisId": "test-case-phish-harvest-1",
+    "modelVersion": "mailtrace-100m-v1",
+    "details": "Analyst verified Action Required: Confirm your Office 365 account credentials: Pred=\"PHISHING\" -> GT=\"CREDENTIAL_THEFT\" (Verdict: Credential Theft, Status: VERIFIED, Weight: 2.00)",
+    "previousState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-15T16:27:28.264Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      },
+      "datasetVersion": "training-dataset-v11-e2e-test"
+    },
+    "newState": {
+      "id": "FB-5ED3F736140E",
+      "feedbackId": "FB-5ED3F736140E",
+      "analysisId": "test-case-phish-harvest-1",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "contentHash": "ed9fcd0464b58bf081aad2803df6549542d188321d2604df974e8fd23576a13f",
+      "urlFingerprint": "faf0dc0aa6498cda",
+      "emailSubject": "Action Required: Confirm your Office 365 account credentials",
+      "sender": "security@micros0ft-support-portal.com",
+      "originalPrediction": {
+        "primaryCategory": "PHISHING",
+        "secondaryCategories": [
+          "CREDENTIAL_THEFT"
+        ],
+        "threatRisk": 92,
+        "spamBulkScore": 10,
+        "confidence": 0.94,
+        "probabilities": {
+          "PHISHING": 0.9,
+          "CREDENTIAL_THEFT": 0.08
+        },
+        "detectedTechniques": [
+          "T1566.002"
+        ],
+        "evidence": [
+          "Lookalike domain micros0ft-portal-auth.com"
+        ]
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "CREDENTIAL_THEFT",
+        "secondaryCategories": [
+          "PHISHING",
+          "EXECUTIVE_IMPERSONATION"
+        ],
+        "verdict": "Credential Theft",
+        "isMalicious": true,
+        "isSpam": false,
+        "correctedEvidence": [
+          "Confirmed credential harvesting endpoint"
+        ]
+      },
+      "classificationType": "CONFIRMED_THREAT",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.chen@defense.corp",
+        "name": "Chen Analyst",
+        "role": "Senior SOC Analyst",
+        "confidence": 0.98
+      },
+      "reason": "Verified credential harvesting attack using Microsoft brand impersonation.",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-15T11:18:27.781Z",
+      "verifiedAt": "2026-09-17T05:39:04.450Z",
+      "modelVersion": "mailtrace-100m-v1",
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    }
+  }
+]

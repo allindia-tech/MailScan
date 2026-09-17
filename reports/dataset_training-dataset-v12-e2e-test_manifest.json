@@ -1,0 +1,133 @@
+{
+  "version": "training-dataset-v12-e2e-test",
+  "createdAt": "2026-09-17T05:39:04.455Z",
+  "samples": [
+    {
+      "feedbackId": "FB-C8595347FB40",
+      "emailFingerprint": "afc84d1a5b85453928d7825833f25c679ae9a9538b4055d36f7a7a9e0cedb529",
+      "subject": "Untitled Email",
+      "primaryCategory": "NEWSLETTER",
+      "isMalicious": false,
+      "isSpam": true,
+      "sampleWeight": 2,
+      "isHardNegative": false,
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Here is your weekly summary of the latest open-source tools and platform features. Click here to read. Unsubscribe at https://substack.com/unsubscribe",
+        "urls": [
+          "https://substack.com/read/weekly-5-updates",
+          "https://substack.com/unsubscribe"
+        ],
+        "sender": "updates@substack.com"
+      }
+    },
+    {
+      "feedbackId": "FB-3A3EDB518C5E",
+      "emailFingerprint": "cf93c54355b7856f05cd456a1e9d26266eb21c5db2486efee2c634c178dd2f45",
+      "subject": "Untitled Email",
+      "primaryCategory": "BUSINESS_EMAIL_COMPROMISE",
+      "isMalicious": true,
+      "isSpam": false,
+      "sampleWeight": 1.5,
+      "isHardNegative": false,
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Please urgently change the routing details on invoice INV-88921 to our new reserve account before 3 PM cutoff.",
+        "urls": [],
+        "sender": "ceo-office@company-partner-corp.com"
+      }
+    },
+    {
+      "feedbackId": "FB-E818AC0379F1",
+      "emailFingerprint": "058bb2bd6dca32a973b1daec31d925b014e34be72dfa4275ae5cdcfe3d69153c",
+      "subject": "Untitled Email",
+      "primaryCategory": "LEGITIMATE",
+      "isMalicious": false,
+      "isSpam": false,
+      "sampleWeight": 2,
+      "isHardNegative": false,
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Hi Chen, thanks for attending the sync. Architecture diagrams are on internal Confluence.",
+        "urls": [
+          "https://confluence.defense.corp/pages/viewpage.action?pageId=9821"
+        ],
+        "sender": "sarah.connor@defense.corp"
+      }
+    },
+    {
+      "feedbackId": "FB-D664FD7D3889",
+      "emailFingerprint": "82e5803b6c747c88aedeb75366f17807fcdeb57afa73e2dadbc56b7631ce3daa",
+      "subject": "Untitled Email",
+      "primaryCategory": "CREDENTIAL_THEFT",
+      "isMalicious": true,
+      "isSpam": false,
+      "sampleWeight": 2,
+      "isHardNegative": false,
+      "rawEmailSample": {
+        "subject": "Untitled Email",
+        "bodyText": "Your Microsoft 365 session has expired. Click here to retain your access: https://login.micros0ft-portal-auth.com/login",
+        "urls": [
+          "https://login.micros0ft-portal-auth.com/login"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    },
+    {
+      "feedbackId": "FB-5ED3F736140E",
+      "emailFingerprint": "c800a4e8b940bbeb490b1e05516471fa7f18a0a5df4f44062f19c0ee050523a8",
+      "subject": "Action Required: Confirm your Office 365 account credentials",
+      "primaryCategory": "CREDENTIAL_THEFT",
+      "isMalicious": true,
+      "isSpam": false,
+      "sampleWeight": 2,
+      "isHardNegative": false,
+      "rawEmailSample": {
+        "subject": "Action Required: Confirm your Office 365 account credentials",
+        "bodyText": "Your Microsoft 365 session has expired. Re-authenticate now at http://login.micros0ft-portal-auth.com/m365/auth.php",
+        "urls": [
+          "http://login.micros0ft-portal-auth.com/m365/auth.php"
+        ],
+        "sender": "security@micros0ft-support-portal.com"
+      }
+    },
+    {
+      "feedbackId": "FB-24AC64211C91",
+      "emailFingerprint": "acfb8d015c03969d1141d7bca47135dc0ef47a04a055f63b6553e37c78181023",
+      "subject": "5 new updates",
+      "primaryCategory": "Newsletter",
+      "isMalicious": false,
+      "isSpam": true,
+      "sampleWeight": 2,
+      "isHardNegative": false,
+      "structuredFeatures": {
+        "threatRisk": 1,
+        "spamBulkScore": 63,
+        "authenticityScore": 98
+      },
+      "rawEmailSample": {
+        "subject": "5 new updates",
+        "bodyText": "5 new updates",
+        "urls": [
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629d=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campai=",
+          "https://m.mc.lavishmonk.com/e=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1=",
+          "https://m.mc.lavishmonk.com/=",
+          "https://m.mc.lavishmonk.com/emaindia/inde=",
+          "https://m.mc.lavishmonk.com/emaindia/index.ph=",
+          "https://m.mc.lavishmonk.com/emaindia/i=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1yc78d/=",
+          "https://m.mc.lavishmonk.com/emain=",
+          "https://m.m=",
+          "https://m.mc.lavishmonk.com/emaindia/ind=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns=",
+          "https://m.mc.lavishmonk.com/emaindia/index.php/campaigns/mh629dv1yc=",
+          "https://m.mc.lavishmonk.com/emai="
+        ],
+        "sender": "discountwalas briefing <newsletter@em.discountwalas.com>"
+      }
+    }
+  ]
+}

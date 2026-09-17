@@ -1,0 +1,57 @@
+# ==============================================================================
+# MailTrace AI — Google Cloud Build Automated CI/CD Pipeline
+# ==============================================================================
+
+steps:
+  # 1. Build Docker Image (Without the 1.4 GB model checkpoint)
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:${SHORT_SHA}'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:latest'
+      - '.'
+
+  # 2. Push Image to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:${SHORT_SHA}'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:latest'
+
+  # 3. Deploy to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'mailtrace-ai'
+      - '--image'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:${SHORT_SHA}'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '4Gi'
+      - '--cpu'
+      - '2'
+      - '--set-env-vars'
+      - 'MAILTRACE_MODEL_BUCKET=${PROJECT_ID}-mailtrace-models,MAILTRACE_MODEL_OBJECT=models/mailtrace-100m-v2/mailtrace-100m-v2.pt,MAILTRACE_MODEL_VERSION=100m-v2,MAILTRACE_MODEL_DIR=/tmp/mailtrace-model'
+
+substitutions:
+  _REGION: 'us-central1'
+  _REPOSITORY: 'mailtrace-registry'
+
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:${SHORT_SHA}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/mailtrace-ai:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

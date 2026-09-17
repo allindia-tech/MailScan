@@ -1,0 +1,116 @@
+{
+  "report": "MailTrace AI \u2014 Pre-Training Remediation Acceptance Audit",
+  "timestamp": "2026-09-15T19:14:47Z",
+  "durationSeconds": 4.06,
+  "allGatesPassed": true,
+  "finalVerdict": "ALL GATES PASSED \u2014 READY FOR FULL-SCALE RETRAINING",
+  "gates": {
+    "GATE_1_DATA_RESOLUTION": {
+      "status": "PASS",
+      "sampleSize": 200,
+      "resolvedCount": 200,
+      "resolutionRate": "100.00%",
+      "parseErrors": 0,
+      "emptyBodyCount": 9,
+      "emptySubjectCount": 4
+    },
+    "GATE_2_NO_PARSE_FAILURES": {
+      "status": "PASS",
+      "unhandledExceptions": 0,
+      "errorDetails": []
+    },
+    "GATE_3_STRUCTURED_FEATURE_DIVERSITY": {
+      "status": "PASS",
+      "totalFeatures": 128,
+      "nonZeroVarianceDimensions": 24,
+      "uniqueFeatureVectors": 174,
+      "uniqueVectorRatio": "87.00%",
+      "allZeroVectorsCount": 0,
+      "allZeroVectorsPercent": "0.00%",
+      "meanNonZeroPerVector": 6.19
+    },
+    "GATE_4_TOKENIZATION_DIVERSITY": {
+      "status": "PASS",
+      "totalSamples": 200,
+      "uniqueTokenHashes": 200,
+      "uniqueHashRatio": "100.00%"
+    },
+    "GATE_5_LABEL_ALIGNMENT": {
+      "status": "PASS",
+      "alignments": {
+        "LEGITIMATE": {
+          "spam_bulk": 0.0,
+          "threat": 0.0,
+          "phishing": 0.0,
+          "primaryIndex": 0
+        },
+        "SPAM": {
+          "spam_bulk": 1.0,
+          "threat": 0.0,
+          "phishing": 0.0,
+          "primaryIndex": 7
+        },
+        "PHISHING": {
+          "spam_bulk": 0.0,
+          "threat": 1.0,
+          "phishing": 1.0,
+          "primaryIndex": 8
+        },
+        "OTHER_MALICIOUS": {
+          "spam_bulk": 0.0,
+          "threat": 1.0,
+          "phishing": 0.0,
+          "primaryIndex": 29
+        },
+        "UNLABELED": {
+          "spam_bulk": 0.0,
+          "threat": 0.0,
+          "phishing": 0.0,
+          "primaryIndex": -100
+        }
+      }
+    },
+    "GATE_6_UNLABELED_LOSS_MASKING": {
+      "status": "PASS",
+      "unlabeledPrimaryTarget": -100,
+      "unlabeledBinaryLossMaskSum": 0.0,
+      "labeledBinaryLossMaskSum": 13.0
+    },
+    "GATE_7_FULL_TRAINING_CONFIGURATION": {
+      "status": "PASS",
+      "csvTrainRecords": 246318,
+      "emlTrainRecords": 36938,
+      "combinedTrainRecords": 283256
+    },
+    "GATE_8_MODEL_ARCHITECTURE": {
+      "status": "PASS",
+      "totalParameters": 128894258,
+      "trainableParameters": 128894258,
+      "expectedParameters": 128894258
+    },
+    "GATE_9_PIPELINE_SENSITIVITY": {
+      "status": "PASS",
+      "structuredFeatureDelta": 1.0,
+      "fusedEmbeddingDelta": 1.998552680015564,
+      "primaryLogitsDelta": 0.1003211960196495,
+      "binaryLogitsDelta": 0.08574774116277695
+    },
+    "GATE_10_AUTHENTIC_DETERMINISTIC_FEATURES": {
+      "status": "PASS",
+      "deterministic": true,
+      "noRandomNoise": true
+    },
+    "GATE_11_ZERO_TEST_LEAKAGE": {
+      "status": "PASS",
+      "trainIdCount": 283256,
+      "testIdCount": 70817,
+      "idOverlap": 0
+    },
+    "GATE_12_BENCHMARK_INTEGRITY": {
+      "status": "PASS",
+      "defaultThreshold": 0.5,
+      "microsoftBenchmarkRequirement": "Threat Risk <= 15 (Safe/Legitimate)",
+      "noConcealmentThresholds": true
+    }
+  }
+}

@@ -1,0 +1,660 @@
+{
+  "report": "MailTrace AI \u2014 Complete Held-Out Test Evaluation Report",
+  "timestamp": "2026-09-15T19:14:14.530647+00:00",
+  "checkpoint": {
+    "file": "mailtrace-100m-v2.pt",
+    "sha256": "22b238cd0d011128347cb019d233f3001f84d1dc95e2655a015e8315c97900c9",
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258
+  },
+  "splitSeed": 42,
+  "device": "MPS: Apple Silicon (unified memory)",
+  "isSmokeTest": true,
+  "durationSeconds": 15.68,
+  "evaluations": {
+    "csvTest": {
+      "name": "CSV Held-Out Test (20%)",
+      "manifestCount": 61581,
+      "reconciliation": {
+        "evaluatedLabeled": 200,
+        "evaluatedUnlabeled": 0,
+        "parseFailures": 0,
+        "invalidRecords": 0,
+        "skippedRecords": 0,
+        "reconciledTotal": 200,
+        "exactMatch": true
+      },
+      "parseFailureDetails": [],
+      "threatMetrics": {
+        "accuracy": 1.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 0.0,
+        "rocAuc": null,
+        "prAuc": null,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 200,
+          "falseNegative": 0,
+          "reconciledTotal": 200
+        },
+        "probabilityDistribution": {
+          "min": 0.2024,
+          "max": 0.2098,
+          "mean": 0.2062,
+          "median": 0.206,
+          "percentile25": 0.2058,
+          "percentile75": 0.2063,
+          "percentile90": 0.2079,
+          "percentile99": 0.2096
+        }
+      },
+      "spamMetrics": {
+        "accuracy": 1.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 0.0,
+        "rocAuc": null,
+        "prAuc": null,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 200,
+          "falseNegative": 0,
+          "reconciledTotal": 200
+        },
+        "probabilityDistribution": {
+          "min": 0.2503,
+          "max": 0.2612,
+          "mean": 0.2568,
+          "median": 0.2568,
+          "percentile25": 0.2567,
+          "percentile75": 0.2568,
+          "percentile90": 0.2584,
+          "percentile99": 0.2603
+        }
+      },
+      "perClass": {
+        "LEGITIMATE": {
+          "support": 200,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "SPAM": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "OTHER_MALICIOUS": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "labelDistribution": {
+        "LEGITIMATE": {
+          "count": 200,
+          "percentage": 100.0
+        }
+      },
+      "predictionDistribution": {
+        "BENIGN": {
+          "count": 200,
+          "percentage": 100.0
+        }
+      },
+      "sampleDebugRecords": [
+        {
+          "recordId": "csv_0207a62d92bf5899",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3379,
+          "threatProbability": 0.2079,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0784,
+          "spamProbability": 0.2538,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_a84d6be19e619f1d",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3488,
+          "threatProbability": 0.2061,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0629,
+          "spamProbability": 0.2567,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_4b6f6ccaeb1c7f89",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3497,
+          "threatProbability": 0.2059,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0628,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_5ed917202c420bd2",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3483,
+          "threatProbability": 0.2062,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.063,
+          "spamProbability": 0.2567,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_5783be0ddc5ac335",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3502,
+          "threatProbability": 0.2058,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0627,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_17f8f6a3ac58e10c",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3452,
+          "threatProbability": 0.2067,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0455,
+          "spamProbability": 0.2601,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_754cf11aacbfee8b",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3492,
+          "threatProbability": 0.206,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0629,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_9304c9267896c4fb",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3494,
+          "threatProbability": 0.206,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0628,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_51dbe720df27ae3b",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3505,
+          "threatProbability": 0.2058,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0625,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_25e503f74eb79d80",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3502,
+          "threatProbability": 0.2058,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0626,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        }
+      ],
+      "durationSeconds": 3.36,
+      "throughputRecordsPerSec": 59.58
+    },
+    "emlTest": {
+      "name": "EML Held-Out Test (20%)",
+      "manifestCount": 9236,
+      "reconciliation": {
+        "evaluatedLabeled": 42,
+        "evaluatedUnlabeled": 158,
+        "parseFailures": 0,
+        "invalidRecords": 0,
+        "skippedRecords": 0,
+        "reconciledTotal": 200,
+        "exactMatch": true
+      },
+      "parseFailureDetails": [],
+      "threatMetrics": {
+        "accuracy": 0.9762,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 1.0,
+        "prAuc": 0.0,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 41,
+          "falseNegative": 1,
+          "reconciledTotal": 42
+        },
+        "probabilityDistribution": {
+          "min": 0.2043,
+          "max": 0.2088,
+          "mean": 0.2066,
+          "median": 0.2069,
+          "percentile25": 0.2059,
+          "percentile75": 0.2071,
+          "percentile90": 0.2074,
+          "percentile99": 0.2086
+        }
+      },
+      "spamMetrics": {
+        "accuracy": 0.9762,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 1.0,
+        "prAuc": 0.0,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 41,
+          "falseNegative": 1,
+          "reconciledTotal": 42
+        },
+        "probabilityDistribution": {
+          "min": 0.2537,
+          "max": 0.2609,
+          "mean": 0.2554,
+          "median": 0.2549,
+          "percentile25": 0.2545,
+          "percentile75": 0.256,
+          "percentile90": 0.2569,
+          "percentile99": 0.2598
+        }
+      },
+      "perClass": {
+        "LEGITIMATE": {
+          "support": 41,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "SPAM": {
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "OTHER_MALICIOUS": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "labelDistribution": {
+        "LEGITIMATE": {
+          "count": 41,
+          "percentage": 20.5
+        },
+        "SPAM": {
+          "count": 1,
+          "percentage": 0.5
+        },
+        "UNLABELED": {
+          "count": 158,
+          "percentage": 79.0
+        }
+      },
+      "predictionDistribution": {
+        "BENIGN": {
+          "count": 200,
+          "percentage": 100.0
+        }
+      },
+      "sampleDebugRecords": [
+        {
+          "recordId": "eml_ebedb1ef8b9dc674",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3495,
+          "threatProbability": 0.206,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0621,
+          "spamProbability": 0.2569,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_6bd69c9e1b50df7e",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3346,
+          "threatProbability": 0.2084,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0749,
+          "spamProbability": 0.2545,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_d73803e13491d1ac",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3407,
+          "threatProbability": 0.2074,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0713,
+          "spamProbability": 0.2552,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_938ac2ad80e93485",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3445,
+          "threatProbability": 0.2068,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0729,
+          "spamProbability": 0.2549,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_aa0fb8727912753b",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3409,
+          "threatProbability": 0.2074,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0728,
+          "spamProbability": 0.2549,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_ccb0dbcdf92681c8",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3514,
+          "threatProbability": 0.2056,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0634,
+          "spamProbability": 0.2567,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_edf4dc70b8d4efd3",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3436,
+          "threatProbability": 0.2069,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0759,
+          "spamProbability": 0.2543,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_0f14965271607497",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3489,
+          "threatProbability": 0.2061,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0623,
+          "spamProbability": 0.2569,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_49cca35124159db0",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3453,
+          "threatProbability": 0.2066,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.077,
+          "spamProbability": 0.2541,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_33734c1c9655a245",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3505,
+          "threatProbability": 0.2058,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0619,
+          "spamProbability": 0.257,
+          "predictedSpam": 0
+        }
+      ],
+      "durationSeconds": 2.7,
+      "throughputRecordsPerSec": 74.14
+    },
+    "combinedTest": {
+      "name": "Combined Held-Out Test",
+      "manifestCount": 70817,
+      "reconciliation": {
+        "evaluatedLabeled": 242,
+        "evaluatedUnlabeled": 158,
+        "parseFailures": 0,
+        "invalidRecords": 0,
+        "skippedRecords": 0,
+        "reconciledTotal": 400,
+        "exactMatch": true
+      },
+      "parseFailureDetails": [],
+      "threatMetrics": {
+        "accuracy": 0.9959,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 0.9502,
+        "prAuc": 0.0385,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 241,
+          "falseNegative": 1,
+          "reconciledTotal": 242
+        },
+        "probabilityDistribution": {
+          "min": 0.2024,
+          "max": 0.2098,
+          "mean": 0.2063,
+          "median": 0.206,
+          "percentile25": 0.2058,
+          "percentile75": 0.2067,
+          "percentile90": 0.2079,
+          "percentile99": 0.2094
+        }
+      },
+      "spamMetrics": {
+        "accuracy": 0.9959,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "fpr": 0.0,
+        "fnr": 1.0,
+        "rocAuc": 0.9959,
+        "prAuc": 0.25,
+        "confusionMatrix": {
+          "truePositive": 0,
+          "falsePositive": 0,
+          "trueNegative": 241,
+          "falseNegative": 1,
+          "reconciledTotal": 242
+        },
+        "probabilityDistribution": {
+          "min": 0.2503,
+          "max": 0.2612,
+          "mean": 0.2566,
+          "median": 0.2568,
+          "percentile25": 0.2566,
+          "percentile75": 0.2568,
+          "percentile90": 0.2579,
+          "percentile99": 0.2604
+        }
+      },
+      "perClass": {
+        "LEGITIMATE": {
+          "support": 241,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "SPAM": {
+          "support": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "OTHER_MALICIOUS": {
+          "support": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "labelDistribution": {
+        "LEGITIMATE": {
+          "count": 241,
+          "percentage": 60.25
+        },
+        "UNLABELED": {
+          "count": 158,
+          "percentage": 39.5
+        },
+        "SPAM": {
+          "count": 1,
+          "percentage": 0.25
+        }
+      },
+      "predictionDistribution": {
+        "BENIGN": {
+          "count": 400,
+          "percentage": 100.0
+        }
+      },
+      "sampleDebugRecords": [
+        {
+          "recordId": "csv_0207a62d92bf5899",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3379,
+          "threatProbability": 0.2079,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0784,
+          "spamProbability": 0.2538,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_a84d6be19e619f1d",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3488,
+          "threatProbability": 0.2061,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0629,
+          "spamProbability": 0.2567,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_4b6f6ccaeb1c7f89",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3497,
+          "threatProbability": 0.2059,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0628,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_5ed917202c420bd2",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3483,
+          "threatProbability": 0.2062,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.063,
+          "spamProbability": 0.2567,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "csv_5783be0ddc5ac335",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3502,
+          "threatProbability": 0.2058,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0627,
+          "spamProbability": 0.2568,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_ebedb1ef8b9dc674",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3495,
+          "threatProbability": 0.206,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0621,
+          "spamProbability": 0.2569,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_6bd69c9e1b50df7e",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3346,
+          "threatProbability": 0.2084,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0749,
+          "spamProbability": 0.2545,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_d73803e13491d1ac",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3407,
+          "threatProbability": 0.2074,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0713,
+          "spamProbability": 0.2552,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_938ac2ad80e93485",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3445,
+          "threatProbability": 0.2068,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0729,
+          "spamProbability": 0.2549,
+          "predictedSpam": 0
+        },
+        {
+          "recordId": "eml_aa0fb8727912753b",
+          "groundTruth": "LEGITIMATE",
+          "rawThreatLogit": -1.3409,
+          "threatProbability": 0.2074,
+          "predictedThreat": 0,
+          "rawSpamLogit": -1.0728,
+          "spamProbability": 0.2549,
+          "predictedSpam": 0
+        }
+      ],
+      "durationSeconds": 6.06,
+      "throughputRecordsPerSec": 66.01
+    }
+  },
+  "benchmarks": {
+    "microsoftFalsePositiveBenchmark": {
+      "sample": "Your Microsoft 365 security alert: unusual sign-in activity detected",
+      "threatRiskScore": 21,
+      "status": "FAIL (Threat Risk 21 > 15)"
+    },
+    "spamBulkThreatSeparation": {
+      "newsletterSpamProb": 0.2525,
+      "newsletterThreatProb": 0.211,
+      "status": "PASS (Spam != Threat)"
+    },
+    "determinism": {
+      "maxDelta": 0.0,
+      "status": "PASS (100% Deterministic)"
+    }
+  }
+}

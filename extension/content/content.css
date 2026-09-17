@@ -1,0 +1,114 @@
+/**
+ * MailTrace AI - Injected Gmail & Webmail Security Badge & Toolbar Styling
+ */
+
+.mailtrace-injected-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  vertical-align: middle;
+  z-index: 100;
+  user-select: none;
+}
+
+.mailtrace-injected-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  color: #38bdf8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+  text-decoration: none !important;
+}
+
+.mailtrace-injected-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e293b 100%);
+  color: #ffffff !important;
+  border-color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+}
+
+.mailtrace-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+}
+
+.mailtrace-btn-text {
+  line-height: 1;
+}
+
+/* In-page Threat Score Badges */
+.mailtrace-badge-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.mailtrace-badge-inner:hover {
+  transform: translateY(-1px);
+}
+
+.mailtrace-badge-inner.threat-high {
+  background: #450a0a;
+  color: #fca5a5;
+  border: 1px solid #dc2626;
+}
+
+.mailtrace-badge-inner.threat-low {
+  background: #022c22;
+  color: #6ee7b7;
+  border: 1px solid #059669;
+}
+
+.mailtrace-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  animation: mtPulse 2s infinite;
+}
+
+.mailtrace-badge-brand {
+  color: #e2e8f0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mailtrace-badge-score {
+  font-weight: 800;
+}
+
+.mailtrace-badge-sev {
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+@keyframes mtPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}

@@ -1,0 +1,338 @@
+[
+  {
+    "promotionId": "PROM-88574E89",
+    "timestamp": "2026-09-15T11:18:27.850Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-7823A2A5",
+    "timestamp": "2026-09-15T11:20:14.347Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-5230C7D3",
+    "timestamp": "2026-09-15T11:34:57.718Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-F965E0FB",
+    "timestamp": "2026-09-15T11:35:28.774Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-ED216764",
+    "timestamp": "2026-09-15T15:34:27.924Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-1DAF1E7F",
+    "timestamp": "2026-09-15T15:37:25.344Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-EF5FEEA3",
+    "timestamp": "2026-09-15T15:43:49.520Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-6DA9B9D9",
+    "timestamp": "2026-09-15T15:56:35.362Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-1A4D3833",
+    "timestamp": "2026-09-15T16:18:48.537Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-65885E21",
+    "timestamp": "2026-09-15T16:27:01.463Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-EE593DC6",
+    "timestamp": "2026-09-15T16:27:28.298Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  },
+  {
+    "promotionId": "PROM-70FC5574",
+    "timestamp": "2026-09-17T05:39:04.501Z",
+    "championVersionBefore": "mailtrace-100m-v1",
+    "challengerVersion": "mailtrace-100m-v2",
+    "decision": "PROMOTED",
+    "reason": "Model passed all 4 verification gates successfully.",
+    "metricsComparison": {
+      "champion": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      },
+      "challenger": {
+        "f1": 1,
+        "fpr": 0,
+        "fnr": 0
+      }
+    },
+    "passedGates": [
+      "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+      "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+      "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+      "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+    ],
+    "failedGates": [],
+    "approvedBy": "admin.taylor@defense.corp"
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "report": "MailTrace AI \u2014 Model Training Report",
+  "timestamp": "2026-09-15T18:11:52.586734+00:00",
+  "modelVersion": "mailtrace-100m-v2-s42-1789495876",
+  "datasetVersion": "1.0.0",
+  "architecture": "MailTraceSecurityTransformer (Multimodal 10-layer text + 2-layer fusion)",
+  "parameterCounts": {
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258,
+    "frozenParameters": 0
+  },
+  "trainingParameters": {
+    "epochs": 3,
+    "learningRate": 3e-05,
+    "optimizer": "AdamW",
+    "batchSize": 16,
+    "seed": 42,
+    "device": "MPS: Apple Silicon (unified memory)",
+    "totalSteps": 39,
+    "finalLoss": 2.4023,
+    "durationSeconds": 184.85
+  },
+  "datasetComposition": {
+    "csvTrainCount": 246318,
+    "emlTrainCount": 36938,
+    "totalTrainRecords": 283256,
+    "activeTrainedRecords": 200
+  },
+  "weightUpdateVerification": {
+    "verified": true,
+    "sampleDeltas": {
+      "fusion_encoder.fusion_transformer.layers.0.self_attn.in_proj_weight": 0.3184299170970917,
+      "fusion_encoder.fusion_transformer.layers.0.self_attn.in_proj_bias": 0.009980099275708199,
+      "fusion_encoder.fusion_transformer.layers.0.self_attn.out_proj.weight": 0.23241648077964783
+    },
+    "status": "PASS (Empirical PyTorch Backprop Confirmed)"
+  },
+  "checkpoints": {
+    "best": "/Users/shivam/Downloads/MailScan/checkpoints/best.pt",
+    "latest": "/Users/shivam/Downloads/MailScan/checkpoints/latest.pt",
+    "mailtrace100mV2": "/Users/shivam/Downloads/MailScan/checkpoints/mailtrace-100m-v2.pt"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "report": "MailTrace AI \u2014 csv_filtered Held-Out Test Evaluation Report",
+  "generated_at": "2026-09-17T03:07:01.855371+00:00",
+  "model_version": "mailtrace-100m-v3-csv-filtered",
+  "checkpoint_file": "mailtrace-100m-v3-csv-filtered.pt",
+  "dataset_source": "dataset/new/csv_filtered.json",
+  "test_manifest": "dataset/splits/csv-filtered-seed-42/manifests/test.json",
+  "dataset_counts": {
+    "total_test_records": 51728,
+    "labeled_records": 51728,
+    "unlabeled_records": 0,
+    "parse_failures": 0,
+    "unresolved_records": 0
+  },
+  "threat_metrics": {
+    "accuracy": 0.945,
+    "precision": 0.5795,
+    "recall": 0.5605,
+    "f1": 0.5699,
+    "fpr": 0.0283,
+    "fnr": 0.4395,
+    "rocAuc": 0.944,
+    "prAuc": 0.5815,
+    "confusionMatrix": {
+      "truePositive": 1884,
+      "falsePositive": 1367,
+      "trueNegative": 47000,
+      "falseNegative": 1477,
+      "totalPositives": 3361,
+      "totalNegatives": 48367,
+      "total": 51728
+    },
+    "probabilityStats": {
+      "min": 0.0003,
+      "max": 0.9415,
+      "mean": 0.1228,
+      "std": 0.2202,
+      "median": 0.0021,
+      "percentile25": 0.0014,
+      "percentile75": 0.2479,
+      "percentile90": 0.3455,
+      "percentile99": 0.8813
+    }
+  },
+  "spam_metrics": {
+    "accuracy": 0.8787,
+    "precision": 0.8874,
+    "recall": 0.8169,
+    "f1": 0.8507,
+    "fpr": 0.0759,
+    "fnr": 0.1831,
+    "rocAuc": 0.9426,
+    "prAuc": 0.9316,
+    "confusionMatrix": {
+      "truePositive": 17873,
+      "falsePositive": 2267,
+      "trueNegative": 27582,
+      "falseNegative": 4006,
+      "totalPositives": 21879,
+      "totalNegatives": 29849,
+      "total": 51728
+    },
+    "probabilityStats": {
+      "min": 0.0028,
+      "max": 0.9878,
+      "mean": 0.4281,
+      "std": 0.4035,
+      "median": 0.2044,
+      "percentile25": 0.0188,
+      "percentile75": 0.9528,
+      "percentile90": 0.9846,
+      "percentile99": 0.9865
+    }
+  },
+  "prediction_distribution": {
+    "LEGITIMATE": 29125,
+    "SPAM": 20224,
+    "OTHER_MALICIOUS": 2379
+  },
+  "actual_label_distribution": {
+    "LEGITIMATE": 26488,
+    "SPAM": 21879,
+    "OTHER_MALICIOUS": 2052,
+    "PHISHING": 1309
+  },
+  "benchmarks": {
+    "model_collapse_check": "PASS",
+    "microsoft_false_positive_benchmark": {
+      "threat_risk_score": 0.1,
+      "requirement": "<= 15.0",
+      "verdict": "PASS"
+    },
+    "spam_independent_of_threat": {
+      "newsletter_spam_prob": 0.6633,
+      "newsletter_threat_risk": 0.4,
+      "verdict": "PASS"
+    },
+    "determinism_test": {
+      "max_delta": 0.0,
+      "verdict": "PASS"
+    }
+  }
+}

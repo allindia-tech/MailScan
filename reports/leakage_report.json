@@ -1,0 +1,17 @@
+{
+  "splitMethod": "GroupAwareSplitter (Campaign Fingerprint + Exact Content Hash)",
+  "trainRatio": 0.7,
+  "validationRatio": 0.15,
+  "testRatio": 0.15,
+  "randomSeed": 42,
+  "totalUniqueRecords": 237852,
+  "trainCount": 166496,
+  "validationCount": 35678,
+  "testCount": 35678,
+  "leakageGuarantees": [
+    "No identical content hash in both train and test splits",
+    "No identical campaign group (domain + subject template) across train/val/test splits",
+    "Zero lookahead bias during test evaluation"
+  ],
+  "generatedAt": "2026-09-15T10:53:50.879363+00:00"
+}

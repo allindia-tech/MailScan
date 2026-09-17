@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-09-17T06:25:07.374Z",
+  "sourceDir": "/Users/shivam/Downloads/MailScan 2/MailScan/dataset/testing",
+  "totalFilesDiscovered": 50,
+  "supportedFiles": 24,
+  "unsupportedFiles": 1,
+  "malformedFiles": 0,
+  "duplicateCount": 0,
+  "labeledCasesCount": 21,
+  "unlabeledCasesCount": 3,
+  "categories": {
+    "Phishing": 6,
+    "Executive Impersonation": 1,
+    "Business Email Compromise": 3,
+    "Credential Theft": 1,
+    "UNLABELED": 3,
+    "Financial Fraud": 2,
+    "Legitimate": 4,
+    "Malware Delivery": 1,
+    "Newsletter": 1,
+    "Promotional": 1,
+    "Domain Spoofing": 1
+  },
+  "cases": [
+    {
+      "id": "edge-case-01-multipart-nested-boundary",
+      "file": "emails/edge_cases/edge-case-01-multipart-nested-boundary.eml",
+      "category": "UNLABELED",
+      "sizeBytes": 333,
+      "sha256": "04bfdea7f6041b50ce9b044ddb730a88dbf408bdb623bb43ae7da480dc4b4ecc",
+      "isLabeled": false
+    },
+    {
+      "id": "edge-case-02-utf8-encoded-words",
+      "file": "emails/edge_cases/edge-case-02-utf8-encoded-words.eml",
+      "category": "UNLABELED",
+      "sizeBytes": 264,
+      "sha256": "b3e19456da7b9f1eadfa64c0d2e75d32bdfaaa808ac09291edbaa340347310d6",
+      "isLabeled": false
+    },
+    {
+      "id": "edge-case-03-empty-headers-raw-body",
+      "file": "emails/edge_cases/edge-case-03-empty-headers-raw-body.eml",
+      "category": "UNLABELED",
+      "sizeBytes": 69,
+      "sha256": "78bb2b0950d83f2054d05d5ab5317d93a1152996affbd1acc037a14b71ecf53d",
+      "isLabeled": false
+    },
+    {
+      "id": "test-case-1-legitimate-microsoft",
+      "file": "emails/microsoft/test-case-1-legitimate-microsoft.eml",
+      "category": "Legitimate",
+      "sizeBytes": 1255,
+      "sha256": "682ecde31b9669cccdb91d212da4cad4a2d72ebad499664e32e2157bb27873c8",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-10-bec",
+      "file": "emails/bec/test-case-10-bec.eml",
+      "category": "Business Email Compromise",
+      "sizeBytes": 934,
+      "sha256": "2f1fd4784d8b0268bd59ebfedb6e34a69b33d15d568275d604d26d4da9482476",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-11-financial-fraud",
+      "file": "emails/financial/test-case-11-financial-fraud.eml",
+      "category": "Financial Fraud",
+      "sizeBytes": 787,
+      "sha256": "0375942b4eb2c4db7f0ab683050bc0f9899d72214ecf3a2de5b3e391e147ef58",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-12-malware-attachment",
+      "file": "emails/malware/test-case-12-malware-attachment.eml",
+      "category": "Malware Delivery",
+      "sizeBytes": 834,
+      "sha256": "9f6bf376a17c143f05d20c9d2cf5c85a2ba96da363ddbeb29760f53ff3173992",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-13-unicode-deception",
+      "file": "emails/unicode_obfuscation/test-case-13-unicode-deception.eml",
+      "category": "Domain Spoofing",
+      "sizeBytes": 490,
+      "sha256": "931492e060b2571bead571a1d63d1993b64dcf02a1cb293650849173f3e40d8d",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-14-ascii-smuggling",
+      "file": "emails/ascii_smuggling/test-case-14-ascii-smuggling.eml",
+      "category": "Phishing",
+      "sizeBytes": 705,
+      "sha256": "b1f8d51a0d93bee1d0235499861717cbf02b03c82255e2143f95b3316023feb0",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-15-otp-scam",
+      "file": "emails/otp_scam/test-case-15-otp-scam.eml",
+      "category": "Financial Fraud",
+      "sizeBytes": 659,
+      "sha256": "eeab603be4328b689119ab879211fb78dccb6772174f414dd608435b7f77c035",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-16-qr-phishing",
+      "file": "emails/quishing/test-case-16-qr-phishing.eml",
+      "category": "Phishing",
+      "sizeBytes": 551,
+      "sha256": "e425ed295de866f54ee5f12120b5a8db9fe3f435bd061902c8de35b188146eef",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-17-conversation-hijacking",
+      "file": "emails/conversation_hijacking/test-case-17-conversation-hijacking.eml",
+      "category": "Business Email Compromise",
+      "sizeBytes": 900,
+      "sha256": "7a7f401f77257d644c95c477fe86208723980e57711b3d345f0f97b732635b70",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-18-google-impersonation",
+      "file": "emails/google/test-case-18-google-impersonation.eml",
+      "category": "Phishing",
+      "sizeBytes": 861,
+      "sha256": "67867989a305f6d698e2a8c0e77e193cb33ba9a9d4889aa0436742eb9882dc8e",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-19-reply-to-manipulation",
+      "file": "emails/routing_anomalies/test-case-19-reply-to-manipulation.eml",
+      "category": "Business Email Compromise",
+      "sizeBytes": 799,
+      "sha256": "1f258423f85ffc0058c92082ee0bf7c3d02a44b4460c49903ad41ad597531c17",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-2-legitimate-google",
+      "file": "emails/google/test-case-2-legitimate-google.eml",
+      "category": "Legitimate",
+      "sizeBytes": 917,
+      "sha256": "b0f6a97d9f91a9ebaf23f867acea9ef5fe8061d0c906683df3e1af4dda276479",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-20-authentication-anomaly",
+      "file": "emails/auth_anomalies/test-case-20-authentication-anomaly.eml",
+      "category": "Executive Impersonation",
+      "sizeBytes": 828,
+      "sha256": "60be184540085f4da4a632bad95bfe19a9df3c2ee5c51ba8718f90eb59387223",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-21-microsoft-false-positive-benchmark",
+      "file": "emails/microsoft/test-case-21-microsoft-false-positive-benchmark.eml",
+      "category": "Legitimate",
+      "sizeBytes": 2117,
+      "sha256": "93f2603760d34d643c34f4bb97f49692a779e097f957a4f5a21cc13338dd12d8",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-3-legitimate-bank",
+      "file": "emails/financial/test-case-3-legitimate-bank.eml",
+      "category": "Legitimate",
+      "sizeBytes": 815,
+      "sha256": "a8f5ac12412cbf85ad356bfb8df9bf7f19beb4a71574ed1858e3ab879098374d",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-4-legitimate-newsletter",
+      "file": "emails/newsletter/test-case-4-legitimate-newsletter.eml",
+      "category": "Newsletter",
+      "sizeBytes": 1089,
+      "sha256": "c9073c88893d9b8d45f7addb338e0418c8fdc11a8247a678ce88b2405889a5c2",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-5-legitimate-promotional",
+      "file": "emails/promotional/test-case-5-legitimate-promotional.eml",
+      "category": "Promotional",
+      "sizeBytes": 859,
+      "sha256": "1cc522ae9ab18863fd91b7a8d63301fe126fd9ef572155f6f49252f777145b4a",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-6-credential-phishing",
+      "file": "emails/credential_theft/test-case-6-credential-phishing.eml",
+      "category": "Credential Theft",
+      "sizeBytes": 908,
+      "sha256": "c0fb246a7f1083e5d710e4bc4d5064eed3615f1a1d9da2b398b5d3eb1a23be79",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-7-fake-microsoft-login",
+      "file": "emails/microsoft/test-case-7-fake-microsoft-login.eml",
+      "category": "Phishing",
+      "sizeBytes": 822,
+      "sha256": "07b5e25f497f6515fd94097e5de8eda9c72445bc7e80ed0f127c9c2be34f2aec",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-8-lookalike-domain",
+      "file": "emails/lookalike_domains/test-case-8-lookalike-domain.eml",
+      "category": "Phishing",
+      "sizeBytes": 823,
+      "sha256": "240145cf8fbcc8e5db967764e3edd5add16b05cb561e2831ee24199700a5b2a7",
+      "isLabeled": true
+    },
+    {
+      "id": "test-case-9-malicious-url",
+      "file": "emails/malicious_urls/test-case-9-malicious-url.eml",
+      "category": "Phishing",
+      "sizeBytes": 513,
+      "sha256": "2c5f13654f4e09e66eec8387054b60858cae17617ce14e29b186cf564f7f2445",
+      "isLabeled": true
+    }
+  ]
+}

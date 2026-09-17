@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-09-16T16:42:58.430263+00:00",
+  "seed": 42,
+  "source_dataset": "dataset/new/csv_filtered.json",
+  "total_source_records": 258640,
+  "total_unique_records": 258640,
+  "duplicates_removed": 0,
+  "counts": {
+    "train_count": 206912,
+    "test_count": 51728,
+    "total_split_records": 258640,
+    "train_percentage": 80.0,
+    "test_percentage": 20.0
+  },
+  "integrity": {
+    "unique_train_hashes": 206912,
+    "unique_test_hashes": 51728,
+    "train_test_hash_overlap": 0,
+    "hash_overlap_verified_zero": true
+  },
+  "checksums": {
+    "train_manifest_sha256": "42e5290eade345f21025c439b9088a527ab24417abfe82030ff2c5b264d65ca4",
+    "test_manifest_sha256": "df8b3c75fa112cc9fd35ae171eddf3cff52c45b1a644ba2bd90fac894d61284e",
+    "split_manifest_sha256": "03a8178d05c20d766406372a40c56a36fd9cc2ff04f9c9bd40a1feebb633788f"
+  },
+  "label_distribution": {
+    "train": {
+      "SPAM": 86180,
+      "LEGITIMATE": 107216,
+      "PHISHING": 5219,
+      "OTHER_MALICIOUS": 8297
+    },
+    "test": {
+      "LEGITIMATE": 26488,
+      "SPAM": 21879,
+      "OTHER_MALICIOUS": 2052,
+      "PHISHING": 1309
+    }
+  }
+}

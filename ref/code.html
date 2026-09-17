@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MailTrace Enterprise SOC • Investigation #MT-2026-8841</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#f1f5f9",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f8fafc",
+            "surface-container": "#f1f5f9",
+            "surface-container-high": "#e2e8f0",
+            "surface-container-highest": "#cbd5e1",
+            "surface": "#ffffff",
+            "background": "#f8f9fc",
+            "primary": "#2563eb",
+            "primary-container": "#1d4ed8",
+            "on-primary": "#ffffff",
+            "text-primary": "#0f172a",
+            "text-secondary": "#334155",
+            "text-tertiary": "#64748b",
+            "status-safe": "#059669",
+            "status-warning": "#d97706",
+            "status-critical": "#dc2626",
+            "border-subtle": "#e2e8f0",
+            "border-card": "#e2e8f0"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            headline: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#f8f9fc] text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-indigo-600 selection:text-white">
+<!-- TOP ENTERPRISE NAVIGATION BAR -->
+<header class="w-full h-16 bg-white border-b border-slate-200 z-40 shrink-0 sticky top-0 shadow-xs">
+<div class="w-full h-full px-5 flex items-center justify-between gap-4">
+<!-- Brand & Product Badge -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg overflow-hidden border border-slate-200 shadow-sm flex items-center justify-center bg-slate-900 shrink-0">
+<img alt="MailTrace Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WYucpSPbWhOpBU9rIM8BcMYe1PAjbhd6JDp-Udl4tEOZp0nsgFGuAoeqH1m7UQN8BgPlYZ9ET3fMgJZxxsFPwY2KRzl_Hi801QwqRBf7FpIkl8409ozVjtJjbU503evmeLXYc9VNqJJ6RUdjK089ossrt0qBNQXdpmISckUftQhycs6PARJRMApP9-k-sWhC9WxQtnGa4cRcFaNU-haQKYTZTadADf9Dmw7p1eiZwZEyLY7QsLzzeSF1t-"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-lg text-slate-900 tracking-tight">MailTrace</span>
+<span class="text-[10px] uppercase font-mono tracking-wider px-1.5 py-0.5 rounded bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200">Enterprise SOC</span>
+</div>
+<span class="text-[11px] text-slate-500 font-normal">SIH 2026 Defense Benchmark v3.2</span>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Zero-Retention Ingest Engine • In-Memory Only</span>
+</div>
+</div>
+<!-- Omnisearch Bar for Analysts -->
+<div class="hidden md:flex flex-1 max-w-md items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 text-[18px]">search</span>
+<input class="w-full pl-9 pr-24 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-mono shadow-inner" placeholder="Search by Message-ID, Sender, SHA-256, or Case #..." type="text" value="Case #MT-2026-8841"/>
+<span class="absolute right-2 px-1.5 py-0.5 rounded text-[10px] font-mono text-slate-500 bg-white border border-slate-200 shadow-xs">⌘K</span>
+</div>
+<!-- Quick Action Controls & Analyst Avatar -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-slate-100" href="#guide">
+<span class="material-symbols-outlined text-[16px] text-slate-500">help_outline</span>
+<span>Analyst Guide</span>
+</a>
+<div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs shadow-sm shadow-indigo-600/20 transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Ingest Specimen</span>
+</button>
+<div class="flex items-center gap-2.5 pl-2">
+<div class="relative cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-headline font-semibold text-xs border border-indigo-200 shadow-xs">
+              RK
+            </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+</div>
+<div class="hidden xl:flex flex-col text-left leading-tight">
+<span class="text-xs font-semibold text-slate-900">Dev Sharma</span>
+<span class="text-[11px] text-slate-500">SOC L3 Lead</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- WORKSPACE BODY WITH SIDEBAR & MAIN CONTENT: NATURAL FLOW, ZERO OVERLAP -->
+<div class="flex flex-1 overflow-hidden">
+<!-- REFINED SIDEBAR IN NATURAL DOCUMENT FLOW (NO FIXED/ABSOLUTE OVERLAP) -->
+<aside class="w-64 shrink-0 bg-slate-50 border-r border-slate-200 hidden md:flex flex-col justify-between py-4 px-3 overflow-y-auto">
+<div class="space-y-6">
+<div>
+<p class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Investigation Views</p>
+<nav class="space-y-1 text-xs">
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-indigo-50 text-indigo-700 font-semibold border-l-4 border-indigo-600 shadow-xs" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-indigo-600">verified_user</span>
+<span>Active Forensic Triage</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-slate-400">inbox</span>
+<span>Inbox Triage Queue</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-slate-400">public</span>
+<span>Hop Geo-Trace Map</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-slate-400">domain</span>
+<span>Lookalike Domain Audit</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-slate-400">hub</span>
+<span>Threat Intel Graph</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-slate-400">description</span>
+<span>Compliance &amp; Audit Logs</span>
+</a>
+</nav>
+</div>
+<!-- System Reliability Health -->
+<div class="p-3.5 rounded-xl bg-white border border-slate-200 shadow-xs space-y-2.5">
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Engine Status</p>
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">YARA Ruleset</span>
+<span class="font-mono text-emerald-700 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">v2026.02.14</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">RFC Parser Sandbox</span>
+<span class="font-mono text-emerald-700 font-semibold">RFC 5322 OK</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-slate-500">Threat Intel Feeds</span>
+<span class="font-mono text-slate-700 font-medium">14 Feeds Active</span>
+</div>
+</div>
+</div>
+<!-- DOCKED BOTTOM JURY MODE CARD (NO FLOATING POPUP OVERLAPPING CONTENT) -->
+<div class="pt-4 mt-auto">
+<div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+</div>
+<div class="overflow-hidden leading-tight">
+<p class="text-xs font-semibold text-slate-900 truncate">SIH 2026 Jury Mode</p>
+<p class="text-[10px] text-slate-500">Court-Admissible Evidence</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN INTERACTIVE WORKSPACE IN NATURAL FLOW WITH NO OVERLAP -->
+<main class="flex-1 overflow-y-auto p-6 bg-[#f8f9fc] space-y-6">
+<div class="max-w-[1600px] mx-auto space-y-6">
+<!-- 1. HUMAN-READABLE EXECUTIVE SUMMARY & VERDICT BANNER -->
+<section class="rounded-2xl border border-red-200 bg-red-50/80 shadow-xs overflow-hidden">
+<div class="p-5 md:p-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-red-100 border border-red-300 text-red-600 flex items-center justify-center shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[28px]">gpp_maybe</span>
+</div>
+<div class="space-y-1.5 max-w-3xl">
+<div class="flex items-center gap-2.5 flex-wrap">
+<span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-red-600 text-white shadow-xs">
+                  CONFIRMED THREAT: 89/100 CVSS
+                </span>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono text-slate-700 bg-white border border-slate-200 font-medium">
+                  CASE #MT-2026-8841
+                </span>
+<span class="text-xs text-slate-500">Ingested: 14 Feb 2026, 09:42 IST</span>
+</div>
+<h1 class="text-xl md:text-2xl font-headline font-bold text-slate-900 tracking-tight">
+                High-Risk Spear Phishing &amp; Executive Impersonation Detected
+              </h1>
+<p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                The sender impersonates <strong class="text-slate-900 font-semibold">Rajesh Kumar (Director of Finance)</strong>, but the message originated from an unauthorized server in <strong class="text-slate-900 font-semibold">Sofia, Bulgaria</strong> via a deceptive lookalike domain (<strong class="text-amber-800 font-mono bg-amber-100/80 px-1 py-0.5 rounded border border-amber-200">corp-in.co</strong> vs legitimate <strong class="text-emerald-800 font-mono bg-emerald-100/80 px-1 py-0.5 rounded border border-emerald-200">corp.in</strong>). The digital signature hash was altered after transmission.
+              </p>
+</div>
+</div>
+<!-- Immediate Human Recommended Actions -->
+<div class="flex lg:flex-col sm:flex-row flex-wrap gap-2 w-full lg:w-auto shrink-0 pt-2 lg:pt-0">
+<button class="flex-1 lg:flex-initial flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs shadow-xs transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Quarantine Mailbox</span>
+</button>
+<button class="flex-1 lg:flex-initial flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-medium text-xs transition-all shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px] text-slate-600">block</span>
+<span>Block Lookalike Domain</span>
+</button>
+<button class="flex-1 lg:flex-initial flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 font-semibold text-xs transition-all shadow-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span>Court-Ready PDF (SIH)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 2. TELEMETRY & TRUST KEY METRICS ROW -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric 1: Identity Trust Score -->
+<div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Identity Trust Score</span>
+<span class="material-symbols-outlined text-rose-500 text-[20px]">verified</span>
+</div>
+<div class="my-3">
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-bold text-3xl text-rose-600">12%</span>
+<span class="text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 px-1.5 py-0.5 rounded">Untrusted Origin</span>
+</div>
+<p class="text-[11px] text-slate-500 mt-1">Legitimate CEO email verified baseline: 98%+</p>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-rose-500 h-full rounded-full" style="width: 12%"></div>
+</div>
+</div>
+<!-- Metric 2: Lookalike Domain Squatting -->
+<div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Domain Squatting</span>
+<span class="material-symbols-outlined text-amber-500 text-[20px]">font_download</span>
+</div>
+<div class="my-2">
+<div class="flex items-center gap-1.5">
+<span class="font-mono text-sm font-bold text-slate-900">corp-in.co</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-semibold">Levenshtein: 1</span>
+</div>
+<p class="text-xs text-slate-600 mt-1">Target: <span class="font-mono text-emerald-700 font-semibold">corp.in</span> (Hyphen Injection)</p>
+</div>
+<div class="text-[11px] text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-amber-600">schedule</span>
+<span>Registered 2 days ago via Hostinger</span>
+</div>
+</div>
+<!-- Metric 3: DKIM Integrity Check -->
+<div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">DKIM Cryptographic Hash</span>
+<span class="material-symbols-outlined text-rose-500 text-[20px]">lock_clock</span>
+</div>
+<div class="my-2">
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-mono text-xs font-bold">BODY TAMPERED</span>
+</div>
+<p class="text-xs text-slate-600 mt-1">Computed hash != Signed hash (<code class="text-slate-700 bg-slate-100 px-1 rounded">bh=</code> mismatch)</p>
+</div>
+<div class="text-[11px] text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-emerald-600">verified</span>
+<span>SPF passed: attacker controls rogue DNS</span>
+</div>
+</div>
+<!-- Metric 4: Anonymized Source Routing -->
+<div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Origin Infrastructure</span>
+<span class="material-symbols-outlined text-rose-500 text-[20px]">vpn_lock</span>
+</div>
+<div class="my-2">
+<div class="flex items-center gap-1.5 font-mono text-xs text-slate-900 font-medium">
+<span class="font-bold">Sofia, BG</span>
+<span class="text-slate-400">•</span>
+<span>185.220.101.44</span>
+</div>
+<p class="text-xs text-rose-700 font-medium mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">warning</span>
+<span>Known Tor Exit Relay (M247 Ltd)</span>
+</p>
+</div>
+<div class="text-[11px] text-slate-500">Flagged in 14 threat intelligence feeds</div>
+</div>
+</section>
+<!-- 3. MAIN WORKSPACE: EMAIL INSPECTOR & FORENSIC TRIAGE -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+<!-- LEFT PANE: DUAL-VIEW EMAIL INSPECTOR (PREVIEW / HEADERS / RAW) -->
+<div class="xl:col-span-7 space-y-4">
+<div class="rounded-2xl bg-white border border-slate-200 shadow-xs overflow-hidden">
+<!-- Tab Switcher Navigation -->
+<div class="p-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center p-1 bg-white rounded-xl border border-slate-200 shadow-xs">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold shadow-xs transition-all" id="tab-preview-btn" onclick="switchView('preview')">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span>Email Preview (Victim View)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-medium transition-all" id="tab-breakdown-btn" onclick="switchView('breakdown')">
+<span class="material-symbols-outlined text-[16px]">rule</span>
+<span>Forensic Table</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-medium transition-all" id="tab-raw-btn" onclick="switchView('raw')">
+<span class="material-symbols-outlined text-[16px]">code</span>
+<span>Raw RFC 822</span>
+</button>
+</div>
+<!-- Inspector Toolbar Utilities -->
+<div class="flex items-center gap-1.5 text-xs text-slate-600">
+<button class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition-colors shadow-xs" id="copy-btn">
+<span class="material-symbols-outlined text-[15px] text-slate-500">content_copy</span>
+<span>Copy Headers</span>
+</button>
+<button class="p-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 transition-colors shadow-xs" title="Download EML">
+<span class="material-symbols-outlined text-[16px] text-slate-500">download</span>
+</button>
+</div>
+</div>
+<!-- VIEW 1: EMAIL CLIENT PREVIEW (ACTIVE BY DEFAULT) -->
+<div class="p-5 md:p-6 space-y-5 bg-white" id="view-preview">
+<!-- Simulated Email Client Header -->
+<div class="p-4 rounded-xl bg-slate-50/70 border border-slate-200 space-y-3">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<h3 class="text-base font-bold text-slate-900">URGENT: Q4 Vendor Advance Clearance - Ref #SIH-992</h3>
+<span class="text-xs text-slate-500 font-mono">14 Feb 2026, 09:41 AM (IST)</span>
+</div>
+<!-- Sender Info with Interactive Security Callout -->
+<div class="space-y-2 text-xs pt-1 border-t border-slate-200/60">
+<div class="flex items-start sm:items-center gap-2 flex-wrap pt-1">
+<span class="text-slate-500 font-semibold w-16">From:</span>
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="text-slate-900 font-bold">Rajesh Kumar (Director Finance)</span>
+<span class="font-mono text-rose-700 font-medium">&lt;rajesh.kumar@corp-in.co&gt;</span>
+</div>
+<!-- Lookalike Badge -->
+<span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-amber-600">warning</span>
+                      Lookalike Domain (corp-in.co vs legitimate corp.in)
+                    </span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-slate-500 font-semibold w-16">Reply-To:</span>
+<span class="font-mono text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 font-medium">
+                      offshore.escrow.audit@proton.me
+                    </span>
+<span class="text-[10px] text-rose-600 font-semibold hidden sm:inline">(Mismatched return path)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-slate-500 font-semibold w-16">To:</span>
+<span class="text-slate-700 font-medium">Accounts Payable &lt;accounts.payable@corp.in&gt;</span>
+</div>
+</div>
+</div>
+<!-- Interactive Visual Security Callouts Inside Body -->
+<div class="p-5 rounded-xl bg-white border border-slate-200 shadow-xs relative space-y-4 text-slate-700 text-sm leading-relaxed">
+<p>Team,</p>
+<p>
+                  In accordance with executive board approval this morning, please expedite the 
+                  <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded border-b-2 border-amber-500 font-semibold" title="Financial pressure trigger">
+                    wire release of INR 44,80,000
+                  </span> 
+                  for critical cloud hosting infrastructure before 11:00 AM IST.
+                </p>
+<!-- High Urgency / Communication Silo Callout -->
+<div class="p-3.5 rounded-lg bg-rose-50 border-l-4 border-rose-500 my-2">
+<div class="flex items-center gap-1.5 text-xs font-bold text-rose-800 mb-1">
+<span class="material-symbols-outlined text-[16px]">phone_disabled</span>
+<span>NLP Social Engineering Flag: Secondary Verification Suppression</span>
+</div>
+<p class="text-xs text-rose-950 italic">
+                    "Please do not call my cellular phone as I am chairing a closed stakeholder session. Transmit remittance confirmation directly to the audit ledger cc'd here."
+                  </p>
+</div>
+<p>The signed authorization and escrow pro-forma have been secured below:</p>
+<!-- Malicious Attachment Card with Explicit Human Warning -->
+<div class="mt-4 p-4 rounded-xl bg-rose-50/80 border border-rose-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center shrink-0 border border-rose-300">
+<span class="material-symbols-outlined text-[24px]">terminal</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs font-bold text-slate-900">invoice-992.pdf.exe</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] bg-rose-600 text-white font-bold tracking-wider">BLOCKED</span>
+</div>
+<p class="text-xs text-rose-800 font-semibold">Double Extension Trap: Disguised Windows Executable Binary</p>
+<p class="text-[11px] text-slate-500 font-mono">Hosted on: storage-corp-in.storage.googleapis.com</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-500 text-xs font-medium cursor-not-allowed border border-slate-300 flex items-center gap-1 shrink-0" disabled="" type="button">
+<span class="material-symbols-outlined text-[14px]">block</span>
+<span>Download Quarantined</span>
+</button>
+</div>
+</div>
+<!-- Quick Explanation Note for Less Technical Users -->
+<div class="p-3.5 rounded-xl bg-indigo-50 border border-indigo-200 flex items-start gap-3">
+<span class="material-symbols-outlined text-indigo-600 text-[20px] shrink-0 mt-0.5">info</span>
+<p class="text-xs text-indigo-900 leading-normal">
+<strong class="font-bold">Why this was flagged:</strong> The email combines high-pressure financial demands, an order not to verify via phone call, a disguised double-extension executable file, and a registered lookalike domain name with altered cryptographic hashes.
+                </p>
+</div>
+</div>
+<!-- VIEW 2: FORENSIC KEY-VALUE TABLE -->
+<div class="hidden p-5 space-y-4 bg-white" id="view-breakdown">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs border-collapse">
+<thead>
+<tr class="border-b border-slate-200 text-slate-500 uppercase text-[10px] tracking-wider bg-slate-50">
+<th class="py-2.5 px-3">RFC Header Field</th>
+<th class="py-2.5 px-3">Inspected Value</th>
+<th class="py-2.5 px-3">Triage Finding</th>
+<th class="py-2.5 px-3">Why It Matters</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 font-mono text-[11px]">
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-3 font-bold text-slate-700">From</td>
+<td class="py-3 px-3 text-rose-700">rajesh.kumar@corp-in.co</td>
+<td class="py-3 px-3"><span class="text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded font-sans font-bold">Impersonation</span></td>
+<td class="py-3 px-3 font-sans text-slate-600">Fake lookalike domain mimicking corp.in</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-3 font-bold text-slate-700">Reply-To</td>
+<td class="py-3 px-3 text-amber-800">offshore.escrow.audit@proton.me</td>
+<td class="py-3 px-3"><span class="text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded font-sans font-bold">Redirected</span></td>
+<td class="py-3 px-3 font-sans text-slate-600">Bypasses legitimate corporate exchange server</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-3 font-bold text-slate-700">Received IP</td>
+<td class="py-3 px-3 text-slate-900">185.220.101.44 (Sofia, BG)</td>
+<td class="py-3 px-3"><span class="text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded font-sans font-bold">Tor Node</span></td>
+<td class="py-3 px-3 font-sans text-slate-600">Origin hidden through M247 Tor relay</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-3 font-bold text-slate-700">DKIM-Signature</td>
+<td class="py-3 px-3 text-rose-700">d=corp-in.co bh=7K8kX9...</td>
+<td class="py-3 px-3"><span class="text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded font-sans font-bold">Mismatch</span></td>
+<td class="py-3 px-3 font-sans text-slate-600">Payload body was mutated post-signing</td>
+</tr>
+<tr class="hover:bg-slate-50">
+<td class="py-3 px-3 font-bold text-slate-700">X-Mailer</td>
+<td class="py-3 px-3 text-slate-800">PHPMailer 6.8.0 (Cron Script)</td>
+<td class="py-3 px-3"><span class="text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded font-sans font-bold">Suspicious</span></td>
+<td class="py-3 px-3 font-sans text-slate-600">Automated script rather than Outlook/Google Workspace</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- VIEW 3: RAW RFC 822 STREAM -->
+<div class="hidden" id="view-raw">
+<div class="px-4 py-2 bg-slate-100 flex items-center justify-between border-b border-slate-200 text-xs font-mono text-slate-600">
+<span>Encoding: UTF-8 • 54 Lines • 2,842 Bytes</span>
+<span class="text-emerald-700 flex items-center gap-1 font-sans font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                  RFC 5322 Syntax Validated
+                </span>
+</div>
+<div class="p-4 bg-slate-900 font-mono text-xs text-slate-200 overflow-x-auto max-h-[500px] select-text leading-relaxed">
+<pre>Delivered-To: accounts.payable@corp.in
+Received: from mail-relay.secureserver-fake.net (mail-relay.secureserver-fake.net [185.220.101.44])
+        by mx1.corp.in (Postfix) with ESMTPS id 4YzK8p2N
+        for &lt;accounts.payable@corp.in&gt;; Sat, 14 Feb 2026 04:11:42 +0000 (UTC)
+<span class="text-rose-400 font-bold">Authentication-Results:</span> mx1.corp.in;
+        <span class="text-emerald-400 font-semibold">spf=pass</span> (sender IP is 185.220.101.44) smtp.mailfrom=rajesh.kumar@corp-in.co;
+        <span class="text-rose-400 font-bold">dkim=fail (body hash mismatch)</span> header.d=corp-in.co header.s=sih2026;
+        <span class="text-amber-400">dmarc=none</span> action=none header.from=corp-in.co;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=corp-in.co; s=sih2026;
+        bh=7K8kX91aMv9+Q1lK1... <span class="text-rose-400">/* CORRUPTED: Body altered post-sign */</span>
+Date: Sat, 14 Feb 2026 09:41:20 +0530
+From: "Rajesh Kumar (Director Finance)" &lt;rajesh.kumar@corp-in.co&gt;
+Reply-To: &lt;offshore.escrow.audit@proton.me&gt;
+To: &lt;accounts.payable@corp.in&gt;
+Subject: URGENT: Q4 Vendor Advance Clearance - Ref #SIH-992
+Message-ID: &lt;8841-20260214-4902@corp-in.co&gt;
+X-Mailer: PHPMailer 6.8.0 (Custom Cron Script)
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_992_401928"
+
+------=_Part_992_401928
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Team,
+In accordance with executive board approval this morning, please expedite
+the wire release of INR 44,80,000 for critical cloud hosting infrastructure.
+Please do not call my cellular phone as I am chairing a closed stakeholder session.
+Transmit remittance confirmation directly to the audit ledger cc'd here.
+
+Link to signed pro-forma: https://storage-corp-in.storage.googleapis.com/auth/invoice-992.pdf.exe
+------=_Part_992_401928--</pre>
+</div>
+</div>
+<!-- Editor Action Bar Footer -->
+<div class="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-1.5 text-slate-600">
+<span class="material-symbols-outlined text-emerald-600 text-[16px]">lock</span>
+<span>Evidence Hash Locked: <code class="text-slate-800 font-mono font-medium">e3b0c44298fc1c149...</code></span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-medium transition-colors shadow-xs" type="button">
+                  Reset View
+                </button>
+<button class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold flex items-center gap-1 shadow-xs transition-all" type="button">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+<span>Re-Scan Rules</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Drop Ingest Card -->
+<div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">file_upload</span>
+</div>
+<div>
+<p class="text-xs font-bold text-slate-900">Upload New Suspicious Email File</p>
+<p class="text-[11px] text-slate-500">Drop .eml, .msg, or raw RFC text • Parsed 100% locally in browser memory</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-300 text-xs font-semibold text-slate-700 transition-colors shadow-xs shrink-0" type="button">
+              Browse File
+            </button>
+</div>
+</div>
+<!-- RIGHT PANE: TRUST VERIFICATION CHECKLIST & INTUITIVE GEO-TRACE -->
+<div class="xl:col-span-5 space-y-4">
+<!-- 4. VISUAL GEO-TRACE & ROUTE VISUALIZER -->
+<div class="rounded-2xl bg-white border border-slate-200 shadow-xs p-5 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 text-[20px]">explore</span>
+<h2 class="font-headline font-bold text-sm text-slate-900">Visual Hop Infrastructure Trace</h2>
+</div>
+<span class="text-xs font-mono font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">3 Network Hops</span>
+</div>
+<!-- Intuitive Visual Relay Stepper -->
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+<div class="grid grid-cols-3 gap-2 text-center relative py-1">
+<!-- Connecting Line -->
+<div class="absolute top-6 left-12 right-12 h-0.5 bg-gradient-to-r from-rose-500 via-amber-400 to-emerald-500 z-0"></div>
+<!-- Step 1: Bulgaria -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-11 h-11 rounded-full bg-rose-50 border-2 border-rose-500 text-lg flex items-center justify-center shadow-xs">
+                    🇧🇬
+                  </div>
+<span class="text-xs font-bold text-rose-700 mt-2">Sofia, Bulgaria</span>
+<span class="text-[10px] text-slate-500 font-mono">185.220.101.44</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 mt-1 font-bold">Tor Node</span>
+</div>
+<!-- Step 2: Frankfurt -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-11 h-11 rounded-full bg-amber-50 border-2 border-amber-500 text-lg flex items-center justify-center shadow-xs">
+                    🇩🇪
+                  </div>
+<span class="text-xs font-bold text-slate-800 mt-2">Frankfurt, DE</span>
+<span class="text-[10px] text-slate-500 font-mono">AS9009 (M247)</span>
+<span class="text-[10px] text-slate-500 font-medium mt-1">Hosting Relay</span>
+</div>
+<!-- Step 3: New Delhi -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-11 h-11 rounded-full bg-emerald-50 border-2 border-emerald-500 text-lg flex items-center justify-center shadow-xs">
+                    🇮🇳
+                  </div>
+<span class="text-xs font-bold text-emerald-700 mt-2">New Delhi, IN</span>
+<span class="text-[10px] text-slate-500 font-mono">mx1.corp.in</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 mt-1 font-bold">Enterprise MX</span>
+</div>
+</div>
+<div class="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
+<span class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-[15px] text-indigo-600">timer</span>
+                  Transit: <strong class="text-slate-800">312ms cumulative</strong>
+</span>
+<span class="text-rose-700 font-semibold">Flagged in 14 Spamhaus &amp; Tor lists</span>
+</div>
+</div>
+</div>
+<!-- 5. TRUST & AUTHENTICATION CHECKLIST (CLEAR EXPLANATIONS) -->
+<div class="rounded-2xl bg-white border border-slate-200 shadow-xs p-5 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 text-[20px]">fact_check</span>
+<h2 class="font-headline font-bold text-sm text-slate-900">Authentication &amp; Policy Checklist</h2>
+</div>
+<span class="text-xs text-slate-500 font-mono">RFC Compliance</span>
+</div>
+<div class="space-y-2.5 text-xs">
+<!-- Check 1: SPF -->
+<div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-slate-900">SPF Validation</span>
+<span class="font-mono text-[10px] text-slate-500">RFC 7208</span>
+</div>
+<p class="text-[11px] text-slate-600 mt-0.5">
+<span class="text-emerald-700 font-bold">PASS:</span> Sender IP is authorized by the attacker's own registered domain TXT record.
+                    </p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-mono font-bold">PASS</span>
+</div>
+<!-- Check 2: DKIM -->
+<div class="p-3 rounded-xl bg-rose-50/50 border border-rose-200 flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-slate-900">DKIM Cryptographic Integrity</span>
+<span class="font-mono text-[10px] text-slate-500">RFC 6376</span>
+</div>
+<p class="text-[11px] text-slate-600 mt-0.5">
+<span class="text-rose-700 font-bold">FAIL:</span> Message body content was altered in transit after the original signature was minted.
+                    </p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-300 text-[10px] font-mono font-bold">FAIL</span>
+</div>
+<!-- Check 3: DMARC -->
+<div class="p-3 rounded-xl bg-amber-50/50 border border-amber-200 flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-slate-900">DMARC Policy Enforcement</span>
+<span class="font-mono text-[10px] text-slate-500">RFC 7489</span>
+</div>
+<p class="text-[11px] text-slate-600 mt-0.5">
+<span class="text-amber-800 font-bold">EVADED:</span> Target organization has strict <code class="text-slate-700 bg-white px-1 rounded border border-amber-200">p=reject</code>; attacker evaded it by utilizing external lookalike domain.
+                    </p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-mono font-bold">EVADED</span>
+</div>
+<!-- Check 4: Payload Extension -->
+<div class="p-3 rounded-xl bg-rose-50/50 border border-rose-200 flex items-start justify-between gap-3">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">pest_control</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-bold text-slate-900">Payload File Analysis</span>
+<span class="font-mono text-[10px] text-slate-500">MIME Filter</span>
+</div>
+<p class="text-[11px] text-slate-600 mt-0.5">
+<span class="text-rose-700 font-bold">BLOCK:</span> Contains double-extension suffix pattern <code class="text-rose-800 font-mono bg-white px-1 rounded border border-rose-200">.pdf.exe</code> with compiled binary headers.
+                    </p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-rose-600 text-white text-[10px] font-mono font-bold">CRITICAL</span>
+</div>
+</div>
+</div>
+<!-- 6. NLP INTENT & PSYCHOLOGICAL PRESSURE ANALYSIS -->
+<div class="rounded-2xl bg-white border border-slate-200 shadow-xs p-5 space-y-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-600 text-[20px]">psychology</span>
+<h2 class="font-headline font-bold text-sm text-slate-900">Social Engineering Heuristics</h2>
+</div>
+<p class="text-xs text-slate-600">
+              Natural language parser identified known VIP spear-phishing coercion structures:
+            </p>
+<div class="space-y-2 text-xs">
+<div class="p-2.5 rounded-lg bg-slate-50 flex items-center justify-between border border-slate-200">
+<span class="text-slate-700 font-medium">Urgency &amp; Monetary Demands</span>
+<span class="text-rose-700 font-mono font-bold">97% Match ("URGENT", "wire release")</span>
+</div>
+<div class="p-2.5 rounded-lg bg-slate-50 flex items-center justify-between border border-slate-200">
+<span class="text-slate-700 font-medium">Out-of-Band Channel Block</span>
+<span class="text-rose-700 font-mono font-bold">"Do not call my cellular phone"</span>
+</div>
+<div class="p-2.5 rounded-lg bg-slate-50 flex items-center justify-between border border-slate-200">
+<span class="text-slate-700 font-medium">Asymmetric Routing Anomaly</span>
+<span class="text-amber-800 font-mono font-bold">From vs Reply-To Mismatch</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM AUDIT FOOTER -->
+<footer class="pt-4 pb-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-[18px]">lock</span>
+<span>Encrypted In-Memory Analysis • Zero Client-Side Data Leakage • SOC2 Type II Certified Pipeline</span>
+</div>
+<div class="font-mono text-[11px] text-slate-600">
+          Smart India Hackathon 2026 • Specimen Hash #4092-A
+        </div>
+</footer>
+</div>
+</main>
+</div>
+<!-- INTERACTION SCRIPTS (TAB TOGGLE & COPY UTILITY) -->
+<script>
+    function switchView(tab) {
+      const previewView = document.getElementById('view-preview');
+      const breakdownView = document.getElementById('view-breakdown');
+      const rawView = document.getElementById('view-raw');
+
+      const previewBtn = document.getElementById('tab-preview-btn');
+      const breakdownBtn = document.getElementById('tab-breakdown-btn');
+      const rawBtn = document.getElementById('tab-raw-btn');
+
+      // Hide all
+      previewView.classList.add('hidden');
+      breakdownView.classList.add('hidden');
+      rawView.classList.add('hidden');
+
+      // Default inactive button styles
+      [previewBtn, breakdownBtn, rawBtn].forEach(btn => {
+        btn.className = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 text-xs font-medium transition-all';
+      });
+
+      // Active styling
+      const activeClasses = 'flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-semibold shadow-xs transition-all';
+
+      if (tab === 'preview') {
+        previewView.classList.remove('hidden');
+        previewBtn.className = activeClasses;
+      } else if (tab === 'breakdown') {
+        breakdownView.classList.remove('hidden');
+        breakdownBtn.className = activeClasses;
+      } else if (tab === 'raw') {
+        rawView.classList.remove('hidden');
+        rawBtn.className = activeClasses;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyBtn = document.getElementById('copy-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const originalHTML = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<span class="material-symbols-outlined text-[15px] text-emerald-600">check</span><span class="text-emerald-700 font-semibold">Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = originalHTML;
+          }, 1800);
+        });
+      }
+    });
+  </script>
+</body></html>

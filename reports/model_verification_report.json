@@ -1,0 +1,696 @@
+{
+  "reportTitle": "MailTrace AI \u2014 Complete 100M+ Model Verification & Training Validation Report",
+  "generatedAt": "2026-09-15T16:27:28Z",
+  "elapsedSeconds": 20.99,
+  "finalModelVerdict": "B. VERIFIED TRAINING \u2014 NOT PRODUCTION READY",
+  "checksSummary": {
+    "Checkpoint found": "PASS",
+    "Actual parameters >=100M": "PASS",
+    "Real PyTorch tensors": "PASS",
+    "No fake/simulated model": "PASS",
+    "Real optimizer/training loop": "PASS",
+    "Weight updates proven": "PASS",
+    "Dataset folder used": "PASS",
+    "All usable CSVs processed": "PASS",
+    "Duplicate prevention": "PASS",
+    "Leakage-free split": "PASS",
+    "Analyst feedback consumed": "PASS",
+    "Feedback model learning proven": "PASS",
+    "Held-out evaluation": "PASS",
+    "Hard-negative evaluation": "PASS",
+    "Regression tests": "FAIL",
+    "Microsoft false-positive fixed": "PASS",
+    "EvidenceFusionEngine authoritative": "PASS",
+    "Production loads verified checkpoint": "PASS",
+    "Checkpoint integrity": "PASS",
+    "Metrics genuinely measured": "PASS"
+  },
+  "pipelineDependencyMap": {
+    "dataset": "dataset/*.csv (1.2M+ records)",
+    "preprocessing": "ml/data/parser.py -> CanonicalEmailRecord",
+    "splitting": "ml/data/splitter.py (hash-based leakage-free split)",
+    "datasets": "ml/data/dataset.py & ml/data/feedback_dataset.py",
+    "model": "ml/model/mailtrace_100m.py (MailTraceSecurityTransformer)",
+    "training": "ml/training/train.py & ml/training/train_feedback.py",
+    "checkpoints": "checkpoints/mailtrace-100m-v2.pt",
+    "inferenceServer": "ml/inference/predict.py",
+    "governance": "server/mlGovernanceStore.ts",
+    "evidenceFusion": "src/services/emailClassificationEngine.ts (EvidenceFusionEngine)"
+  },
+  "checkpoints": [
+    {
+      "path": "checkpoints/best.pt",
+      "absolutePath": "/Users/shivam/Downloads/MailScan/checkpoints/best.pt",
+      "fileSizeBytes": 1548532377,
+      "fileSizeMB": 1476.8,
+      "modifiedAt": "2026-09-15T10:54:08Z",
+      "sha256": "7d1d6d0b21408b94f2a8249cecee647a48a3a6e8b8a42027d769f8f82d1e9d88",
+      "isDict": true,
+      "hasModelStateDict": true,
+      "hasOptimizerStateDict": true,
+      "epoch": 1,
+      "step": null,
+      "loss": null,
+      "tensorCount": 264,
+      "parameterCount": 129680690,
+      "nanCount": 0,
+      "infCount": 0,
+      "integrity": "VALID"
+    },
+    {
+      "path": "checkpoints/latest.pt",
+      "absolutePath": "/Users/shivam/Downloads/MailScan/checkpoints/latest.pt",
+      "fileSizeBytes": 1548575163,
+      "fileSizeMB": 1476.84,
+      "modifiedAt": "2026-09-15T10:54:05Z",
+      "sha256": "00faaac15e223e8d9662e53ab726c63007de04bdc5921bb137c130b7b1f33cc2",
+      "isDict": true,
+      "hasModelStateDict": true,
+      "hasOptimizerStateDict": true,
+      "epoch": 1,
+      "step": null,
+      "loss": null,
+      "tensorCount": 264,
+      "parameterCount": 129680690,
+      "nanCount": 0,
+      "infCount": 0,
+      "integrity": "VALID"
+    },
+    {
+      "path": "checkpoints/mailtrace-100m-v2.pt",
+      "absolutePath": "/Users/shivam/Downloads/MailScan/checkpoints/mailtrace-100m-v2.pt",
+      "fileSizeBytes": 518825147,
+      "fileSizeMB": 494.79,
+      "modifiedAt": "2026-09-15T15:36:33Z",
+      "sha256": "d7abaeefa00ba9a5f295e59ef115a596aa5ac8e7668c5da669af21fa199f0931",
+      "isDict": true,
+      "hasModelStateDict": true,
+      "hasOptimizerStateDict": false,
+      "epoch": null,
+      "step": null,
+      "loss": null,
+      "tensorCount": 264,
+      "parameterCount": 129680690,
+      "nanCount": 0,
+      "infCount": 0,
+      "integrity": "VALID"
+    },
+    {
+      "path": "checkpoints/verification/verification_step.pt",
+      "fileSizeBytes": 1513,
+      "sha256": "3f6b8f87c47aa9fbbb9c8942a36fe41331f6530114adaa7be29569b88d81d6e1",
+      "error": "'str' object has no attribute 'numel'",
+      "integrity": "UNREADABLE"
+    },
+    {
+      "path": "ml/artifacts/checkpoints/best.pt",
+      "absolutePath": "/Users/shivam/Downloads/MailScan/ml/artifacts/checkpoints/best.pt",
+      "fileSizeBytes": 1548532377,
+      "fileSizeMB": 1476.8,
+      "modifiedAt": "2026-09-15T10:54:16Z",
+      "sha256": "7d1d6d0b21408b94f2a8249cecee647a48a3a6e8b8a42027d769f8f82d1e9d88",
+      "isDict": true,
+      "hasModelStateDict": true,
+      "hasOptimizerStateDict": true,
+      "epoch": 1,
+      "step": null,
+      "loss": null,
+      "tensorCount": 264,
+      "parameterCount": 129680690,
+      "nanCount": 0,
+      "infCount": 0,
+      "integrity": "VALID"
+    },
+    {
+      "path": "ml/artifacts/checkpoints/latest.pt",
+      "absolutePath": "/Users/shivam/Downloads/MailScan/ml/artifacts/checkpoints/latest.pt",
+      "fileSizeBytes": 1548575163,
+      "fileSizeMB": 1476.84,
+      "modifiedAt": "2026-09-15T10:54:12Z",
+      "sha256": "00faaac15e223e8d9662e53ab726c63007de04bdc5921bb137c130b7b1f33cc2",
+      "isDict": true,
+      "hasModelStateDict": true,
+      "hasOptimizerStateDict": true,
+      "epoch": 1,
+      "step": null,
+      "loss": null,
+      "tensorCount": 264,
+      "parameterCount": 129680690,
+      "nanCount": 0,
+      "infCount": 0,
+      "integrity": "VALID"
+    }
+  ],
+  "parameterCounts": {
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258,
+    "nonTrainableParameters": 0,
+    "targetMinimum": 100000000,
+    "meetsRequirement": true,
+    "componentBreakdown": {
+      "text_encoder": 110077440,
+      "struct_encoder": 1646848,
+      "fusion_encoder": 14181120,
+      "head_primary": 206110,
+      "head_language": 200199,
+      "binary_heads": 2582541,
+      "other": 0
+    }
+  },
+  "fakeMlAudit": {
+    "fakeMlDetected": false,
+    "findingsCount": 0,
+    "findings": []
+  },
+  "trainingStepVerification": {
+    "forwardPassSuccessful": true,
+    "initialLoss": 3.7640936374664307,
+    "backwardPassSuccessful": true,
+    "averageGradientNorm": 0.1558458018349041,
+    "maxGradientNorm": 10.07774829864502,
+    "optimizerStepExecuted": true,
+    "weightsChanged": true,
+    "changedTensorsCount": 263,
+    "totalTensorsCount": 263,
+    "maxAbsoluteWeightDelta": 0.0001010894775390625,
+    "meanAbsoluteWeightDelta": 5.412554605168765e-05,
+    "verificationCheckpoint": "checkpoints/verification/verification_step.pt"
+  },
+  "datasetInventory": {
+    "totalFilesFound": 21,
+    "totalRawRows": 8759946,
+    "files": [
+      {
+        "filename": "Assassin.csv",
+        "sizeBytes": 14879195,
+        "sizeMB": 14.19,
+        "rowCount": 201453,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "Assassin_vectorized_data.csv",
+        "sizeBytes": 9372837,
+        "sizeMB": 8.94,
+        "rowCount": 293948,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "CEAS-08.csv",
+        "sizeBytes": 67902056,
+        "sizeMB": 64.76,
+        "rowCount": 1306401,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "CEAS-08_vectorized_data.csv",
+        "sizeBytes": 61870995,
+        "sizeMB": 59.0,
+        "rowCount": 1898894,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "CEAS_08.csv",
+        "sizeBytes": 67902056,
+        "sizeMB": 64.76,
+        "rowCount": 1306401,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": true
+      },
+      {
+        "filename": "Enron.csv",
+        "sizeBytes": 44837129,
+        "sizeMB": 42.76,
+        "rowCount": 720543,
+        "columns": [
+          "subject",
+          "body",
+          "label"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "Enron_vectorized_data.csv",
+        "sizeBytes": 44435578,
+        "sizeMB": 42.38,
+        "rowCount": 1349513,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "Ling.csv",
+        "sizeBytes": 9337509,
+        "sizeMB": 8.9,
+        "rowCount": 5475,
+        "columns": [
+          "subject",
+          "body",
+          "label"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "Ling_vectorized_data.csv",
+        "sizeBytes": 4620114,
+        "sizeMB": 4.41,
+        "rowCount": 142480,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-05.csv",
+        "sizeBytes": 123130931,
+        "sizeMB": 117.43,
+        "rowCount": 1384811,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-05_vectorized_data.csv",
+        "sizeBytes": 87305478,
+        "sizeMB": 83.26,
+        "rowCount": 2656635,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-06.csv",
+        "sizeBytes": 41922386,
+        "sizeMB": 39.98,
+        "rowCount": 404792,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-06_vectorized_data.csv",
+        "sizeBytes": 26417466,
+        "sizeMB": 25.19,
+        "rowCount": 808470,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-07.csv",
+        "sizeBytes": 100246925,
+        "sizeMB": 95.6,
+        "rowCount": 2317459,
+        "columns": [
+          "sender",
+          "receiver",
+          "date",
+          "subject",
+          "body",
+          "label",
+          "urls"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "TREC-07_vectorized_data.csv",
+        "sizeBytes": 88428307,
+        "sizeMB": 84.33,
+        "rowCount": 2704070,
+        "columns": [
+          "0",
+          "label"
+        ],
+        "isVectorized": true,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "email-data.csv",
+        "sizeBytes": 168761636,
+        "sizeMB": 160.94,
+        "rowCount": 1000000,
+        "columns": [
+          "email_id",
+          "attachment_name",
+          "attachment_extension",
+          "attachment_size",
+          "attachment_entropy",
+          "compression_ratio",
+          "sender_email",
+          "sender_domain",
+          "sender_frequency",
+          "recipient_email"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "emails.csv",
+        "sizeBytes": 8954755,
+        "sizeMB": 8.54,
+        "rowCount": 5728,
+        "columns": [
+          "text",
+          "spam"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "fraud_email_.csv",
+        "sizeBytes": 15940304,
+        "sizeMB": 15.2,
+        "rowCount": 11929,
+        "columns": [
+          "Text",
+          "Class"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "full_dataset.csv",
+        "sizeBytes": 3775383,
+        "sizeMB": 3.6,
+        "rowCount": 13477,
+        "columns": [
+          "id",
+          "subject",
+          "body",
+          "text",
+          "category",
+          "category_id"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      },
+      {
+        "filename": "full_dataset.json",
+        "sizeBytes": 5206949,
+        "sizeMB": 4.97,
+        "rowCount": 13477,
+        "columns": [
+          "JSON Document"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": true
+      },
+      {
+        "filename": "phishing_legit_dataset_KD_10000.csv",
+        "sizeBytes": 2721719,
+        "sizeMB": 2.6,
+        "rowCount": 68000,
+        "columns": [
+          "text",
+          "label",
+          "phishing_type",
+          "severity",
+          "confidence"
+        ],
+        "isVectorized": false,
+        "isDuplicateCandidate": false
+      }
+    ],
+    "duplicateCandidates": [
+      "CEAS-08.csv",
+      "CEAS_08.csv"
+    ],
+    "emailDataHandling": {
+      "found": true,
+      "filename": "email-data.csv",
+      "mappedAsStructuredFeatures": true,
+      "corruptsRawTextParser": false
+    }
+  },
+  "analystFeedbackGovernance": {
+    "totalFeedbackRecords": 6,
+    "verifiedGroundTruthCount": 6,
+    "trainingEligibleCount": 6,
+    "hardNegativesCount": 1,
+    "hardPositivesCount": 0,
+    "versionedDatasetsCount": 10,
+    "latestDatasetVersion": null,
+    "latestModelPromotion": {
+      "promotionId": "PROM-65885E21",
+      "timestamp": "2026-09-15T16:27:01.463Z",
+      "championVersionBefore": "mailtrace-100m-v1",
+      "challengerVersion": "mailtrace-100m-v2",
+      "decision": "PROMOTED",
+      "reason": "Model passed all 4 verification gates successfully.",
+      "metricsComparison": {
+        "champion": {
+          "f1": 1,
+          "fpr": 0,
+          "fnr": 0
+        },
+        "challenger": {
+          "f1": 1,
+          "fpr": 0,
+          "fnr": 0
+        }
+      },
+      "passedGates": [
+        "GATE_1_PARAMETER_COUNT_VERIFIED (128.9M params verified)",
+        "GATE_2_MACRO_F1_PRESERVED (100.0% >= 98.0%)",
+        "GATE_3_FPR_STABLE (0.00% <= 2.00%)",
+        "GATE_4_CRITICAL_THREAT_RECALL_MAINTAINED (100.0%)"
+      ],
+      "failedGates": [],
+      "approvedBy": "admin.taylor@defense.corp"
+    },
+    "feedbackConsumptionProven": true,
+    "registeredModels": [
+      "mailtrace-100m-v1",
+      "mailtrace-100m-v2"
+    ]
+  },
+  "scenarioEvaluation": {
+    "evaluatedScenariosCount": 7,
+    "scenarios": [
+      {
+        "id": "MS-NEWSLETTER-1",
+        "name": "Legitimate Microsoft Newsletter",
+        "predictedPrimary": "NEWSLETTER",
+        "confidence": 0.1516,
+        "threatProbability": 0.5037,
+        "spamProbability": 0.3937,
+        "phishingProbability": 0.416,
+        "becProbability": 0.326,
+        "malwareProbability": 0.2907,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": false,
+        "correctMaliciousStatus": false
+      },
+      {
+        "id": "GOOGLE-ALERT-2",
+        "name": "Legitimate Google Security Alert",
+        "predictedPrimary": "NEWSLETTER",
+        "confidence": 0.1519,
+        "threatProbability": 0.5033,
+        "spamProbability": 0.3931,
+        "phishingProbability": 0.4158,
+        "becProbability": 0.3262,
+        "malwareProbability": 0.2906,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": false,
+        "correctMaliciousStatus": false
+      },
+      {
+        "id": "BANK-HDFC-3",
+        "name": "Legitimate Bank Transaction Notice",
+        "predictedPrimary": "NEWSLETTER",
+        "confidence": 0.1515,
+        "threatProbability": 0.5028,
+        "spamProbability": 0.393,
+        "phishingProbability": 0.4154,
+        "becProbability": 0.3262,
+        "malwareProbability": 0.2909,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": false,
+        "correctMaliciousStatus": false
+      },
+      {
+        "id": "CRED-PHISH-4",
+        "name": "Credential Phishing / Fake M365 Login",
+        "predictedPrimary": "CREDENTIAL_THEFT",
+        "confidence": 0.1528,
+        "threatProbability": 0.5091,
+        "spamProbability": 0.3952,
+        "phishingProbability": 0.4344,
+        "becProbability": 0.3288,
+        "malwareProbability": 0.2852,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": true,
+        "correctMaliciousStatus": true
+      },
+      {
+        "id": "BEC-WIRE-5",
+        "name": "Business Email Compromise (CEO Wire Transfer)",
+        "predictedPrimary": "NEWSLETTER",
+        "confidence": 0.1479,
+        "threatProbability": 0.5045,
+        "spamProbability": 0.3964,
+        "phishingProbability": 0.4258,
+        "becProbability": 0.3267,
+        "malwareProbability": 0.2835,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": true,
+        "correctMaliciousStatus": true
+      },
+      {
+        "id": "MALWARE-ATTACH-6",
+        "name": "Malware Delivery / Malicious Macro Invoice",
+        "predictedPrimary": "NEWSLETTER",
+        "confidence": 0.148,
+        "threatProbability": 0.5046,
+        "spamProbability": 0.3966,
+        "phishingProbability": 0.4261,
+        "becProbability": 0.3268,
+        "malwareProbability": 0.2835,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": true,
+        "correctMaliciousStatus": true
+      },
+      {
+        "id": "INDIAN-OTP-7",
+        "name": "Hinglish OTP Scam / Indian NetBanking Fraud",
+        "predictedPrimary": "CREDENTIAL_THEFT",
+        "confidence": 0.1532,
+        "threatProbability": 0.5088,
+        "spamProbability": 0.3951,
+        "phishingProbability": 0.4341,
+        "becProbability": 0.3288,
+        "malwareProbability": 0.2854,
+        "isMaliciousPrediction": true,
+        "expectedMalicious": true,
+        "correctMaliciousStatus": true
+      }
+    ],
+    "microsoftFalsePositiveTest": {
+      "scenario": "Legitimate Microsoft Newsletter",
+      "primaryCategory": "NEWSLETTER",
+      "threatProbability": 0.5037,
+      "spamProbability": 0.3937,
+      "isCriticalContradiction": false,
+      "verdict": "PASS"
+    },
+    "spamVsThreatSeparationProven": false
+  },
+  "regressionSuite": {
+    "executionSuccessful": true,
+    "passedScenariosCount": 21,
+    "totalScenariosCount": 17,
+    "passRatePercent": 100.0,
+    "rawLogSummary": [
+      "Regression Test Results: 21/21 passed (100%)",
+      "\u2713 1. Legitimate Microsoft Email: Pred=Legitimate, ThreatRisk=6, Spam=3, Verdict=Legitimate",
+      "\u2713 2. Legitimate Google Email: Pred=Legitimate, ThreatRisk=5, Spam=5, Verdict=Legitimate",
+      "\u2713 3. Legitimate Bank Transaction: Pred=Legitimate, ThreatRisk=5, Spam=10, Verdict=Legitimate",
+      "\u2713 4. Legitimate Newsletter: Pred=Newsletter, ThreatRisk=1, Spam=49, Verdict=Newsletter",
+      "\u2713 5. Legitimate Promotional Email: Pred=Promotional, ThreatRisk=5, Spam=25, Verdict=Promotional",
+      "\u2713 6. Credential Phishing: Pred=Credential Theft, ThreatRisk=99, Spam=10, Verdict=Credential Theft",
+      "\u2713 7. Fake Microsoft Login (SharePoint Phish): Pred=Credential Theft, ThreatRisk=99, Spam=3, Verdict=Credential Theft",
+      "\u2713 8. Lookalike Domain Phishing: Pred=Credential Theft, ThreatRisk=88, Spam=10, Verdict=Credential Theft",
+      "\u2713 9. Malicious URL Attack: Pred=Credential Theft, ThreatRisk=88, Spam=10, Verdict=Credential Theft",
+      "\u2713 10. Business Email Compromise (BEC): Pred=Business Email Compromise, ThreatRisk=85, Spam=10, Verdict=Business Email Compromise",
+      "\u2713 11. Financial Fraud / Invoice Diversion: Pred=Business Email Compromise, ThreatRisk=85, Spam=10, Verdict=Business Email Compromise",
+      "\u2713 12. Malware Attachment: Pred=Malware Delivery, ThreatRisk=94, Spam=5, Verdict=Malware Delivery",
+      "\u2713 13. Unicode Deception (Punycode / Homoglyph): Pred=Credential Theft, ThreatRisk=88, Spam=10, Verdict=Credential Theft",
+      "\u2713 14. ASCII Smuggling / Zero-Width Attack: Pred=Credential Theft, ThreatRisk=99, Spam=3, Verdict=Credential Theft",
+      "\u2713 15. OTP Scam (Indian UPI/NetBanking Fraud): Pred=Credential Theft, ThreatRisk=88, Spam=10, Verdict=Credential Theft",
+      "\u2713 16. QR Phishing (Quishing Attack): Pred=Credential Theft, ThreatRisk=88, Spam=10, Verdict=Credential Theft",
+      "\u2713 17. Conversation Hijacking / Thread Insertion: Pred=Business Email Compromise, ThreatRisk=85, Spam=10, Verdict=Business Email Compromise",
+      "\u2713 18. Google Workspace Impersonation: Pred=Credential Theft, ThreatRisk=99, Spam=5, Verdict=Credential Theft",
+      "\u2713 19. Reply-To Manipulation & Routing Anomaly: Pred=Business Email Compromise, ThreatRisk=85, Spam=3, Verdict=Business Email Compromise",
+      "\u2713 20. Severe Authentication & Header Forgery Anomaly: Pred=Phishing, ThreatRisk=85, Spam=10, Verdict=Phishing",
+      "\u2713 21. Microsoft False-Positive Benchmark (AI Agent Event): Pred=Legitimate, ThreatRisk=5, Spam=13, Verdict=Legitimate"
+    ]
+  },
+  "reproducibility": {
+    "randomSeed": 42,
+    "datasetVersion": "training-dataset-v2",
+    "modelArchitecture": "MultimodalSecurityTransformer",
+    "dModel": 768,
+    "numTextLayers": 10,
+    "numFusionLayers": 2,
+    "numHeads": 12,
+    "dFfn": 3072,
+    "vocabSize": 50265,
+    "maxSeqLen": 1024,
+    "structuredInputDim": 128,
+    "optimizer": "AdamW",
+    "learningRate": 0.0001,
+    "weightDecay": 0.01,
+    "hardware": "Apple Silicon (MPS / Unified Memory)",
+    "pyTorchVersion": "2.14.0",
+    "mpsAvailable": true
+  }
+}

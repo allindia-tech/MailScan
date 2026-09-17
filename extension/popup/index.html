@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MailTrace AI - Direct Email Threat Analyzer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    
+    <!-- Header Bar -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">MAILTRACE<span class="brand-accent">.AI</span></div>
+          <div class="brand-subtitle">LIVE WEBMAIL SOC ANALYZER</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div id="backend-status-badge" class="status-badge connecting" title="Checking MailTrace AI backend connection...">
+          <span class="status-dot"></span>
+          <span id="backend-status-text">Connecting...</span>
+        </div>
+        <button id="btn-toggle-diagnostics" class="icon-btn" title="Toggle Live Extension Diagnostics">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </button>
+        <button id="btn-open-sidepanel" class="icon-btn" title="Open in Side Panel">
+          <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sub-navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="tab-analyze">
+        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Analysis</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-history">
+        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>History</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-settings">
+        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- LIVE DIAGNOSTICS OVERLAY (Toggleable) -->
+    <div id="diagnostics-panel" class="diagnostics-panel hidden">
+      <div class="diag-header">
+        <span class="diag-title">EXTENSION DIAGNOSTICS & TELEMETRY</span>
+        <button id="btn-close-diagnostics" class="diag-close">&times;</button>
+      </div>
+      <div class="diag-grid">
+        <div class="diag-row"><span class="diag-k">Active Tab ID:</span><span id="diag-tab-id" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Tab URL:</span><span id="diag-url" class="diag-v font-mono text-[10px] break-all">-</span></div>
+        <div class="diag-row"><span class="diag-k">Provider:</span><span id="diag-provider" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Webmail Tab:</span><span id="diag-is-webmail" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Content Script:</span><span id="diag-content-script" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Context State:</span><span id="diag-state" class="diag-v font-mono text-emerald-400">-</span></div>
+        <div class="diag-row"><span class="diag-k">Message In View:</span><span id="diag-is-message" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Message Key:</span><span id="diag-message-key" class="diag-v font-mono text-[10px]">-</span></div>
+        <div class="diag-row"><span class="diag-k">Extraction Status:</span><span id="diag-extract-status" class="diag-v">-</span></div>
+        <div class="diag-row"><span class="diag-k">Backend Status:</span><span id="diag-backend" class="diag-v">-</span></div>
+      </div>
+    </div>
+
+    <!-- TAB 1: MAIN ANALYSIS VIEW -->
+    <main id="tab-analyze" class="tab-content active">
+      
+      <!-- Current Page Status Banner -->
+      <section id="detection-card" class="card">
+        <div class="card-header">
+          <span class="card-label">CURRENT CONTEXT</span>
+          <span id="provider-badge" class="badge-neutral">Detecting...</span>
+        </div>
+        
+        <div id="detection-loading" class="detection-loading">
+          <div class="spinner"></div>
+          <span id="detection-loading-text">Inspecting active browser tab...</span>
+        </div>
+
+        <div id="detection-empty" class="detection-empty hidden">
+          <div id="empty-icon-wrapper" class="empty-icon">⚠️</div>
+          <div id="empty-message-title" class="empty-title">No Email Open in View</div>
+          <div id="empty-message-desc" class="empty-desc">
+            Open an email message in Gmail or Outlook to analyze it with MailTrace AI.
+          </div>
+          <button id="btn-retry-detection" class="btn btn-secondary mt-2">
+            Re-check Current View
+          </button>
+        </div>
+
+        <div id="detection-details" class="detection-details hidden">
+          <div class="meta-row">
+            <span class="meta-label">Subject:</span>
+            <span id="det-subject" class="meta-value highlight font-medium"></span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Sender:</span>
+            <span id="det-sender" class="meta-value font-mono"></span>
+          </div>
+          <div class="meta-tags">
+            <span id="tag-links" class="tag">0 Links</span>
+            <span id="tag-attachments" class="tag">0 Attachments</span>
+            <span id="tag-thread" class="tag">1 Message in Thread</span>
+          </div>
+
+          <!-- Primary Action Button -->
+          <button id="btn-analyze-email" class="btn btn-primary w-full mt-3">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Analyze Email Now</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Analysis In-Progress Flow (7-Step Stepper) -->
+      <section id="analysis-progress-card" class="card progress-card hidden">
+        <div class="progress-header">
+          <div class="pulse-ring"></div>
+          <span id="progress-step-text" class="progress-text">Extracting email content...</span>
+        </div>
+        <div class="progress-bar-container">
+          <div id="progress-bar-fill" class="progress-bar-fill" style="width: 15%"></div>
+        </div>
+        <div class="step-trail font-mono">
+          <span id="step-counter">Step 1 of 7</span>
+        </div>
+      </section>
+
+      <!-- Threat Result Card (Shown after analysis) -->
+      <section id="result-container" class="space-y-3 hidden">
+        
+        <!-- Main Threat Score Banner -->
+        <div id="score-banner" class="threat-card critical">
+          <div class="threat-badge-row">
+            <span id="threat-severity-badge" class="severity-pill">CRITICAL RISK</span>
+            <span id="threat-confidence" class="confidence-tag">94% Confidence</span>
+          </div>
+
+          <div class="primary-cat-box mt-2 mb-2 p-2 rounded bg-slate-950/80 border border-slate-800">
+            <div class="text-[10px] uppercase font-mono tracking-wider text-slate-400">PRIMARY CATEGORY</div>
+            <div id="threat-classification" class="text-sm font-bold text-amber-400 mt-0.5">Business Email Compromise</div>
+          </div>
+
+          <div class="score-display">
+            <div class="score-number-group">
+              <span id="threat-score-val" class="score-number">94</span>
+              <span class="score-denom">/ 100</span>
+            </div>
+            <div class="threat-type-group">
+              <div class="text-[10px] font-mono text-slate-400">SPAM / BULK SCORE</div>
+              <div id="spam-score-val" class="text-xs font-mono font-semibold text-slate-300">14 / 100</div>
+            </div>
+          </div>
+
+          <!-- Secondary Category Pills -->
+          <div id="secondary-cats-wrapper" class="secondary-cats-container mt-2">
+            <div class="text-[10px] font-mono text-slate-400 mb-1">SECONDARY FINDINGS</div>
+            <div id="secondary-cats-list" class="flex flex-wrap gap-1">
+              <span class="sec-cat-pill">Credential Theft</span>
+              <span class="sec-cat-pill">Phishing</span>
+            </div>
+          </div>
+
+          <!-- Reasoning Breakdown -->
+          <div class="why-box mt-3 p-2 bg-slate-900/90 rounded border border-slate-800">
+            <div class="text-[10px] font-mono text-slate-400 font-semibold mb-1">WHY THIS CLASSIFICATION</div>
+            <div id="threat-reason-snippet" class="text-xs text-slate-300 leading-snug">Display name spoofing & urgent financial coercion</div>
+          </div>
+
+          <!-- Risk Dimensions Breakdown Grid -->
+          <div class="risk-breakdown-grid mt-3">
+            <div class="risk-mini-item">
+              <span class="mini-label">Phishing</span>
+              <span id="risk-phish" class="mini-val">High</span>
+            </div>
+            <div class="risk-mini-item">
+              <span class="mini-label">Impersonation</span>
+              <span id="risk-impersonation" class="mini-val">Critical</span>
+            </div>
+            <div class="risk-mini-item">
+              <span class="mini-label">Domain Risk</span>
+              <span id="risk-domain" class="mini-val">High</span>
+            </div>
+            <div class="risk-mini-item">
+              <span class="mini-label">URL Risk</span>
+              <span id="risk-url" class="mini-val">Flagged</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Header Context Notice -->
+        <div class="notice-box">
+          <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>DOM forensics evaluated rendered content, links, attachment signatures, and sender lookalikes.</span>
+        </div>
+
+        <!-- Quick Findings Section -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-label">KEY SUSPICIOUS INDICATORS</span>
+            <span id="findings-count" class="badge-alert">0 Found</span>
+          </div>
+          <div id="findings-list" class="findings-list">
+            <!-- Dynamic findings rendered here -->
+          </div>
+        </div>
+
+        <!-- Extracted Links Section -->
+        <div id="links-card" class="card">
+          <div class="card-header">
+            <span class="card-label">EXTRACTED HYPERLINKS</span>
+            <span id="links-count-badge" class="badge-neutral">0</span>
+          </div>
+          <div id="links-list" class="links-list">
+            <!-- Dynamic links rendered here -->
+          </div>
+        </div>
+
+        <!-- Attachments Section (if any) -->
+        <div id="attachments-card" class="card hidden">
+          <div class="card-header">
+            <span class="card-label">DETECTED ATTACHMENTS</span>
+            <span id="attachments-count-badge" class="badge-neutral">0</span>
+          </div>
+          <div id="attachments-list" class="attachments-list"></div>
+        </div>
+
+        <!-- Primary Action CTAs -->
+        <div class="action-buttons-group">
+          <button id="btn-open-investigation" class="btn btn-primary w-full">
+            <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            <span>Open Full Investigation</span>
+          </button>
+
+          <div class="btn-row">
+            <button id="btn-create-case" class="btn btn-secondary flex-1">
+              <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span>Create Case</span>
+            </button>
+            <button id="btn-report-email" class="btn btn-danger flex-1">
+              <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                <line x1="4" y1="22" x2="4" y2="15"></line>
+              </svg>
+              <span>Report Threat</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- TAB 2: ANALYSIS HISTORY VIEW -->
+    <section id="tab-history" class="tab-content hidden">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-label">RECENT SCAN TELEMETRY</span>
+          <button id="btn-clear-history" class="text-btn">Clear</button>
+        </div>
+        <div id="history-list" class="history-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: SETTINGS VIEW -->
+    <section id="tab-settings" class="tab-content hidden">
+      <div class="card space-y-3">
+        <div class="card-header">
+          <span class="card-label">BACKEND CONNECTION</span>
+        </div>
+
+        <div class="setting-item">
+          <label for="input-api-url" class="setting-label">MailTrace API Endpoint</label>
+          <div class="input-with-action">
+            <input type="text" id="input-api-url" class="text-input font-mono" placeholder="http://localhost:3000">
+            <button id="btn-test-connection" class="btn btn-secondary btn-sm">Test</button>
+          </div>
+          <span id="connection-test-result" class="text-xs text-slate-400 mt-1 block"></span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="card-header">
+          <span class="card-label">PREFERENCES & PRIVACY</span>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Save Scan History</div>
+            <div class="toggle-desc">Store metadata locally in browser storage</div>
+          </div>
+          <input type="checkbox" id="toggle-history" class="toggle" checked>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Critical Threat Alerts</div>
+            <div class="toggle-desc">Show desktop notifications for score &ge; 80</div>
+          </div>
+          <input type="checkbox" id="toggle-notifications" class="toggle" checked>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-title">Auto-Analyze On Open</div>
+            <div class="toggle-desc">Automatically trigger analysis when extension opens</div>
+          </div>
+          <input type="checkbox" id="toggle-auto-analyze" class="toggle">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="card-header">
+          <span class="card-label">SUPPORTED PROVIDERS</span>
+        </div>
+        <div class="provider-support-list">
+          <div class="provider-item">
+            <span class="font-medium text-slate-200">Gmail Web</span>
+            <span class="badge-success">Active Engine</span>
+          </div>
+          <div class="provider-item">
+            <span class="font-medium text-slate-200">Outlook Web (Live / 365)</span>
+            <span class="badge-success">Active Engine</span>
+          </div>
+        </div>
+
+        <button id="btn-save-settings" class="btn btn-primary w-full mt-2">
+          Save Configuration
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#" id="link-open-web-soc">Open MailTrace Web SOC</a>
+        <span>&bull;</span>
+        <a href="#" id="link-extension-docs">Documentation</a>
+      </div>
+      <div class="version-tag">v2.4.0 &bull; Manifest V3</div>
+    </footer>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

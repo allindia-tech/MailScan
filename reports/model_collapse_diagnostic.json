@@ -1,0 +1,848 @@
+{
+  "checkpointAudit": {
+    "file": "/Users/shivam/Downloads/MailScan/checkpoints/mailtrace-100m-v2.pt",
+    "sha256": "22b238cd0d011128347cb019d233f3001f84d1dc95e2655a015e8315c97900c9",
+    "missingKeys": 0,
+    "unexpectedKeys": 0,
+    "strictLoadPassed": true,
+    "totalParameters": 128894258,
+    "trainableParameters": 128894258,
+    "savedTrainingStats": {
+      "epochs": 3,
+      "steps": 39,
+      "avgLoss": 2.4023,
+      "device": "MPS: Apple Silicon (unified memory)",
+      "seed": 42,
+      "batchSize": 16,
+      "learningRate": 3e-05,
+      "totalTrainingRecords": 283256,
+      "activeTrainedRecords": 200
+    }
+  },
+  "tokenizerAudit": {
+    "vocabPath": "/Users/shivam/Downloads/MailScan/ml/artifacts/tokenizer/vocab.json",
+    "vocabExists": true,
+    "vocabSize": 50265,
+    "sampleTokenEncodings": [
+      {
+        "text": "Urgent: Reset your Microsoft 365 password immediately!",
+        "tokenIds": [
+          2,
+          2738,
+          9,
+          5395,
+          49,
+          446,
+          4881,
+          1639,
+          1066,
+          27
+        ],
+        "uniqueTokenCount": 12
+      },
+      {
+        "text": "Quarterly financial earnings report and invoice #9821 Attached.",
+        "tokenIds": [
+          2,
+          5226,
+          704,
+          2245,
+          267,
+          16,
+          7350,
+          46,
+          1,
+          2498
+        ],
+        "uniqueTokenCount": 13
+      },
+      {
+        "text": "Weekly newsletter: Top 10 software architecture trends for 2026",
+        "tokenIds": [
+          2,
+          1575,
+          633,
+          9,
+          345,
+          146,
+          209,
+          3450,
+          4567,
+          33
+        ],
+        "uniqueTokenCount": 13
+      },
+      {
+        "text": "Your bank account has been locked. Verify identity via OTP now.",
+        "tokenIds": [
+          2,
+          49,
+          1040,
+          594,
+          104,
+          154,
+          4992,
+          6,
+          3402,
+          2535
+        ],
+        "uniqueTokenCount": 15
+      },
+      {
+        "text": "Hi John, can we schedule our 1:1 sync for tomorrow at 2 PM?",
+        "tokenIds": [
+          2,
+          610,
+          842,
+          10,
+          71,
+          69,
+          3756,
+          91,
+          56,
+          9
+        ],
+        "uniqueTokenCount": 19
+      }
+    ]
+  },
+  "inputDiversityTest": {
+    "totalRecordsTested": 100,
+    "uniqueRawContentHashes": 98,
+    "uniqueNormalizedHashes": 68,
+    "uniqueStructuredFeatureHashes": 1,
+    "uniqueInputTensorHashes": 98,
+    "meanTokenCount": 22.41,
+    "meanUniqueTokenCount": 19.65,
+    "minUniqueTokens": 9,
+    "maxUniqueTokens": 35
+  },
+  "sampleComparisons": [
+    {
+      "category": "Legitimate CSV",
+      "recordId": "unknown",
+      "groundTruth": "LEGITIMATE",
+      "textLength": 72,
+      "tokenCount": 22,
+      "uniqueTokens": 21,
+      "sfNonZeroCount": 0,
+      "sfMin": 0.0,
+      "sfMax": 0.0,
+      "sfMean": 0.0,
+      "sfStd": 0.0,
+      "tensorSha256": "a7603e543508cba0"
+    },
+    {
+      "category": "Spam CSV",
+      "recordId": "unknown",
+      "groundTruth": "SPAM",
+      "textLength": 89,
+      "tokenCount": 20,
+      "uniqueTokens": 20,
+      "sfNonZeroCount": 0,
+      "sfMin": 0.0,
+      "sfMax": 0.0,
+      "sfMean": 0.0,
+      "sfStd": 0.0,
+      "tensorSha256": "40a58c37c574b8cd"
+    },
+    {
+      "category": "Malicious CSV",
+      "recordId": "unknown",
+      "groundTruth": "OTHER_MALICIOUS",
+      "textLength": 52,
+      "tokenCount": 10,
+      "uniqueTokens": 10,
+      "sfNonZeroCount": 0,
+      "sfMin": 0.0,
+      "sfMax": 0.0,
+      "sfMean": 0.0,
+      "sfStd": 0.0,
+      "tensorSha256": "6fa88b4849f64b9e"
+    },
+    {
+      "category": "Legitimate EML",
+      "recordId": "unknown",
+      "groundTruth": "LEGITIMATE",
+      "textLength": 81,
+      "tokenCount": 19,
+      "uniqueTokens": 16,
+      "sfNonZeroCount": 0,
+      "sfMin": 0.0,
+      "sfMax": 0.0,
+      "sfMean": 0.0,
+      "sfStd": 0.0,
+      "tensorSha256": "cef606bc4e3d53c1"
+    },
+    {
+      "category": "Spam EML",
+      "recordId": "unknown",
+      "groundTruth": "SPAM",
+      "textLength": 81,
+      "tokenCount": 26,
+      "uniqueTokens": 19,
+      "sfNonZeroCount": 0,
+      "sfMin": 0.0,
+      "sfMax": 0.0,
+      "sfMean": 0.0,
+      "sfStd": 0.0,
+      "tensorSha256": "ed360f3d57b7ea11"
+    }
+  ],
+  "weightDiversity": {
+    "totalNamedParameters": 263,
+    "zeroTensorsCount": 0,
+    "constantTensorsCount": 13,
+    "representativeLayers": [
+      {
+        "layer": "text_encoder.token_embedding.weight",
+        "shape": [
+          50265,
+          768
+        ],
+        "min": -0.105894,
+        "max": 0.111393,
+        "mean": 4e-06,
+        "std": 0.020001,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "text_encoder.transformer.layers.0.linear1.weight",
+        "shape": [
+          3072,
+          768
+        ],
+        "min": -0.036689,
+        "max": 0.036669,
+        "mean": 8e-06,
+        "std": 0.020844,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "text_encoder.pooler.0.weight",
+        "shape": [
+          768,
+          768
+        ],
+        "min": -0.102721,
+        "max": 0.101825,
+        "mean": -1e-05,
+        "std": 0.02001,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "struct_encoder.encoder.0.weight",
+        "shape": [
+          512,
+          128
+        ],
+        "min": -0.086692,
+        "max": 0.091661,
+        "mean": 0.000199,
+        "std": 0.020007,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "struct_encoder.encoder.12.weight",
+        "shape": [
+          768,
+          768
+        ],
+        "min": -0.098427,
+        "max": 0.090058,
+        "mean": -1.8e-05,
+        "std": 0.019998,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "fusion_encoder.fusion_cls",
+        "shape": [
+          1,
+          1,
+          768
+        ],
+        "min": -0.071957,
+        "max": 0.05916,
+        "mean": 0.000146,
+        "std": 0.020362,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "fusion_encoder.fusion_transformer.layers.0.linear1.weight",
+        "shape": [
+          3072,
+          768
+        ],
+        "min": -0.036876,
+        "max": 0.036864,
+        "mean": -1.9e-05,
+        "std": 0.02083,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "head_primary.net.1.weight",
+        "shape": [
+          256,
+          768
+        ],
+        "min": -0.08711,
+        "max": 0.090367,
+        "mean": -2.3e-05,
+        "std": 0.02003,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "head_primary.net.4.weight",
+        "shape": [
+          30,
+          256
+        ],
+        "min": -0.081458,
+        "max": 0.078079,
+        "mean": -0.000254,
+        "std": 0.020142,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "head_primary.net.4.bias",
+        "shape": [
+          30
+        ],
+        "min": -0.001083,
+        "max": 0.001036,
+        "mean": -0.000808,
+        "std": 0.000586,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "binary_heads.0.net.4.weight",
+        "shape": [
+          1,
+          256
+        ],
+        "min": -0.058498,
+        "max": 0.052719,
+        "mean": 0.000489,
+        "std": 0.019321,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "binary_heads.0.net.4.bias",
+        "shape": [
+          1
+        ],
+        "min": -0.000987,
+        "max": -0.000987,
+        "mean": -0.000987,
+        "std": 0.0,
+        "isZero": false,
+        "isConstant": true
+      },
+      {
+        "layer": "binary_heads.1.net.4.weight",
+        "shape": [
+          1,
+          256
+        ],
+        "min": -0.05393,
+        "max": 0.057374,
+        "mean": -0.000868,
+        "std": 0.019742,
+        "isZero": false,
+        "isConstant": false
+      },
+      {
+        "layer": "binary_heads.1.net.4.bias",
+        "shape": [
+          1
+        ],
+        "min": -0.001057,
+        "max": -0.001057,
+        "mean": -0.001057,
+        "std": 0.0,
+        "isZero": false,
+        "isConstant": true
+      }
+    ]
+  },
+  "twoInputForwardTest": {
+    "sampleA": {
+      "groundTruth": "LEGITIMATE",
+      "threatProb": 0.20544663071632385,
+      "spamProb": 0.26132750511169434,
+      "threatLogit": -1.3525938987731934
+    },
+    "sampleB": {
+      "groundTruth": "OTHER_MALICIOUS",
+      "threatProb": 0.20580744743347168,
+      "spamProb": 0.26133498549461365,
+      "threatLogit": -1.3503848314285278
+    },
+    "maxAbsTextPooledDiff": 0.18153248727321625,
+    "maxAbsStructEmbDiff": 0.0,
+    "maxAbsFusedDiff": 0.10549244284629822,
+    "maxAbsPrimaryLogitsDiff": 0.020633459091186523,
+    "maxAbsBinaryLogitsDiff": 0.004152178764343262,
+    "threatProbabilityDiff": 0.00036081671714782715,
+    "spamProbabilityDiff": 7.4803829193115234e-06
+  },
+  "layerActivationStats": [
+    {
+      "layer": "token_embedding",
+      "maxAbsDelta": 0.11852453649044037,
+      "l2Distance": 3.4099175930023193,
+      "actAMean": -0.00047178249224089086,
+      "actAStd": 0.020070521160960197,
+      "actBMean": -0.0006365130539052188,
+      "actBStd": 0.020136157050728798
+    },
+    {
+      "layer": "text_layer_0",
+      "maxAbsDelta": 0.5994710326194763,
+      "l2Distance": 36.440185546875,
+      "actAMean": 0.3584710657596588,
+      "actAStd": 0.7902519106864929,
+      "actBMean": 0.35028448700904846,
+      "actBStd": 0.7979219555854797
+    },
+    {
+      "layer": "text_layer_5",
+      "maxAbsDelta": 2.080876350402832,
+      "l2Distance": 132.0026397705078,
+      "actAMean": 0.22300390899181366,
+      "actAStd": 3.9163177013397217,
+      "actBMean": 0.2105531543493271,
+      "actBStd": 3.9315872192382812
+    },
+    {
+      "layer": "text_layer_9",
+      "maxAbsDelta": 2.8610386848449707,
+      "l2Distance": 174.35971069335938,
+      "actAMean": 0.11053609102964401,
+      "actAStd": 6.524449825286865,
+      "actBMean": 0.10097841173410416,
+      "actBStd": 6.5241780281066895
+    },
+    {
+      "layer": "text_pooler",
+      "maxAbsDelta": 0.18153248727321625,
+      "l2Distance": 1.3731253147125244,
+      "actAMean": 0.00713149132207036,
+      "actAStd": 0.5406532883644104,
+      "actBMean": 0.005971952807158232,
+      "actBStd": 0.5392506122589111
+    },
+    {
+      "layer": "struct_encoder_in",
+      "maxAbsDelta": 0.0,
+      "l2Distance": 0.0,
+      "actAMean": -4.140472356084501e-06,
+      "actAStd": 0.0001766118366504088,
+      "actBMean": -4.140472356084501e-06,
+      "actBStd": 0.0001766118366504088
+    },
+    {
+      "layer": "struct_encoder_out",
+      "maxAbsDelta": 0.0,
+      "l2Distance": 0.0,
+      "actAMean": 4.110237114218762e-06,
+      "actAStd": 1.0001649856567383,
+      "actBMean": 4.110237114218762e-06,
+      "actBStd": 1.0001649856567383
+    },
+    {
+      "layer": "fusion_layer_0",
+      "maxAbsDelta": 0.3461463749408722,
+      "l2Distance": 2.7478158473968506,
+      "actAMean": 0.009340187534689903,
+      "actAStd": 1.0669951438903809,
+      "actBMean": 0.00961191114038229,
+      "actBStd": 1.065464973449707
+    },
+    {
+      "layer": "fusion_layer_1",
+      "maxAbsDelta": 0.4049244523048401,
+      "l2Distance": 3.2278530597686768,
+      "actAMean": 0.029230011627078056,
+      "actAStd": 1.5620445013046265,
+      "actBMean": 0.029499424621462822,
+      "actBStd": 1.558097004890442
+    },
+    {
+      "layer": "head_primary",
+      "maxAbsDelta": 0.020633459091186523,
+      "l2Distance": 0.031930528581142426,
+      "actAMean": -0.16489467024803162,
+      "actAStd": 0.9396205544471741,
+      "actBMean": -0.16630162298679352,
+      "actBStd": 0.9394716024398804
+    },
+    {
+      "layer": "head_binary_spam",
+      "maxAbsDelta": 3.8623809814453125e-05,
+      "l2Distance": 3.8623809814453125e-05,
+      "actAMean": -1.0390801429748535,
+      "actAStd": 0.0,
+      "actBMean": -1.039041519165039,
+      "actBStd": 0.0
+    },
+    {
+      "layer": "head_binary_threat",
+      "maxAbsDelta": 0.0022090673446655273,
+      "l2Distance": 0.0022090673446655273,
+      "actAMean": -1.3525938987731934,
+      "actAStd": 0.0,
+      "actBMean": -1.3503848314285278,
+      "actBStd": 0.0
+    }
+  ],
+  "outputHeadDetails": [
+    {
+      "headIndex": 0,
+      "headName": "spam_bulk",
+      "layer1WeightStd": 0.019972804933786392,
+      "layer1BiasStd": 0.0008817070629447699,
+      "layer2WeightStd": 0.01932085119187832,
+      "layer2WeightMean": 0.0004888514522463083,
+      "layer2Bias": -0.0009870122885331511,
+      "impliedDefaultProb": 0.4997532367706299
+    },
+    {
+      "headIndex": 1,
+      "headName": "threat",
+      "layer1WeightStd": 0.020017579197883606,
+      "layer1BiasStd": 0.0009432843653485179,
+      "layer2WeightStd": 0.019742071628570557,
+      "layer2WeightMean": -0.0008682811167091131,
+      "layer2Bias": -0.0010573406470939517,
+      "impliedDefaultProb": 0.49973568320274353
+    },
+    {
+      "headIndex": 2,
+      "headName": "phishing",
+      "layer1WeightStd": 0.020038733258843422,
+      "layer1BiasStd": 0.0009482755558565259,
+      "layer2WeightStd": 0.020610105246305466,
+      "layer2WeightMean": -0.0005862698890268803,
+      "layer2Bias": -0.0010768870124593377,
+      "impliedDefaultProb": 0.49973079562187195
+    },
+    {
+      "headIndex": 3,
+      "headName": "credential_theft",
+      "layer1WeightStd": 0.020026711747050285,
+      "layer1BiasStd": 0.0009537893929518759,
+      "layer2WeightStd": 0.02072194032371044,
+      "layer2WeightMean": 0.0018741011153906584,
+      "layer2Bias": -0.001084894291125238,
+      "impliedDefaultProb": 0.4997287690639496
+    },
+    {
+      "headIndex": 4,
+      "headName": "malware",
+      "layer1WeightStd": 0.02004234865307808,
+      "layer1BiasStd": 0.000966522959060967,
+      "layer2WeightStd": 0.02083921805024147,
+      "layer2WeightMean": 0.0005547591717913747,
+      "layer2Bias": -0.0011003162944689393,
+      "impliedDefaultProb": 0.4997248947620392
+    },
+    {
+      "headIndex": 5,
+      "headName": "bec",
+      "layer1WeightStd": 0.019990140572190285,
+      "layer1BiasStd": 0.0009471441735513508,
+      "layer2WeightStd": 0.020685847848653793,
+      "layer2WeightMean": -0.00108149868901819,
+      "layer2Bias": -0.0010716270189732313,
+      "impliedDefaultProb": 0.499732106924057
+    },
+    {
+      "headIndex": 6,
+      "headName": "financial_fraud",
+      "layer1WeightStd": 0.020013971254229546,
+      "layer1BiasStd": 0.0009819359984248877,
+      "layer2WeightStd": 0.01895354874432087,
+      "layer2WeightMean": 0.0018916415283456445,
+      "layer2Bias": -0.0010998612269759178,
+      "impliedDefaultProb": 0.49972501397132874
+    },
+    {
+      "headIndex": 7,
+      "headName": "executive_impersonation",
+      "layer1WeightStd": 0.02001195028424263,
+      "layer1BiasStd": 0.0009412707877345383,
+      "layer2WeightStd": 0.02126813307404518,
+      "layer2WeightMean": -0.00043889868538826704,
+      "layer2Bias": -0.0010530432919040322,
+      "impliedDefaultProb": 0.4997367560863495
+    },
+    {
+      "headIndex": 8,
+      "headName": "account_takeover",
+      "layer1WeightStd": 0.020022589713335037,
+      "layer1BiasStd": 0.0009623812511563301,
+      "layer2WeightStd": 0.02105777896940708,
+      "layer2WeightMean": -0.00043567351531237364,
+      "layer2Bias": -0.0010802779579535127,
+      "impliedDefaultProb": 0.4997299015522003
+    },
+    {
+      "headIndex": 9,
+      "headName": "social_engineering",
+      "layer1WeightStd": 0.020011039450764656,
+      "layer1BiasStd": 0.0009683262906037271,
+      "layer2WeightStd": 0.02028215117752552,
+      "layer2WeightMean": 0.0016446523368358612,
+      "layer2Bias": -0.0010771553497761488,
+      "impliedDefaultProb": 0.4997307360172272
+    },
+    {
+      "headIndex": 10,
+      "headName": "obfuscation",
+      "layer1WeightStd": 0.02001839131116867,
+      "layer1BiasStd": 0.0009474537800997496,
+      "layer2WeightStd": 0.019492963328957558,
+      "layer2WeightMean": -0.002326162066310644,
+      "layer2Bias": -0.0010674026561900973,
+      "impliedDefaultProb": 0.4997331202030182
+    },
+    {
+      "headIndex": 11,
+      "headName": "malicious_url",
+      "layer1WeightStd": 0.020025135949254036,
+      "layer1BiasStd": 0.0009549334063194692,
+      "layer2WeightStd": 0.021845603361725807,
+      "layer2WeightMean": 0.0003203579690307379,
+      "layer2Bias": -0.001074799569323659,
+      "impliedDefaultProb": 0.4997313320636749
+    },
+    {
+      "headIndex": 12,
+      "headName": "malicious_attachment",
+      "layer1WeightStd": 0.02003510110080242,
+      "layer1BiasStd": 0.0009700426599010825,
+      "layer2WeightStd": 0.020024893805384636,
+      "layer2WeightMean": 0.0028186608105897903,
+      "layer2Bias": -0.0010576938511803746,
+      "impliedDefaultProb": 0.49973562359809875
+    }
+  ],
+  "trainingClassDistribution": {
+    "csvTrain": {
+      "total": 246318,
+      "distribution": {
+        "LEGITIMATE": 112314,
+        "SPAM": 88621,
+        "UNLABELED": 30576,
+        "PHISHING": 6528,
+        "OTHER_MALICIOUS": 8279
+      }
+    },
+    "emlTrain": {
+      "total": 36938,
+      "distribution": {
+        "UNLABELED": 31400,
+        "LEGITIMATE": 5322,
+        "SPAM": 216
+      }
+    },
+    "combinedTrain": {
+      "total": 283256,
+      "distribution": {
+        "LEGITIMATE": 117636,
+        "SPAM": 88837,
+        "UNLABELED": 61976,
+        "PHISHING": 6528,
+        "OTHER_MALICIOUS": 8279
+      }
+    }
+  },
+  "labelMappingAudit": {
+    "primaryCategories": [
+      "LEGITIMATE",
+      "NEWSLETTER",
+      "PROMOTIONAL",
+      "TRANSACTIONAL",
+      "NOTIFICATION",
+      "PERSONAL_BUSINESS",
+      "BULK",
+      "SPAM",
+      "PHISHING",
+      "CREDENTIAL_THEFT",
+      "MALWARE_DELIVERY",
+      "BUSINESS_EMAIL_COMPROMISE",
+      "FINANCIAL_FRAUD",
+      "EXECUTIVE_IMPERSONATION",
+      "ACCOUNT_TAKEOVER",
+      "IDENTITY_THEFT",
+      "INVESTMENT_SCAM",
+      "PAYMENT_FRAUD",
+      "INVOICE_FRAUD",
+      "PAYROLL_FRAUD",
+      "DELIVERY_SCAM",
+      "GOVERNMENT_IMPERSONATION",
+      "JOB_RECRUITMENT_SCAM",
+      "TECH_SUPPORT_SCAM",
+      "ADVANCE_FEE_SCAM",
+      "EXTORTION",
+      "OAUTH_ABUSE",
+      "DATA_HARVESTING",
+      "MALICIOUS_LINK",
+      "OTHER_MALICIOUS"
+    ],
+    "categoryIndex": {
+      "LEGITIMATE": 0,
+      "NEWSLETTER": 1,
+      "PROMOTIONAL": 2,
+      "TRANSACTIONAL": 3,
+      "NOTIFICATION": 4,
+      "PERSONAL_BUSINESS": 5,
+      "BULK": 6,
+      "SPAM": 7,
+      "PHISHING": 8,
+      "CREDENTIAL_THEFT": 9,
+      "MALWARE_DELIVERY": 10,
+      "BUSINESS_EMAIL_COMPROMISE": 11,
+      "FINANCIAL_FRAUD": 12,
+      "EXECUTIVE_IMPERSONATION": 13,
+      "ACCOUNT_TAKEOVER": 14,
+      "IDENTITY_THEFT": 15,
+      "INVESTMENT_SCAM": 16,
+      "PAYMENT_FRAUD": 17,
+      "INVOICE_FRAUD": 18,
+      "PAYROLL_FRAUD": 19,
+      "DELIVERY_SCAM": 20,
+      "GOVERNMENT_IMPERSONATION": 21,
+      "JOB_RECRUITMENT_SCAM": 22,
+      "TECH_SUPPORT_SCAM": 23,
+      "ADVANCE_FEE_SCAM": 24,
+      "EXTORTION": 25,
+      "OAUTH_ABUSE": 26,
+      "DATA_HARVESTING": 27,
+      "MALICIOUS_LINK": 28,
+      "OTHER_MALICIOUS": 29
+    },
+    "binaryHeadNames": [
+      "spam_bulk",
+      "threat",
+      "phishing",
+      "credential_theft",
+      "malware",
+      "bec",
+      "financial_fraud",
+      "executive_impersonation",
+      "account_takeover",
+      "social_engineering",
+      "obfuscation",
+      "malicious_url",
+      "malicious_attachment"
+    ],
+    "sampleDerivedBinaryLabels": {
+      "LEGITIMATE": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "SPAM": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "OTHER_MALICIOUS": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "UNLABELED": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "perClassGradients": {
+    "LEGITIMATE_0": {
+      "label": "LEGITIMATE",
+      "loss": 1.826375961303711,
+      "totalGradNorm": 53.8237412181518,
+      "threatHeadGradNorm": 0.1622911920631883
+    },
+    "SPAM_1": {
+      "label": "SPAM",
+      "loss": 2.848963975906372,
+      "totalGradNorm": 70.45172314513098,
+      "threatHeadGradNorm": 0.16219879440419932
+    },
+    "OTHER_MALICIOUS_2": {
+      "label": "OTHER_MALICIOUS",
+      "loss": 1.2007566690444946,
+      "totalGradNorm": 41.721424835411476,
+      "threatHeadGradNorm": 0.6268560632547678
+    }
+  },
+  "rootCauseClassification": {
+    "primaryCauses": [
+      "TOKENIZER",
+      "TRAINING_FAILURE",
+      "UNLABELED_HANDLING"
+    ],
+    "details": {
+      "TOKENIZER": "Vocab file exists: True. Without vocab, all tokens mapped to [UNK]=1, collapsing text representations.",
+      "TRAINING_FAILURE": "Model was trained on only 200 records for 3 epochs (39 steps) in baseline run.",
+      "UNLABELED_HANDLING": "Unlabeled records (61976 records in train) default all binary targets to 0.0, biasing threat/spam heads toward 0."
+    }
+  },
+  "diagnosticDurationSeconds": 9.46
+}

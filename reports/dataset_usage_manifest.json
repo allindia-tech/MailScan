@@ -1,0 +1,581 @@
+{
+  "manifestVersion": "2.0.0",
+  "generatedAt": "2026-09-15T10:53:29.571878+00:00",
+  "datasetDirectory": "/Users/shivam/Downloads/MailScan/dataset",
+  "totalFiles": 22,
+  "canonicalCount": 12,
+  "duplicateCount": 2,
+  "derivedCount": 7,
+  "excludedCount": 1,
+  "files": [
+    {
+      "file": ".DS_Store",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/.DS_Store",
+      "size": 8196,
+      "hash": "50d99a2d3b60d7834335838d6b3763509ec71f701685dfe984511de7314d2d95",
+      "md5": "362c819e1e2b05f881b2d61690b7b900",
+      "rows": 0,
+      "columns": [],
+      "schema": "UNSUPPORTED",
+      "textColumns": [],
+      "labelColumns": [],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Unsupported file format / system metadata"
+    },
+    {
+      "file": "Assassin.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Assassin.csv",
+      "size": 14879195,
+      "hash": "3bfe8f8abff89f69a98456be50413c2fcb20a476141116dd84ee1507b980c00e",
+      "md5": "d921e0b2333bfaa058bd38193e6b3fbd",
+      "rows": 5809,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "CANONICAL_7COL_EMAIL (sender, receiver, date, subject, body, label, urls)",
+      "textColumns": [
+        "sender",
+        "receiver",
+        "subject",
+        "body",
+        "urls"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "Assassin_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Assassin_vectorized_data.csv",
+      "size": 9372837,
+      "hash": "ac0ed1384dc6eeb5a2885fedaade4114381959766ddef8fec24f8811f330810a",
+      "md5": "94264e25d5d472ad797218fa6dc99b3f",
+      "rows": 5809,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "Assassin.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical Assassin.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "CEAS-08.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/CEAS-08.csv",
+      "size": 67902056,
+      "hash": "22375e7d5f5a8229dbe987914ee9b3705656c590038662a7df6054629b376074",
+      "md5": "1f0d59191eec892a709995d48cd8decb",
+      "rows": 39154,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "CANONICAL_7COL_EMAIL (sender, receiver, date, subject, body, label, urls)",
+      "textColumns": [
+        "sender",
+        "receiver",
+        "subject",
+        "body",
+        "urls"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "CEAS-08_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/CEAS-08_vectorized_data.csv",
+      "size": 61870995,
+      "hash": "6eaf339eb3b0912039c70fd534642874828549149537ac276fec7ac8af0dcf86",
+      "md5": "8d7262aa9d044efddee27c58f8cda3e5",
+      "rows": 39154,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "CEAS-08.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical CEAS-08.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "CEAS_08.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/CEAS_08.csv",
+      "size": 67902056,
+      "hash": "22375e7d5f5a8229dbe987914ee9b3705656c590038662a7df6054629b376074",
+      "md5": "1f0d59191eec892a709995d48cd8decb",
+      "rows": 39154,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "EXACT_CSV_DUPLICATE",
+      "textColumns": [
+        "subject",
+        "body"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": "CEAS-08.csv",
+      "derivedFrom": null,
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Exact binary/content duplicate of canonical dataset CEAS-08.csv"
+    },
+    {
+      "file": "Enron.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Enron.csv",
+      "size": 44837129,
+      "hash": "11f28a5bdd3603f1829681ab6b55071b5f9af781b4e6694e39216b2996a96883",
+      "md5": "10489e0fdcc8af6fe62135c689367d40",
+      "rows": 29767,
+      "columns": [
+        "subject",
+        "body",
+        "label"
+      ],
+      "schema": "CANONICAL_3COL_EMAIL (subject, body, label)",
+      "textColumns": [
+        "subject",
+        "body"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "Enron_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Enron_vectorized_data.csv",
+      "size": 44435578,
+      "hash": "e13f29770fefb0f71bae8f19dbdd54376991fffa3eb0c3af4d71b645311a6dee",
+      "md5": "faa623a042c10087c0089761a0330b3d",
+      "rows": 29767,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "Enron.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical Enron.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "Ling.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Ling.csv",
+      "size": 9337509,
+      "hash": "9407c9e022accc6c831e54c5226b99b30ac4ae07682e63f5d483ed0ec17ff23c",
+      "md5": "eac6399dc0c7ae455aebb64423dadc8b",
+      "rows": 2859,
+      "columns": [
+        "subject",
+        "body",
+        "label"
+      ],
+      "schema": "CANONICAL_3COL_EMAIL (subject, body, label)",
+      "textColumns": [
+        "subject",
+        "body"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "Ling_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/Ling_vectorized_data.csv",
+      "size": 4620114,
+      "hash": "4b5623f0fa5099f5ba5c63b47fd8f29479ea91ee4a794e35e1dedd2696644c07",
+      "md5": "899359bb61f96496041ee632c560538b",
+      "rows": 2859,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "Ling.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical Ling.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-05.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-05.csv",
+      "size": 123130931,
+      "hash": "cb93c37ff21a3ecc8ff71351b279850ff8698ae00399541c3599600639b60b8c",
+      "md5": "ef4023fa9e64247212487b77a4c7d98e",
+      "rows": 56088,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "CANONICAL_7COL_EMAIL (sender, receiver, date, subject, body, label, urls)",
+      "textColumns": [
+        "sender",
+        "receiver",
+        "subject",
+        "body",
+        "urls"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "TREC-05_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-05_vectorized_data.csv",
+      "size": 87305478,
+      "hash": "e303eeb377eee7eabd541c35c7812ad2107a1bbe25dc3e9756b51613c197ecce",
+      "md5": "391ba66e2e4a30d7f3edb3d905d32f31",
+      "rows": 55414,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "TREC-05.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical TREC-05.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-06.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-06.csv",
+      "size": 41922386,
+      "hash": "8ca6b1249f30f0a74790b8a34d4dbe248d526cfb0b13227b41970a1ebd638be5",
+      "md5": "b840dc9477f86c098a71a0dfd25c928e",
+      "rows": 16463,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "CANONICAL_7COL_EMAIL (sender, receiver, date, subject, body, label, urls)",
+      "textColumns": [
+        "sender",
+        "receiver",
+        "subject",
+        "body",
+        "urls"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "TREC-06_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-06_vectorized_data.csv",
+      "size": 26417466,
+      "hash": "76dd38b53c62fe50db6343a7d077ca7865360b0193d8db7368f1d6977b4d532f",
+      "md5": "9b554cac3e5efff49b91677b24e651b9",
+      "rows": 16416,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "TREC-06.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical TREC-06.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "TREC-07.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-07.csv",
+      "size": 100246925,
+      "hash": "48c79ed8bd173587a73d9171d1c315229c44b7ee201f83a95883feed241d6c4b",
+      "md5": "e5a5ae0de1580965191cb32806dc0dae",
+      "rows": 53757,
+      "columns": [
+        "sender",
+        "receiver",
+        "date",
+        "subject",
+        "body",
+        "label",
+        "urls"
+      ],
+      "schema": "CANONICAL_7COL_EMAIL (sender, receiver, date, subject, body, label, urls)",
+      "textColumns": [
+        "sender",
+        "receiver",
+        "subject",
+        "body",
+        "urls"
+      ],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "TREC-07_vectorized_data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/TREC-07_vectorized_data.csv",
+      "size": 88428307,
+      "hash": "6db80233e0f5c2847f0aa2028ae758eef18576b918d51c2b178053e7bef3edd8",
+      "md5": "4472b42e32dc659eb0422c8c1c4e0604",
+      "rows": 53757,
+      "columns": [
+        "0",
+        "label"
+      ],
+      "schema": "VECTORIZED_FEATURE_MATRIX",
+      "textColumns": [],
+      "labelColumns": [
+        "label"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": "TREC-07.csv",
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Derived vectorized representation of canonical TREC-07.csv; canonical raw text is used to prevent double-counting"
+    },
+    {
+      "file": "email-data.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/email-data.csv",
+      "size": 168761636,
+      "hash": "83646478faf53a55cae2ca0b100f978d8bd6e5c5576615f99161cc1d71757565",
+      "md5": "786499ed2dad4ee58b4f396e1b8a00be",
+      "rows": 1000000,
+      "columns": [
+        "email_id",
+        "attachment_name",
+        "attachment_extension",
+        "attachment_size",
+        "attachment_entropy",
+        "compression_ratio",
+        "sender_email",
+        "sender_domain",
+        "sender_frequency",
+        "recipient_email",
+        "time_received",
+        "attachment_count",
+        "attachment_mime_type",
+        "attachment_is_archive",
+        "attachment_is_executable",
+        "attachment_entropy_bin",
+        "domain_reputation_score",
+        "is_malicious"
+      ],
+      "schema": "STRUCTURED_MALWARE_ATTACHMENT_18COL",
+      "textColumns": [],
+      "labelColumns": [],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "AUXILIARY_STRUCTURED",
+      "exclusionReason": "Preserved as auxiliary structured malware dataset to prevent text field corruption"
+    },
+    {
+      "file": "emails.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/emails.csv",
+      "size": 8954755,
+      "hash": "a5d0d75d15d370ef2dd3229b30204b18deab6d3fd249206e89a2c58f901bcc77",
+      "md5": "8ead76b237d8690efbe2b634d855f1dc",
+      "rows": 5728,
+      "columns": [
+        "text",
+        "spam"
+      ],
+      "schema": "CANONICAL_2COL_SPAM (text, spam)",
+      "textColumns": [
+        "text"
+      ],
+      "labelColumns": [
+        "spam"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "fraud_email_.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/fraud_email_.csv",
+      "size": 15940304,
+      "hash": "b37e3f56ddcb13076f3f18d883f9199b8f90610ffb243d76dbb44e4ff3038c61",
+      "md5": "3110e3e4be42c76e3d0485c91ba9ab75",
+      "rows": 11929,
+      "columns": [
+        "Text",
+        "Class"
+      ],
+      "schema": "CANONICAL_FRAUD_EMAIL (Text, Class)",
+      "textColumns": [
+        "Text"
+      ],
+      "labelColumns": [
+        "Class"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "full_dataset.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/full_dataset.csv",
+      "size": 3775383,
+      "hash": "4a5448ad76cbfd44f2a2feff4ab405eddbf91f690a6374ccba8dd038b460ac8d",
+      "md5": "058bf84226245325483e2c90bdbd5cf7",
+      "rows": 13477,
+      "columns": [
+        "id",
+        "subject",
+        "body",
+        "text",
+        "category",
+        "category_id"
+      ],
+      "schema": "CANONICAL_FULL_DATASET (id, subject, body, text, category, category_id)",
+      "textColumns": [
+        "subject",
+        "body",
+        "text"
+      ],
+      "labelColumns": [
+        "category"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    },
+    {
+      "file": "full_dataset.json",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/full_dataset.json",
+      "size": 5206949,
+      "hash": "0dceb71ea5d211adf9aa95e9fefbc4bde6c996c8ac90af5bbab6e8d3e67f00a6",
+      "md5": "45f1ec25a1d53e5c132351db73e3c147",
+      "rows": 13477,
+      "columns": [
+        "id",
+        "subject",
+        "body",
+        "text",
+        "category",
+        "category_id"
+      ],
+      "schema": "JSON_ARRAY_DUPLICATE",
+      "textColumns": [
+        "subject",
+        "body",
+        "text"
+      ],
+      "labelColumns": [
+        "category",
+        "category_id"
+      ],
+      "duplicateOf": "full_dataset.csv",
+      "derivedFrom": null,
+      "trainingStatus": "EXCLUDED",
+      "exclusionReason": "Exact JSON serialization duplicate of canonical full_dataset.csv"
+    },
+    {
+      "file": "phishing_legit_dataset_KD_10000.csv",
+      "path": "/Users/shivam/Downloads/MailScan/dataset/phishing_legit_dataset_KD_10000.csv",
+      "size": 2721719,
+      "hash": "fb65d38e33e9fe070cc842abf3a6f7ed679da5ae0fd823cec31db46ede5f1aa7",
+      "md5": "5c095d4ff614c67143ffafcad9ea8162",
+      "rows": 10000,
+      "columns": [
+        "text",
+        "label",
+        "phishing_type",
+        "severity",
+        "confidence"
+      ],
+      "schema": "CANONICAL_PHISHING_KD (text, label, phishing_type, severity, confidence)",
+      "textColumns": [
+        "text"
+      ],
+      "labelColumns": [
+        "label",
+        "phishing_type"
+      ],
+      "duplicateOf": null,
+      "derivedFrom": null,
+      "trainingStatus": "USABLE",
+      "exclusionReason": null
+    }
+  ]
+}

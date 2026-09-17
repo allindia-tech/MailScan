@@ -1,0 +1,25 @@
+# MailTrace AI — Python ML Pipeline Requirements
+# ==============================================
+# Core framework
+torch>=2.0.0
+torchvision
+
+# Tokenizer (for GPT-2 BPE — supports Unicode/Indian scripts)
+transformers>=4.35.0
+
+# Data handling
+numpy>=1.24.0
+pandas>=1.5.0
+
+# Metrics
+scikit-learn>=1.3.0
+
+# Inference server
+flask>=3.0.0
+
+# Utilities
+tqdm>=4.65.0
+psutil>=5.9.0
+
+# Google Cloud Storage (Model Artifact Management)
+google-cloud-storage>=2.10.0

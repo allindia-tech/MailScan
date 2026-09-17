@@ -1,0 +1,70 @@
+{
+  "report": "MailTrace AI \u2014 Dataset Split & Inventory Report",
+  "datasetVersion": "mailtrace-dataset-split-s42-6e403d1a8e14",
+  "timestamp": "2026-09-15T17:29:09.206057+00:00",
+  "seed": 42,
+  "elapsedSeconds": 159.18,
+  "inventory": {
+    "mixCsv": {
+      "totalFilesDiscovered": 40,
+      "canonicalCsvFiles": 16,
+      "totalRawRecords": 2741764,
+      "exactDuplicates": 2433865,
+      "uniqueRecords": 307899,
+      "trainCount": 246318,
+      "testCount": 61581,
+      "trainRatio": 0.8,
+      "testRatio": 0.2,
+      "classDistribution": {
+        "train": {
+          "LEGITIMATE": 112314,
+          "SPAM": 88621,
+          "UNLABELED": 30576,
+          "PHISHING": 6528,
+          "OTHER_MALICIOUS": 8279
+        },
+        "test": {
+          "LEGITIMATE": 21390,
+          "SPAM": 19438,
+          "UNLABELED": 18683,
+          "OTHER_MALICIOUS": 2070
+        }
+      }
+    },
+    "mixEml": {
+      "totalFilesDiscovered": 49136,
+      "validEmlRecords": 49134,
+      "malformedEmlFiles": 2,
+      "exactDuplicates": 2960,
+      "uniqueRecords": 46174,
+      "trainCount": 36938,
+      "testCount": 9236,
+      "trainRatio": 0.8,
+      "testRatio": 0.2,
+      "classDistribution": {
+        "train": {
+          "UNLABELED": 31400,
+          "LEGITIMATE": 5322,
+          "SPAM": 216
+        },
+        "test": {
+          "UNLABELED": 7819,
+          "LEGITIMATE": 1360,
+          "SPAM": 57
+        }
+      }
+    },
+    "combined": {
+      "totalRecords": 2790898,
+      "uniqueRecords": 354073,
+      "trainRecords": 283256,
+      "testRecords": 70817
+    }
+  },
+  "isolationAndSafety": {
+    "csvTrainTestOverlap": 0,
+    "emlTrainTestOverlap": 0,
+    "leakageStatus": "ZERO_LEAKAGE_PASS",
+    "heldOutTestStrictness": "STRICT_20_PERCENT_HELD_OUT"
+  }
+}

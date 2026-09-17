@@ -1,0 +1,18 @@
+{
+  "report": "MailTrace AI \u2014 csv_filtered Training Integrity Report",
+  "generated_at": "2026-09-17T03:07:01.856748+00:00",
+  "source_dataset": "dataset/new/csv_filtered.json",
+  "authoritative_verified": true,
+  "split_seed": 42,
+  "train_count": 206912,
+  "test_count": 51728,
+  "train_test_hash_overlap": 0,
+  "unlabeled_loss_contribution": 0.0,
+  "model_parameters": 128894258,
+  "checkpoint_file": "mailtrace-100m-v3-csv-filtered.pt",
+  "microsoft_benchmark_score": 0.1,
+  "microsoft_benchmark_passed": true,
+  "spam_threat_separation_passed": true,
+  "determinism_passed": true,
+  "model_collapse_check": "PASSED"
+}

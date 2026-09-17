@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-09-16T16:42:19.041516+00:00",
+  "source_file": "dataset/new/csv_filtered.json",
+  "authoritative_status": "SOLE_AUTHORITATIVE_SOURCE",
+  "file_metrics": {
+    "size_bytes": 125278456,
+    "size_mb": 119.47,
+    "json_structure": "List[Dict[str, Any]]",
+    "total_records": 258640,
+    "unique_records": 258640,
+    "duplicate_records": 0,
+    "malformed_records": 0
+  },
+  "schema": {
+    "available_fields": [
+      "campaignGroup",
+      "contentHash",
+      "exclusionReason",
+      "normalizedLabel",
+      "recordId",
+      "sender",
+      "sourceFile",
+      "sourceRecordId",
+      "sourceType",
+      "split",
+      "subject"
+    ],
+    "label_field": "normalizedLabel",
+    "id_field": "recordId",
+    "hash_field": "contentHash",
+    "sample_records": [
+      {
+        "recordId": "csv_6de3dbe07821e81f",
+        "sourceFile": "Assassin.csv",
+        "sourceType": "mix-csv",
+        "sourceRecordId": 0,
+        "normalizedLabel": "LEGITIMATE",
+        "split": "train",
+        "exclusionReason": "",
+        "contentHash": "03c7cddd9af545d089f77c89c1d8e720149255054e1947318041de5afb405012",
+        "campaignGroup": "d4529281586a3408",
+        "subject": "Re: New Sequences Window",
+        "sender": "Robert Elz <kre@munnari.OZ.AU>"
+      },
+      {
+        "recordId": "csv_041061189bad2809",
+        "sourceFile": "Assassin.csv",
+        "sourceType": "mix-csv",
+        "sourceRecordId": 1,
+        "normalizedLabel": "LEGITIMATE",
+        "split": "train",
+        "exclusionReason": "",
+        "contentHash": "163d8c153d6e0e45032525d11d7fb96d94f4cfc0732c27648970fd64074d3f5e",
+        "campaignGroup": "5016e7b86d5b324d",
+        "subject": "[zzzzteana] RE: Alexander",
+        "sender": "Steve Burt <Steve_Burt@cursor-system.com>"
+      },
+      {
+        "recordId": "csv_0e09ac924c7a4b85",
+        "sourceFile": "Assassin.csv",
+        "sourceType": "mix-csv",
+        "sourceRecordId": 3,
+        "normalizedLabel": "LEGITIMATE",
+        "split": "train",
+        "exclusionReason": "",
+        "contentHash": "c0e7ea918b97392706caace380ee661355f1e4280c56ac46c2c391ea2e4be6c3",
+        "campaignGroup": "c406500b656333ef",
+        "subject": "[IRR] Klez: The Virus That  Won't Die",
+        "sender": "Monty Solomon <monty@roscom.com>"
+      }
+    ]
+  },
+  "label_distribution": {
+    "total_labeled": 258640,
+    "total_unlabeled": 0,
+    "breakdown": {
+      "LEGITIMATE": 133704,
+      "SPAM": 108059,
+      "PHISHING": 6528,
+      "OTHER_MALICIOUS": 10349
+    }
+  },
+  "source_breakdown": {
+    "distinct_source_files": 12,
+    "distribution": {
+      "TREC-05.csv": 55151,
+      "TREC-07.csv": 53749,
+      "CEAS-08.csv": 39149,
+      "Enron.csv": 29745,
+      "Phishing_Email.csv": 17457,
+      "TREC-06.csv": 16378,
+      "full_dataset.csv": 12476,
+      "fraud_email_.csv": 10218,
+      "phishing_legit_dataset_KD_10000.csv": 9956,
+      "Assassin.csv": 5807,
+      "emails copy.csv": 5695,
+      "Ling.csv": 2859
+    }
+  }
+}
