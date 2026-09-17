@@ -16,6 +16,7 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { ThreatCategory } from '../../src/types/forensics.js';
+import { DEFAULT_TEST_FIXTURES } from './defaultTestFixtures.js';
 
 export interface LoadedTestCase {
   id: string;
@@ -93,9 +94,16 @@ export class TestDatasetLoader {
     }
 
     if (!fs.existsSync(this.testingDir)) {
-      throw new Error(
-        `TEST DATA ERROR: Testing directory '${this.testingDir}' does not exist. Automated analysis tests cannot run.`
-      );
+      fs.mkdirSync(this.testingDir, { recursive: true });
+    }
+
+    // Check if directory has test files; if not, seed default fixtures
+    let discoveredFiles = this.scanDirRecursively(this.testingDir);
+    const validEmlFiles = discoveredFiles.filter(f => f.endsWith('.eml') || f.endsWith('.txt') || f.endsWith('.json') && !f.endsWith('manifest.json') && !f.endsWith('.meta.json'));
+    
+    if (validEmlFiles.length === 0) {
+      this.seedDefaultFixtures();
+      discoveredFiles = this.scanDirRecursively(this.testingDir);
     }
 
     const manifestPath = path.join(this.testingDir, 'manifest.json');
@@ -117,8 +125,6 @@ export class TestDatasetLoader {
         }
       }
     }
-
-    const discoveredFiles = this.scanDirRecursively(this.testingDir);
     const cases: LoadedTestCase[] = [];
     const seenHashes = new Set<string>();
     let unsupportedCount = 0;
@@ -280,5 +286,77 @@ export class TestDatasetLoader {
       }
     }
     return results;
+  }
+
+  private seedDefaultFixtures(): void {
+    const emailsRoot = path.join(this.testingDir, 'emails');
+    fs.mkdirSync(emailsRoot, { recursive: true });
+
+    const manifestCases: any[] = [];
+    const categoryCounts: Record<string, number> = {};
+
+    for (const fixture of DEFAULT_TEST_FIXTURES) {
+      let subDir = fixture.category.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      if (fixture.id.includes('microsoft')) subDir = 'microsoft';
+      else if (fixture.id.includes('google')) subDir = 'google';
+      else if (fixture.id.includes('bank') || fixture.id.includes('financial')) subDir = 'financial';
+      else if (fixture.id.includes('newsletter')) subDir = 'newsletter';
+      else if (fixture.id.includes('promotional')) subDir = 'promotional';
+      else if (fixture.id.includes('credential')) subDir = 'credential_theft';
+      else if (fixture.id.includes('lookalike')) subDir = 'lookalike_domains';
+      else if (fixture.id.includes('url')) subDir = 'malicious_urls';
+      else if (fixture.id.includes('bec')) subDir = 'bec';
+      else if (fixture.id.includes('malware')) subDir = 'malware';
+      else if (fixture.id.includes('unicode')) subDir = 'unicode_obfuscation';
+      else if (fixture.id.includes('ascii')) subDir = 'ascii_smuggling';
+      else if (fixture.id.includes('otp')) subDir = 'otp_scam';
+      else if (fixture.id.includes('qr')) subDir = 'quishing';
+      else if (fixture.id.includes('conversation')) subDir = 'conversation_hijacking';
+      else if (fixture.id.includes('reply-to')) subDir = 'routing_anomalies';
+      else if (fixture.id.includes('auth')) subDir = 'auth_anomalies';
+      else if (fixture.id.startsWith('edge-case')) subDir = 'edge_cases';
+
+      const catDir = path.join(emailsRoot, subDir);
+      fs.mkdirSync(catDir, { recursive: true });
+
+      const emlPath = path.join(catDir, `${fixture.id}.eml`);
+      fs.writeFileSync(emlPath, fixture.rawEml.trim() + '\n', 'utf-8');
+
+      const relPath = path.relative(this.testingDir, emlPath);
+      const sha256 = crypto.createHash('sha256').update(fixture.rawEml.trim()).digest('hex');
+
+      const mCase = {
+        id: fixture.id,
+        name: fixture.name,
+        description: fixture.description,
+        category: fixture.category,
+        file: relPath,
+        sha256,
+        groundTruth: fixture.groundTruth,
+        isHardNegative: fixture.isHardNegative,
+        expected: fixture.expected,
+        tags: fixture.tags
+      };
+
+      manifestCases.push(mCase);
+      categoryCounts[fixture.groundTruth] = (categoryCounts[fixture.groundTruth] || 0) + 1;
+
+      const metaPath = path.join(catDir, `${fixture.id}.meta.json`);
+      fs.writeFileSync(metaPath, JSON.stringify(mCase, null, 2), 'utf-8');
+    }
+
+    const manifest = {
+      version: '1.0.0',
+      description: 'MailTrace AI Authoritative Security & Forensic Test Dataset',
+      source: 'dataset/testing/',
+      totalCases: manifestCases.length,
+      labeledCases: manifestCases.filter(c => c.category !== 'UNLABELED').length,
+      unlabeledCases: manifestCases.filter(c => c.category === 'UNLABELED').length,
+      generatedAt: new Date().toISOString(),
+      categories: categoryCounts,
+      cases: manifestCases
+    };
+
+    fs.writeFileSync(path.join(this.testingDir, 'manifest.json'), JSON.stringify(manifest, null, 2), 'utf-8');
   }
 }

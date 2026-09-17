@@ -1,8 +1,8 @@
 # MailTrace AI — Testing & Data Validation Report
 
 **Test Source:** `dataset/testing/`  
-**Execution Timestamp:** 2026-09-17T06:25:07.461Z  
-**Total Duration:** 0.09s  
+**Execution Timestamp:** 2026-09-17T06:50:41.295Z  
+**Total Duration:** 0.07s  
 **Overall Status:** **✓ ALL TESTS PASSED**  
 
 ---
@@ -47,27 +47,27 @@ All automated email threat analysis, forensics, and regression tests have been u
 | 1 | Edge Case 1: Nested MIME Multipart with Empty Part | UNLABELED | Legitimate | 5/100 | 3/100 | ✓ PASS |
 | 2 | Edge Case 2: RFC 2047 Encoded Words in Subject and Headers | UNLABELED | Legitimate | 5/100 | 3/100 | ✓ PASS |
 | 3 | Edge Case 3: Raw Body with Minimal Incomplete Headers | UNLABELED | Legitimate | 5/100 | 3/100 | ✓ PASS |
-| 4 | 1. Legitimate Microsoft Email | Legitimate | Legitimate | 6/100 | 3/100 | ✓ PASS |
+| 4 | 1. Legitimate Microsoft Email | Legitimate | Legitimate | 6/100 | 5/100 | ✓ PASS |
 | 5 | 10. Business Email Compromise (BEC) | Business Email Compromise | Business Email Compromise | 85/100 | 10/100 | ✓ PASS |
-| 6 | 11. Financial Fraud / Invoice Diversion | Financial Fraud | Business Email Compromise | 85/100 | 10/100 | ✓ PASS |
-| 7 | 12. Malware Attachment | Malware Delivery | Malware Delivery | 94/100 | 5/100 | ✓ PASS |
-| 8 | 13. Unicode Deception (Punycode / Homoglyph) | Domain Spoofing | Credential Theft | 88/100 | 10/100 | ✓ PASS |
+| 6 | 11. Financial Fraud / Invoice Diversion | Financial Fraud | Business Email Compromise | 85/100 | 3/100 | ✓ PASS |
+| 7 | 12. Malware Attachment | Malware Delivery | Phishing | 94/100 | 10/100 | ✓ PASS |
+| 8 | 13. Unicode Deception (Punycode / Homoglyph) | Domain Spoofing | Business Email Compromise | 85/100 | 10/100 | ✓ PASS |
 | 9 | 14. ASCII Smuggling / Zero-Width Attack | Phishing | Credential Theft | 99/100 | 3/100 | ✓ PASS |
 | 10 | 15. OTP Scam (Indian UPI/NetBanking Fraud) | Financial Fraud | Credential Theft | 88/100 | 10/100 | ✓ PASS |
 | 11 | 16. QR Phishing (Quishing Attack) | Phishing | Credential Theft | 88/100 | 10/100 | ✓ PASS |
-| 12 | 17. Conversation Hijacking / Thread Insertion | Business Email Compromise | Business Email Compromise | 85/100 | 10/100 | ✓ PASS |
-| 13 | 18. Google Workspace Impersonation | Phishing | Credential Theft | 99/100 | 5/100 | ✓ PASS |
-| 14 | 19. Reply-To Manipulation & Routing Anomaly | Business Email Compromise | Business Email Compromise | 85/100 | 3/100 | ✓ PASS |
+| 12 | 17. Conversation Hijacking / Thread Insertion | Business Email Compromise | Phishing | 85/100 | 3/100 | ✓ PASS |
+| 13 | 18. Google Workspace Impersonation | Phishing | Credential Theft | 99/100 | 10/100 | ✓ PASS |
+| 14 | 19. Reply-To Manipulation & Routing Anomaly | Business Email Compromise | Business Email Compromise | 85/100 | 10/100 | ✓ PASS |
 | 15 | 2. Legitimate Google Email | Legitimate | Legitimate | 5/100 | 5/100 | ✓ PASS |
-| 16 | 20. Severe Authentication & Header Forgery Anomaly | Executive Impersonation | Phishing | 85/100 | 10/100 | ✓ PASS |
-| 17 | 21. Microsoft False-Positive Benchmark (AI Agent Event) | Legitimate | Legitimate | 5/100 | 13/100 | ✓ PASS |
-| 18 | 3. Legitimate Bank Transaction | Legitimate | Legitimate | 5/100 | 10/100 | ✓ PASS |
-| 19 | 4. Legitimate Newsletter | Newsletter | Newsletter | 1/100 | 49/100 | ✓ PASS |
-| 20 | 5. Legitimate Promotional Email | Promotional | Promotional | 5/100 | 25/100 | ✓ PASS |
+| 16 | 20. Severe Authentication & Header Forgery Anomaly | Executive Impersonation | Credential Theft | 99/100 | 3/100 | ✓ PASS |
+| 17 | 21. Microsoft False-Positive Benchmark (AI Agent Event) | Legitimate | Legitimate | 5/100 | 3/100 | ✓ PASS |
+| 18 | 3. Legitimate Bank Transaction | Legitimate | Legitimate | 5/100 | 3/100 | ✓ PASS |
+| 19 | 4. Legitimate Newsletter | Newsletter | Legitimate | 1/100 | 43/100 | ✓ PASS |
+| 20 | 5. Legitimate Promotional Email | Promotional | Promotional | 1/100 | 52/100 | ✓ PASS |
 | 21 | 6. Credential Phishing | Credential Theft | Credential Theft | 99/100 | 10/100 | ✓ PASS |
-| 22 | 7. Fake Microsoft Login (SharePoint Phish) | Phishing | Credential Theft | 99/100 | 3/100 | ✓ PASS |
-| 23 | 8. Lookalike Domain Phishing | Phishing | Credential Theft | 88/100 | 10/100 | ✓ PASS |
-| 24 | 9. Malicious URL Attack | Phishing | Credential Theft | 88/100 | 10/100 | ✓ PASS |
+| 22 | 7. Fake Microsoft Login (SharePoint Phish) | Phishing | Credential Theft | 99/100 | 10/100 | ✓ PASS |
+| 23 | 8. Lookalike Domain Phishing | Phishing | Phishing | 85/100 | 3/100 | ✓ PASS |
+| 24 | 9. Malicious URL Attack | Phishing | Phishing | 85/100 | 3/100 | ✓ PASS |
 
 ---
 

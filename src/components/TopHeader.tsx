@@ -79,9 +79,9 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           {/* Model Status Indicator */}
           {modelStatus?.available && modelStatus.loaded ? (
-            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-medium" title="MailTraceSecurityTransformer 128.9M Parameters Loaded">
+            <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-medium" title="MailTraceSecurityTransformer 128,894,258 Parameters Loaded">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>ML ENGINE • READY • 100m-v2 (128.9M PARAMS)</span>
+              <span>ML ENGINE • READY • 100m-v2 (128,894,258 PARAMS)</span>
             </div>
           ) : modelStatus?.status === 'INITIALIZING' ? (
             <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-medium">

@@ -1076,7 +1076,7 @@ export interface ModelEvaluationMetrics {
 export interface MLModelMetadata {
   modelId: string;
   version: string;
-  architecture: 'XGBoost / Calibrated Ensembled Forest' | 'Interpretable Tabular Model' | 'Multimodal Deep Transformer (8 Layers, 12 Heads, 100M Parameters)';
+  architecture: 'XGBoost / Calibrated Ensembled Forest' | 'Interpretable Tabular Model' | 'Multimodal Deep Transformer (8 Layers, 12 Heads, 128,894,258 Parameters)' | 'Multimodal Deep Transformer (8 Layers, 12 Heads, 100M Parameters)' | string;
   trainingDatasetVersion: string;
   trainingTimestamp: string;
   featureSchemaVersion: string;

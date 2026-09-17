@@ -314,7 +314,7 @@ export const ExtensionView: React.FC<ExtensionViewProps> = ({ onLoadInvestigatio
 
           <div className="p-3 rounded bg-slate-50 border border-slate-200">
             <div className="text-[10px] text-slate-500 uppercase font-bold">Parameters</div>
-            <div className="text-sm font-bold text-indigo-700 mt-1">104.8M Parameters</div>
+            <div className="text-sm font-bold text-indigo-700 mt-1">128,894,258 Parameters</div>
             <div className="text-[10px] text-slate-500 mt-1">Self-Attention Classifier</div>
           </div>
 
