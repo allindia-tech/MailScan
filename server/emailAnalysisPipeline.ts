@@ -43,7 +43,7 @@ export async function runEmailAnalysisPipeline(
   const parsed = parseRawEmail(rawEmail);
 
   // 2. Reconstruct SMTP Relay Path & isolate untrusted ingress boundary
-  const { relayPath, earliestReliableNode } = reconstructRelayPath(parsed.receivedHeaders);
+  const { relayPath, earliestReliableNode } = reconstructRelayPath(parsed.receivedHeaders, parsed.headers);
 
   // 3. Domain Intelligence & Lookalike Pattern Sweeper
   const domainIntel = analyzeDomain(parsed.fromDomain, parsed.from);

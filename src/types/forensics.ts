@@ -108,6 +108,12 @@ export interface RelayNode {
   isEarliestReliable: boolean;
   isUntrustedBoundary: boolean;
   protocol: string;
+  tls?: string;
+  isTor?: boolean;
+  isPublic?: boolean;
+  isMappable?: boolean;
+  classification?: string;
+  evidenceSource?: string;
   rawHeader: string;
 }
 

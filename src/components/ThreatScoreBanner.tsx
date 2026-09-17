@@ -131,11 +131,17 @@ export const ThreatScoreBanner: React.FC<ThreatScoreBannerProps> = ({
     { key: 'threatIntelligence', name: 'Threat intelligence', weight: '5%', score: catScores.threatIntelligence, pts: Number((catScores.threatIntelligence * 0.05).toFixed(1)) }
   ];
 
-  // Origin info
-  const firstHop = analysis.hops?.[0];
-  const originIp = firstHop?.ip || analysis.authResults?.spf?.clientIp || '127.0.0.1';
-  const originLocation = firstHop?.location || (firstHop?.country ? `${firstHop.city || 'Origin'}, ${firstHop.country}` : 'Local Gateway');
-  const isTor = firstHop?.isTor || analysis.iocs?.some(i => i.type === 'ip' && i.risk === 'CRITICAL');
+  // Origin / Ingress info
+  const firstHop = analysis.relayPath?.[0] || analysis.hops?.[0];
+  const targetNode = analysis.earliestReliableNode || firstHop;
+  const isLocalOnly = targetNode && targetNode.isPublic === false;
+  const originIp = targetNode?.ip || analysis.authResults?.spf?.clientIp || (analysis.relayPath?.length ? 'Unresolved IP' : 'No Headers');
+  const originLocation = isLocalOnly
+    ? (targetNode?.classification === 'LOOPBACK' ? 'Local Loopback' : 'Internal LAN')
+    : (targetNode?.country && targetNode.country !== 'Unknown' && targetNode.country !== 'Non-Routable' && targetNode.country !== 'Unverified Location'
+        ? `${targetNode.city && targetNode.city !== 'Unknown' ? `${targetNode.city}, ` : ''}${targetNode.country}`
+        : (targetNode?.isPublic ? 'Public Node (Unverified Geo)' : 'Observed Ingress'));
+  const isTor = targetNode?.isTor || firstHop?.isTor || analysis.iocs?.some(i => i.type === 'ip' && i.risk === 'CRITICAL');
 
   // Lookalike info
   const lookalikeDomain = analysis.senderDomainIntel?.domain || analysis.fromDomain || 'unknown';
@@ -366,11 +372,11 @@ export const ThreatScoreBanner: React.FC<ThreatScoreBannerProps> = ({
           </div>
         </div>
 
-        {/* Metric 4: Origin Infrastructure Routing */}
+        {/* Metric 4: Observed Relay Infrastructure */}
         <div className="p-4 rounded-lg bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide font-mono">
-              Origin Infrastructure
+              Observed Relay Infrastructure
             </span>
             <Radio className={`w-4 h-4 ${isTor ? 'text-rose-500' : 'text-slate-400'}`} />
           </div>
@@ -383,13 +389,15 @@ export const ThreatScoreBanner: React.FC<ThreatScoreBannerProps> = ({
             <p className="text-xs text-slate-600 mt-1">
               {isTor ? (
                 <span className="text-rose-700 font-semibold">Anonymized Tor / Proxy Exit Node</span>
+              ) : isLocalOnly ? (
+                <span className="text-slate-600">Only local/loopback infrastructure observed</span>
               ) : (
                 <span>Standard SMTP Transport Gateway</span>
               )}
             </p>
           </div>
           <div className="text-[11px] text-slate-500 font-mono">
-            {analysis.hops?.length || 1} Relay Hop(s) Identified
+            {analysis.relayPath?.length || analysis.hops?.length || 0} Relay Hop(s) Identified
           </div>
         </div>
 
