@@ -231,8 +231,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
           <div className="flex items-center justify-between text-[11px]">
             <span className="text-slate-500">Transformer ML</span>
-            <span className="font-mono text-slate-700 font-medium">
-              100M Ready
+            <span className="font-mono text-slate-700 font-medium" title="128,894,258 Parameters">
+              128.9M (128,894,258)
             </span>
           </div>
         </div>

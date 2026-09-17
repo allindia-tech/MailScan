@@ -191,8 +191,8 @@ export const AnalysisBreakdownSection: React.FC<AnalysisBreakdownSectionProps> =
                 <Cpu className="w-3.5 h-3.5 text-indigo-600" />
                 <span className="text-xs font-bold text-slate-900">Transformer ML Model</span>
               </div>
-              <span className="text-[10px] font-mono text-indigo-700 bg-indigo-50 px-1.5 py-0.2 rounded border border-indigo-200">
-                100M Params
+              <span className="text-[10px] font-mono text-indigo-700 bg-indigo-50 px-1.5 py-0.2 rounded border border-indigo-200" title="128,894,258 Total Parameters">
+                128.9M (128,894,258 Params)
               </span>
             </div>
 

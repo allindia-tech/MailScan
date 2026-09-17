@@ -387,7 +387,7 @@ export const AnalyzerView: React.FC<AnalyzerViewProps> = ({
                 </div>
                 <div className="p-2 rounded bg-slate-50 border border-slate-200 flex items-center justify-between">
                   <span className="text-slate-700 font-medium">ML Threat Classifier</span>
-                  <span className="font-mono text-indigo-700 font-bold text-[11px]">Transformer 100M</span>
+                  <span className="font-mono text-indigo-700 font-bold text-[11px]" title="128,894,258 Parameters">Transformer 100M (128,894,258 Params)</span>
                 </div>
                 <div className="p-2 rounded bg-slate-50 border border-slate-200 flex items-center justify-between">
                   <span className="text-slate-700 font-medium">Evidence Fusion</span>

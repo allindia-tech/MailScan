@@ -85,9 +85,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 Live SOC Telemetry Active
               </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono text-[10px]">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-mono text-[10px]" title="128,894,258 Parameters Loaded">
                 <Cpu className="w-3 h-3 text-indigo-600" />
-                Transformer ML 100M Model
+                Transformer ML (128,894,258 Parameters)
               </span>
             </div>
 

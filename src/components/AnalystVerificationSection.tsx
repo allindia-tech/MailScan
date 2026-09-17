@@ -113,7 +113,7 @@ export const AnalystVerificationSection: React.FC<AnalystVerificationSectionProp
         },
         reason: reason.trim() || (isCorrect ? 'Analyst verified model verdict.' : 'Analyst corrected classification.'),
         notes: notes.trim(),
-        modelVersion: 'mailtrace-100m-v1'
+        modelVersion: 'mailtrace-100m-v2'
       };
 
       const result = await submitAnalystVerification(payload);
@@ -148,7 +148,7 @@ export const AnalystVerificationSection: React.FC<AnalystVerificationSectionProp
         <div className="flex items-center gap-2 bg-slate-50 px-2.5 py-1 rounded border border-slate-200 text-xs font-mono">
           <Database className="w-3.5 h-3.5 text-emerald-600" />
           <span className="text-slate-500">Target Model:</span>
-          <span className="text-slate-900 font-semibold">mailtrace-100m-v1</span>
+          <span className="text-slate-900 font-semibold" title="MailTraceSecurityTransformer 128,894,258 Parameters">mailtrace-100m-v2 (128.9M)</span>
         </div>
       </div>
 
