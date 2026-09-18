@@ -2135,5 +2135,77 @@
         "sender": "Jules <jules-noreply@google.com>"
       }
     }
+  },
+  {
+    "id": "AUDIT-BBDE3A74",
+    "timestamp": "2026-09-17T11:44:42.445Z",
+    "action": "ANALYST_VERIFICATION_CREATED",
+    "actor": "analyst.soc@mailtrace.workstation",
+    "actorRole": "SOC L3 Lead",
+    "feedbackId": "FB-DBD63F91B867",
+    "analysisId": "analysis-1789645230873-92d8ced5",
+    "modelVersion": "mailtrace-100m-v2",
+    "details": "Analyst verified Bank's digital platforms for applying for IPOs.: Pred=\"Legitimate\" -> GT=\"Legitimate\" (Verdict: Legitimate, Status: VERIFIED, Weight: 2.00)",
+    "newState": {
+      "id": "FB-DBD63F91B867",
+      "feedbackId": "FB-DBD63F91B867",
+      "analysisId": "analysis-1789645230873-92d8ced5",
+      "emailFingerprint": "41f2a9542f1516d3aa70c2e98ea447b2c8c575a795b561f5cfb4925da5e1cde2",
+      "contentHash": "4e4bb57a8ce753c38e3fe4415450ca9a8dcd84965bb10f7f866ea9d870284a1e",
+      "urlFingerprint": "44ca1b9ad30ef91a",
+      "emailSubject": "Bank's digital platforms for applying for IPOs.",
+      "sender": "Bank of Baroda <noreply@bankofbaroda.bank.in>",
+      "originalPrediction": {
+        "primaryCategory": "Legitimate",
+        "secondaryCategories": [],
+        "threatRisk": 5,
+        "spamBulkScore": 7,
+        "confidence": 93,
+        "probabilities": {
+          "Legitimate": 0.85
+        },
+        "detectedTechniques": [],
+        "evidence": []
+      },
+      "verifiedGroundTruth": {
+        "primaryCategory": "Legitimate",
+        "secondaryCategories": [],
+        "verdict": "Legitimate",
+        "isMalicious": false,
+        "isSpam": false,
+        "correctedEvidence": []
+      },
+      "classificationType": "CONFIRMED_BENIGN",
+      "isHardNegative": false,
+      "isHardPositive": false,
+      "sampleWeight": 2,
+      "analyst": {
+        "id": "analyst.soc@mailtrace.workstation",
+        "name": "SOC Verification Analyst",
+        "role": "SOC L3 Lead",
+        "confidence": 0.95
+      },
+      "reason": "Analyst verified model verdict.",
+      "notes": "",
+      "status": "VERIFIED",
+      "trainingEligible": true,
+      "createdAt": "2026-09-17T11:44:42.444Z",
+      "verifiedAt": "2026-09-17T11:44:42.444Z",
+      "modelVersion": "mailtrace-100m-v2",
+      "rawEmailSample": {
+        "subject": "Bank's digital platforms for applying for IPOs.",
+        "bodyText": "Bank's digital platforms for applying for IPOs.",
+        "urls": [
+          "https://bankofbaroda.bank.in/",
+          "https://www.facebook.com/p/Bank-of-Baroda-100064572496759/",
+          "https://twitter.com/bankofbaroda",
+          "https://www.youtube.com/bankofbaroda",
+          "https://www.instagram.com/officialbankofbaroda/",
+          "https://www.linkedin.com/company/bankofbaroda/",
+          "https://www.quora.com/profile/Bank-of-Baroda-29"
+        ],
+        "sender": "Bank of Baroda <noreply@bankofbaroda.bank.in>"
+      }
+    }
   }
 ]
